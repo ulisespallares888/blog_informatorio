@@ -1,0 +1,1 @@
+cd .. && cd scripts && activate && cd .. && cd blog
