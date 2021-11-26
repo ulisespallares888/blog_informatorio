@@ -79,7 +79,7 @@ def agregar_post(request):
     return redirect('perfil_usuario')
 
 
-def eliminar_post(request,id):
+"""def eliminar_post(request,id):
     post_eliminado = post.objects.get(id=id)
     post_eliminado.delete()
     messages.success(request, 'Post eliminado correctamente')
@@ -87,7 +87,7 @@ def eliminar_post(request,id):
 
 def editar_post(request,id):
     post_editar = post.objects.get(id=id)
-    return render(request,"editar_post.html",{'post_editar':post_editar})
+    return render(request,"editar_post.html",{'post_editar':post_editar})"""
 
 def editar_post_guardar(request,id):
     titulo = request.POST['txttitulo']
@@ -111,10 +111,4 @@ def crear_comentario(request):
         messages.success(request, 'Comentario creado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
-    return redirect('perfil_usuario')
-
-def eliminar_comentario(request,id):
-    comentario_eliminado = comentario.objects.get(id=id)
-    comentario_eliminado.delete()
-    messages.success(request, 'Comentario eliminado correctamente')
-    return redirect('perfil_usuario')
+    return redirect('feed')
