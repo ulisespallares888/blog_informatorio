@@ -3,10 +3,9 @@ from  django.contrib.auth.models import User
 
 
 class usuario(models.Model):
-    tipo = [("reader","reader"), ("writer","writer"), ("admin","admin")]
     id = models.BigAutoField(primary_key=True)
     usuario_fk = models.ForeignKey(User, on_delete=models.CASCADE)
-    tipo_usuario = models.CharField(max_length=10, choices=tipo )
+    tipo_usuario = models.CharField(max_length=10 )
 
     def __str__(self):
         salida = '{} {} {}'.format(self.id, self.usuario_fk, self.tipo_usuario)
