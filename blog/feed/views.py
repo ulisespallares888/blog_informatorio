@@ -9,8 +9,14 @@ def feed(request):
     posteos = post.objects.all()
     return render(request,"feed.html",{'posteos':posteos})
 
+def perfil_usuario(request):
+    return render(request,"perfil_usuario.html")
+
 def registrarse(request):
     return render(request,"registrarse.html")
+
+def editar_posteo(request):
+    return render(request,"editar_posteo.html")
 
 def login(request):
     return render(request,"login.html")
@@ -61,3 +67,48 @@ def iniciar_sesion(request):
         messages.warning(request, 'Hay campos vacios')
     return redirect('login')
 
+def agregar_post(request):
+    titulo = request.POST['txttitulo']
+    contenido = request.POST['txtcontenido']
+    if titulo != "" and contenido != "":
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,usuario_fk_id=request.user.id)
+        post_creado.save()
+        messages.success(request, 'Post creado correctamente')
+    else:
+        messages.warning(request, 'Hay campos vacios')
+    return redirect('perfil_usuario')
+
+
+def eliminar_post(request,id):
+    post_eliminado = post.objects.get(id=id)
+    post_eliminado.delete()
+    messages.success(request, 'Post eliminado correctamente')
+    return redirect('perfil_usuario')
+
+def editar_post(request,id):
+    post_editar = post.objects.get(id=id)
+    return render(request,"editar_post.html",{'post_editar':post_editar})
+
+def editar_post_guardar(request,id):
+    titulo = request.POST['txttitulo']
+    contenido = request.POST['txtcontenido']
+    if titulo != "" and contenido != "":
+        post_editar = post.objects.get(id=id)
+        post_editar.titulo = titulo
+        post_editar.contenido = contenido
+        post_editar.save()
+        messages.success(request, 'Post editado correctamente')
+    else:
+        messages.warning(request, 'Hay campos vacios')
+    return redirect('perfil_usuario')
+
+def crear_comentario(request):
+    comentario = request.POST['txtcomentario']
+    contenido = request.POST['txtcontenido']
+    if comentario != "" and contenido != "":
+        comentario_creado = comentario.objects.create(comentario=comentario,usuario_id=request.user.id,post_id=post.id)
+        comentario_creado.save()
+        messages.success(request, 'Comentario creado correctamente')
+    else:
+        messages.warning(request, 'Hay campos vacios')
+    return redirect('perfil_usuario')
