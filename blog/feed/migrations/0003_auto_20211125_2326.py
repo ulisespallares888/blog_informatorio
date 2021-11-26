@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
         ('feed', '0002_auto_20211125_2240'),
     ]
 
-    operations = [
+    """operations = [
         migrations.AlterModelOptions(
             name='usuario',
             options={},
@@ -42,4 +42,4 @@ class Migration(migrations.Migration):
             name='usuario_fk',
             field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
-    ]
+    ]"""

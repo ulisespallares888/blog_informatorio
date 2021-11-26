@@ -1,9 +1,13 @@
 from django.db import models
 from  django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
 
-class User(AbstractUser):
-    tipo_usuario = models.CharField(max_length=20, default='reader')
+
+class usuario(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    usuario_fk = models.ForeignKey(User, on_delete=models.CASCADE)
+    tipo_usuario = models.CharField(max_length=20)
+    def __str__(self):
+        return self.usuario_fk.username
 
 class post(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE) 
