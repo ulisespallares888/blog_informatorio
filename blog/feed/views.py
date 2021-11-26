@@ -112,3 +112,9 @@ def crear_comentario(request):
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
+
+def eliminar_comentario(request,id):
+    comentario_eliminado = comentario.objects.get(id=id)
+    comentario_eliminado.delete()
+    messages.success(request, 'Comentario eliminado correctamente')
+    return redirect('perfil_usuario')
