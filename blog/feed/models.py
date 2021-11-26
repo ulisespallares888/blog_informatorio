@@ -3,11 +3,14 @@ from  django.contrib.auth.models import User
 
 
 class usuario(models.Model):
+    tipo = [("reader","reader"), ("writer","writer"), ("admin","admin")]
     id = models.BigAutoField(primary_key=True)
     usuario_fk = models.ForeignKey(User, on_delete=models.CASCADE)
-    tipo_usuario = models.CharField(max_length=20)
+    tipo_usuario = models.CharField(max_length=10, choices=tipo )
+
     def __str__(self):
-        return self.usuario_fk.username
+        salida = '{} {} {}'.format(self.id, self.usuario_fk, self.tipo_usuario)
+        return salida
 
 class post(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE) 
