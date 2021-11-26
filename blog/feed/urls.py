@@ -10,5 +10,8 @@ urlpatterns = [
     path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('agregar_post',views.agregar_post, name='agregar_post'),
+    path('eliminar_post/<id>',views.eliminar_post, name='eliminar_post'),
+    path('perfil_usuario/',views.perfil_usuario, name='perfil_usuario'),
+    path('crear_comentario/',views.crear_comentario, name='crear_comentario'),
 
 ]

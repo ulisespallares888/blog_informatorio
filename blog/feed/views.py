@@ -18,8 +18,6 @@ def registrarse(request):
 def editar_posteo(request):
     return render(request,"editar_posteo.html")
 
-def login(request):
-    return render(request,"login.html")
 
 
 def crear_usuario(request):
@@ -79,15 +77,15 @@ def agregar_post(request):
     return redirect('perfil_usuario')
 
 
-"""def eliminar_post(request,id):
+def eliminar_post(request,id):
     post_eliminado = post.objects.get(id=id)
     post_eliminado.delete()
     messages.success(request, 'Post eliminado correctamente')
     return redirect('perfil_usuario')
 
-def editar_post(request,id):
+"""def editar_post(request,id):
     post_editar = post.objects.get(id=id)
-    return render(request,"editar_post.html",{'post_editar':post_editar})"""
+    return render(request,"editar_post.html",{'post_editar':post_editar})
 
 def editar_post_guardar(request,id):
     titulo = request.POST['txttitulo']
@@ -100,7 +98,7 @@ def editar_post_guardar(request,id):
         messages.success(request, 'Post editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
-    return redirect('perfil_usuario')
+    return redirect('perfil_usuario')"""
 
 def crear_comentario(request):
     comentario = request.POST['txtcomentario']
