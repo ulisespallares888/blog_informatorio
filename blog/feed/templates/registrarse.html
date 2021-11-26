@@ -34,6 +34,8 @@
                         <option  value="Posteador" >Posteador</option>
                       </select>
                 </div>
+                <br>
+
                 <div class="form-gourp">
                     <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
                         Aceptar
@@ -42,6 +44,18 @@
             </form>
         </div>
     </div>
+    <div>
+        {% if mesagess %}
+    {% for message in mesagess %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
     
+    {% endif %}
+    </div>
+    
+
 </body>
 </html>
