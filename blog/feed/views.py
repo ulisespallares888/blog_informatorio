@@ -110,3 +110,7 @@ def crear_comentario(request):
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('feed')
+
+def mostar_comentarios(request,id):
+    comentarios = comentario.objects.filter(post_id=id)
+    return render(request,"mostar_comentarios.html",{'comentarios':comentarios})
