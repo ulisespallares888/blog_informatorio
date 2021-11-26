@@ -12,7 +12,7 @@ class post(models.Model):
     #imagen = models.ImageField(upload_to='post_images', blank=True)
     visitas = models.IntegerField(default=0)
     def __str__(self):
-        return self.title
+        return self.titulo
 
 class comentario(models.Model):
     post = models.ForeignKey(post, on_delete=models.CASCADE)
@@ -21,5 +21,7 @@ class comentario(models.Model):
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.content
+        return self.contenido
+
+
 # Create your models here.
