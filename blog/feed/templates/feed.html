@@ -4,5 +4,19 @@
 
 
     <h1>Acá hiría el Feed si tuviera uno</h1>
+
+    {% for post in posteos %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                
+                <h5 class="card-title">titulo: {{ post.titulo }}</h5>
+              
+                <p class="card-text">contenido: {{ post.contenido }}</p>
+                <br>
+            </div>
+        </div>
+
+    {% endfor %}
     
 {% endblock %}

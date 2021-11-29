@@ -73,15 +73,16 @@ def iniciar_sesion(request):
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
+    usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,usuario_fk_id=request.user.id)
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match)
         post_creado.save()
         messages.success(request, 'Post creado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
 
-
+#@login_required
 def eliminar_post(request,id):
     post_eliminado = post.objects.get(id=id)
     post_eliminado.delete()

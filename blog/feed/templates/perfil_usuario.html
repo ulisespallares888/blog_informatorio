@@ -4,4 +4,16 @@
 
     <h1>este es el perfil de usuario</h1>
 
+    <form action="agregar_post/" method="POST" class="form" > {% csrf_token %}
+        <div class="form-group">
+            <label for="titulo">Titulo</label>
+            <input type="text" class="form-control" id="txttitulo" name="txttitulo" placeholder="Titulo">
+        </div>
+        <div class="form-group">
+            <label for="contenido">Contenido</label>
+            <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>  
+
+    </form>
 {% endblock %}
