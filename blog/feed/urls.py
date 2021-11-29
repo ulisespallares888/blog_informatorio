@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from feed import views
+
 urlpatterns = [
     path('', views.feed, name='feed'),
     path('registrarse/',views.registrarse, name='registrarse'),
@@ -13,7 +14,7 @@ urlpatterns = [
     path('eliminar_post/<id>',views.eliminar_post, name='eliminar_post'),
     path('perfil_usuario/',views.perfil_usuario, name='perfil_usuario'),
     path('crear_comentario/',views.crear_comentario, name='crear_comentario'),
+    path('login',views.login, name='login'),
     path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
     
-
 ]

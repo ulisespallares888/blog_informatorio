@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from feed.models import *
 
 
@@ -17,6 +18,9 @@ def registrarse(request):
 
 def editar_posteo(request):
     return render(request,"editar_posteo.html")
+
+def login(request):
+    return render(request,"login.html")
 
 
 
@@ -65,6 +69,7 @@ def iniciar_sesion(request):
         messages.warning(request, 'Hay campos vacios')
     return redirect('login')
 
+@login_required
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
