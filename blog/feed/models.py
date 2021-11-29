@@ -31,7 +31,8 @@ class comentario(models.Model):
     contenido = models.TextField()
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
-
+    #me_gusta = models.IntegerField(default=0)
+    #no_megusta = models.IntegerField(default=0)
     def __str__(self):
         salida = '{} {} {} {} {}'.format(self.id, self.post, self.comentador, self.contenido, self.creado_en)
         return salida
