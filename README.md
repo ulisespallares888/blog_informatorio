@@ -7,6 +7,7 @@ La tematica del blog comprende asuntos medioambientales, en este caso, los 17 OD
 - Sotelo Felix
 - Blanco Carolina
 - Bracamonte Alberto Sebastian
+- Lautaro Sanchez
 - Romero Dario Ricardo
 - Pallarés Ulises
 - Kapitanich Jorge Pablo
