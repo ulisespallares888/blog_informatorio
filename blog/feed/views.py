@@ -114,3 +114,4 @@ def crear_comentario(request):
 def mostar_comentarios(request,id):
     comentarios = comentario.objects.filter(post_id=id)
     return render(request,"mostar_comentarios.html",{'comentarios':comentarios})
+
