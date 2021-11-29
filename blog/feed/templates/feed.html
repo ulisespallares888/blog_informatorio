@@ -13,6 +13,15 @@
                 <h5 class="card-title">titulo: {{ post.titulo }}</h5>
               
                 <p class="card-text">contenido: {{ post.contenido }}</p>
+                
+
+
+                {% for comentario in comentarios %}
+                {% if comentario.post_id == post.id %}
+                    <p class="card-text">comentario: {{ comentario.contenido }}</p>
+                {% endif %}
+                {% endfor %}
+               
                 <br>
             </div>
         </div>

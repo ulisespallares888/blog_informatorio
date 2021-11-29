@@ -16,4 +16,31 @@
         <button type="submit" class="btn btn-primary">Submit</button>  
 
     </form>
+
+
+     <br>
+     <br>
+     {% for post in posteos %}
+
+     <div class="card" style="width: 18rem;">
+         <div class="card-body">
+             
+             <h5 class="card-title">titulo: {{ post.titulo }}</h5>
+           
+             <p class="card-text">contenido: {{ post.contenido }}</p>
+             
+
+
+             {% for comentario in comentarios %}
+             {% if comentario.post_id == post.id %}
+                 <p class="card-text">comentario: {{ comentario.contenido }}</p>
+             {% endif %}
+             {% endfor %}
+            
+             <br>
+         </div>
+     </div>
+
+ {% endfor %}
+
 {% endblock %}

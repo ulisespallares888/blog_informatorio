@@ -6,12 +6,18 @@ from django.contrib.auth.decorators import login_required
 from feed.models import *
 
 
+
+
+
 def feed(request):
     posteos = post.objects.all()
-    return render(request,"feed.html",{'posteos':posteos})
+    comentarios = comentario.objects.all()
+    return render(request,"feed.html",{'posteos':posteos, 'comentarios':comentarios})
 
 def perfil_usuario(request):
-    return render(request,"perfil_usuario.html")
+    posteos = post.objects.filter(posteador_id=request.user.id)
+    comentarios = comentario.objects.filter(comentador_id=request.user.id)
+    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
 
 def registrarse(request):
     return render(request,"registrarse.html")
