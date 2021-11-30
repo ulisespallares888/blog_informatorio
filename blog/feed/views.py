@@ -84,7 +84,8 @@ def agregar_post(request):
     pre_contenido = str(contenido)[1:120] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido)
+        #agragar bien el tipo_17_ods
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1)
         post_creado.save()
         messages.success(request, 'Post creado correctamente')
     else:
