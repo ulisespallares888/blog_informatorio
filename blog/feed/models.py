@@ -16,6 +16,7 @@ class post(models.Model):
     posteador = models.ForeignKey(usuario, on_delete=models.CASCADE, null=True)
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
+    pre_contenido = models.TextField()
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
     me_gusta = models.IntegerField(default=0)

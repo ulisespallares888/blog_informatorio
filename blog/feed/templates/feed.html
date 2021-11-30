@@ -12,17 +12,18 @@
                 
                 <h5 class="card-title">titulo: {{ post.titulo }}</h5>
               
-                <p class="card-text">contenido: {{ post.contenido }}</p>
+                <div class="card-text">contenido: {{ post.pre_contenido }}</div>
                 
-
-
-                {% for comentario in comentarios %}
-                {% if comentario.post_id == post.id %}
-                    <p class="card-text">comentario: {{ comentario.contenido }}</p>
-                {% endif %}
-                {% endfor %}
-               
+                <a>me gusta: {{post.me_gusta}}</a>
+                <a>no me gusta: {{post.no_megusta}}</a>
+                <a>visitas: {{post.visitas}}</a>
                 <br>
+                <form action="crear_comentario/" method="POST" > {% csrf_token %}
+                    <input type="hidden" name="id_post" value="{{post.id_post}}">
+                    <input type="text" name="txtcontenido" id="txtcontenido" placeholder="comentario">
+                   <button type="submit">comentar</button>
+                </form>
+                
             </div>
         </div>
 

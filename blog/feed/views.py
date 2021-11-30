@@ -10,9 +10,10 @@ from feed.models import *
 
 
 def feed(request):
+    #posteos = post.objects.raw("SELECT * FROM post ")
     posteos = post.objects.all()
-    comentarios = comentario.objects.all()
-    return render(request,"feed.html",{'posteos':posteos, 'comentarios':comentarios})
+    #posteos = post.objects.raw( "select SUBSTRING_INDEX(contenido, ' ', 10) from post" )
+    return render(request,"feed.html",{'posteos':posteos})
 
 def perfil_usuario(request):
     posteos = post.objects.filter(posteador_id=request.user.id)
@@ -79,16 +80,17 @@ def iniciar_sesion(request):
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
+    pre_contenido = str(contenido)[1:120] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match)
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido)
         post_creado.save()
         messages.success(request, 'Post creado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
 
-#@login_required
+@login_required
 def eliminar_post(request,id):
     post_eliminado = post.objects.get(id=id)
     post_eliminado.delete()
@@ -113,17 +115,15 @@ def editar_post_guardar(request,id):
     return redirect('perfil_usuario')"""
 
 def crear_comentario(request):
-    comentario = request.POST['txtcomentario']
     contenido = request.POST['txtcontenido']
+    usuario_match = usuario.objects.get(id=request.user.id)
     if comentario != "" and contenido != "":
-        comentario_creado = comentario.objects.create(comentario=comentario,usuario_id=request.user.id,post_id=post.id)
+        comentario_creado = comentario.objects.create(contenido=contenido, comentador=usuario_match, post_id=1)
         comentario_creado.save()
         messages.success(request, 'Comentario creado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('feed')
 
-def mostar_comentarios(request,id):
-    comentarios = comentario.objects.filter(post_id=id)
-    return render(request,"mostar_comentarios.html",{'comentarios':comentarios})
+
 
