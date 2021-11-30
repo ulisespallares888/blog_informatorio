@@ -81,7 +81,7 @@ def iniciar_sesion(request):
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
-    pre_contenido = str(contenido)[0:120] + "..."
+    pre_contenido = str(contenido)[0:150] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
         #agragar bien el tipo_17_ods

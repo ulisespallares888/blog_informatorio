@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o4ir*xlcqqh9k+wt4g#u7)%eq^g)z*6c)dwla93tvxz!kty091'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,10 +104,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
-
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 USE_I18N = True
 
 USE_L10N = True
@@ -119,7 +119,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+"""STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = []"""
 
+"""MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'"""
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
