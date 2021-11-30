@@ -7,29 +7,42 @@ from feed.models import *
 
 
 
+#---------------------------------------------------------------------------------------------------
+#                                    VISTAS PARA EL PRIMER SPRINT
+#---------------------------------------------------------------------------------------------------
 
 
 def feed(request):
-    #posteos = post.objects.all()[:20]
-    #variable = Model.all()[20:]
     posteos = post.objects.all()
-    #posteos = post.objects.raw( "select SUBSTRING_INDEX(contenido, ' ', 10) from post" )
     return render(request,"feed.html",{'posteos':posteos})
 
-def perfil_usuario(request):
-    posteos = post.objects.filter(posteador_id=request.user.id)
-    comentarios = comentario.objects.filter(comentador_id=request.user.id)
-    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
+
+def leer_posteo(request,id):
+    un_posteo=post.objects.get(id=id)
+    comentarios_del_posteo = comentario.objects.filter(post_id=id)
+    return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
+
+@login_required
+def agregar_post(request):
+    titulo = request.POST['txttitulo']
+    contenido = request.POST['txtcontenido']
+    imagen = request.GET.get('id_imagen')
+    
+    print(imagen)
+    pre_contenido = str(contenido)[0:150] + "..."
+    usuario_match = usuario.objects.get(id=request.user.id)
+    if titulo != "" and contenido != "":
+        #agragar bien el tipo_17_ods
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1,imagen=imagen)
+        post_creado.save()
+        messages.success(request, 'Post creado correctamente')
+    else:
+        messages.warning(request, 'Hay campos vacios')
+    return redirect('perfil_usuario')
+
 
 def registrarse(request):
     return render(request,"registrarse.html")
-
-def editar_posteo(request):
-    return render(request,"editar_posteo.html")
-
-def login(request):
-    return render(request,"login.html")
-
 
 
 def crear_usuario(request):
@@ -58,6 +71,10 @@ def crear_usuario(request):
     return redirect('registrarse')
 
 
+def login(request):
+    return render(request,"login.html")
+
+
 def iniciar_sesion(request):
     username = request.POST['txtusuario']
     password = request.POST['txtpassword']
@@ -77,20 +94,24 @@ def iniciar_sesion(request):
         messages.warning(request, 'Hay campos vacios')
     return redirect('login')
 
-@login_required
-def agregar_post(request):
-    titulo = request.POST['txttitulo']
-    contenido = request.POST['txtcontenido']
-    pre_contenido = str(contenido)[0:150] + "..."
-    usuario_match = usuario.objects.get(id=request.user.id)
-    if titulo != "" and contenido != "":
-        #agragar bien el tipo_17_ods
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1)
-        post_creado.save()
-        messages.success(request, 'Post creado correctamente')
-    else:
-        messages.warning(request, 'Hay campos vacios')
-    return redirect('perfil_usuario')
+#---------------------------------------------------------------------------------------------------
+#                                     VISTAS PARA EL SEGUNDO SPRINT
+#---------------------------------------------------------------------------------------------------
+
+
+def perfil_usuario(request):
+    posteos = post.objects.filter(posteador_id=request.user.id)
+    comentarios = comentario.objects.filter(comentador_id=request.user.id)
+    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
+
+def editar_posteo(request):
+    return render(request,"editar_posteo.html")
+
+
+
+
+
+
 
 @login_required
 def eliminar_post(request,id):

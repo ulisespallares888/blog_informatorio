@@ -13,6 +13,11 @@
             <label for="contenido">Contenido</label>
             <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="3"></textarea>
         </div>
+
+        <div class="form-group">
+            <input id="id_image" type="file" accept="imagen/*" name="id_image">
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>  
 
     </form>
@@ -37,6 +42,8 @@
              {% endif %}
              {% endfor %}
             
+             <img src="{{post.image.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
+
              <br>
          </div>
      </div>

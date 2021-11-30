@@ -1,8 +1,9 @@
 from django.db import models
 from  django.contrib.auth.models import User
+from PIL.Image  import Image
 
 tipos = [
-    (1,'Fin de la pobreza'),
+    ('Fin de la pobreza',1),
     (2,'Hambre cero'),
     (3,'Salud y bienestar'),
     (4,'Educación de calidad'),
@@ -40,7 +41,7 @@ class post(models.Model):
     actualizado_en = models.DateTimeField(auto_now=True)
     me_gusta = models.IntegerField(default=0)
     no_megusta = models.IntegerField(default=0)
-    #imagen = models.ImageField(upload_to='post_images', blank=True)
+    imagen = models.ImageField(upload_to='imagenes_posts',default='feed/static/images/default.jpg')
     visitas = models.IntegerField(default=0)
 
     def __str__(self):
