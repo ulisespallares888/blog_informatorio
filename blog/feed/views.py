@@ -10,7 +10,8 @@ from feed.models import *
 
 
 def feed(request):
-    #posteos = post.objects.raw("SELECT * FROM post ")
+    #posteos = post.objects.all()[:20]
+    #variable = Model.all()[20:]
     posteos = post.objects.all()
     #posteos = post.objects.raw( "select SUBSTRING_INDEX(contenido, ' ', 10) from post" )
     return render(request,"feed.html",{'posteos':posteos})

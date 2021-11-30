@@ -1,7 +1,25 @@
 from django.db import models
 from  django.contrib.auth.models import User
 
-
+tipos = [
+    (1,'Fin de la pobreza'),
+    (2,'Hambre cero'),
+    (3,'Salud y bienestar'),
+    (4,'Educación de calidad'),
+    (5,'Igualdad de género'),
+    (6,'Agua limpia y saneamiento'),
+    (7,'Energía asequible y no contaminante'),
+    (8,'Trabajo y crecimiento económico'),
+    (9,'Industria, innovación e infraestructura'),
+    (10,'Reducción de las desigualdades'),
+    (11,'Ciudades y comunidades sostenibles'),
+    (12,'Producción y consumo responsables'),
+    (13,'Acción por el clima'),
+    (14,'Vida submarina'),
+    (15,'Vida de ecosistemas terrestres'),
+    (16,'Paz y justicia para todos'),
+    (17,'Alianzas para lograr los objetivos'),
+    ]
 
 class usuario(models.Model):
     id = models.AutoField(primary_key=True)
@@ -17,6 +35,7 @@ class post(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
     pre_contenido = models.TextField()
+    tipo_17_ODS= models.CharField( choices=tipos , max_length=50, default=1)
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
     me_gusta = models.IntegerField(default=0)
