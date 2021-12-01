@@ -1,0 +1,29 @@
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1,2fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+}
+
+.posts{
+  background-color: rgb(205, 151, 255);
+  grid-column: 2 / 4;
+  grid-row: 1 / 5;
+}
+
+.lista {
+  background-color: rgb(255, 132, 132);
+  grid-column: 1;
+  grid-row: 1 / 5;
+}
+
+
+.otras_cosas {
+  background-color: rgb(241, 241, 92);
+  grid-column: 4/4;
+  grid-row: 1;
+}
+

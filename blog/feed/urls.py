@@ -15,6 +15,7 @@ urlpatterns = [
     path('perfil_usuario/',views.perfil_usuario, name='perfil_usuario'),
     path('crear_comentario/',views.crear_comentario, name='crear_comentario'),
     path('login',views.login, name='login'),
+    path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
     #path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
     
 ]

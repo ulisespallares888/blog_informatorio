@@ -3,32 +3,64 @@
 {% block content %}
 
 
-    <h1>Acá hiría el Feed si tuviera uno</h1>
+<div class="wrapper">
+
+  
+    <div class="posts">
+        <div>
 
     {% for post in posteos %}
 
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;" >
+            <img src="{{post.imagen.url}}" class="card-img-top" alt="{{post.tipo_17_ODS}}"  >
             <div class="card-body">
-                
-                <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:170px;">
-
                 <h5 class="card-title">titulo: {{ post.titulo }}</h5>
-              
-                <div class="card-text">contenido: {{ post.pre_contenido }}</div>
-                
+                <div class="card-text">
+                   <p>contenido: {{ post.pre_contenido }}</p> 
+                </div>
+                <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
                 <a>me gusta: {{post.me_gusta}}</a>
                 <a>no me gusta: {{post.no_megusta}}</a>
                 <a>visitas: {{post.visitas}}</a>
                 <br>
-                <form action="crear_comentario/" method="POST" > {% csrf_token %}
-                    <input type="hidden" name="id_post" value="{{post.id_post}}">
-                    <input type="text" name="txtcontenido" id="txtcontenido" placeholder="comentario">
-                   <button type="submit">comentar</button>
-                </form>
+               
                 
             </div>
         </div>
 
     {% endfor %}
+
+        </div>
+
+    </div>
+    <div class="lista">Lista de Objetivos
+  
+      <ul>
+        <a href="#">Fin de la pobreza </a>
+        <li><a href="#">Hambre cero</a> </li>
+        <li><a href="#">Salud</a></li>
+        <li><a href="#">Educacion</a></li>
+        <li><a href="#"> Igualdad de genero </a> </li>
+        <li><a href="#">Salud</a></li>
+        <li><a href="#">Educacion</a></li>
+        <li><a href="#">Objetivo 4</a> </li>
+        <li><a href="#">Objetivo 5</a> </li>
+        <li><a href="#">Objetivo 6</a> </li>
+        <li><a href="#">Objetivo 7</a> </li>
+        <li><a href="#">Objetivo 8</a> </li>
+        <li><a href="#">Objetivo 9</a> </li>
+        <li><a href="#">Objetivo 10</a> </li>
+  
+  
+      </ul>
+  
+    </div>
+    
+    <div class="otras_cosas">Boton de crear post o cosas asi</div>
+  </div>
+    
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     
 {% endblock %}
