@@ -22,6 +22,7 @@ def leer_posteo(request,id):
     comentarios_del_posteo = comentario.objects.filter(post_id=id)
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
 
+#agragar bien el tipo_17_ods
 @login_required
 def agregar_post(request):
     titulo = request.POST['txttitulo']
@@ -30,7 +31,6 @@ def agregar_post(request):
     pre_contenido = str(contenido)[0:150] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
-        #agragar bien el tipo_17_ods
         post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1,imagen=imagen)
         post_creado.save()
         messages.success(request, 'Post creado correctamente')
@@ -50,7 +50,6 @@ def crear_usuario(request):
     password2 = request.POST['txtpassword2']
     rol = request.POST['txtrol']
     foto = request.FILES.get('txtimagen','foto_default.jpg')
-
     if nombre != "" and email != "" and password != "" and password2 != "" and rol != "":
         usename_exists = User.objects.filter(username=nombre).exists()
         if usename_exists:
@@ -72,7 +71,6 @@ def crear_usuario(request):
 
 def login(request):
     return render(request,"login.html")
-
 
 def iniciar_sesion(request):
     username = request.POST['txtusuario']
@@ -97,19 +95,38 @@ def iniciar_sesion(request):
 #                                     VISTAS PARA EL SEGUNDO SPRINT
 #---------------------------------------------------------------------------------------------------
 
+#configurar a que post va el comentario y por quien es creado
+@login_required
+def crear_comentario(request):
+    contenido = request.POST['txtcontenido']
+    usuario_match = usuario.objects.get(id=request.user.id)
+    if comentario != "" and contenido != "":
+        comentario_creado = comentario.objects.create(contenido=contenido, comentador=usuario_match, post_id=1)
+        comentario_creado.save()
+        messages.success(request, 'Comentario creado correctamente')
+    else:
+        messages.warning(request, 'Hay campos vacios')
 
+    return redirect('leer_posteo',id)
+
+
+@login_required
 def perfil_usuario(request):
     posteos = post.objects.filter(posteador_id=request.user.id)
     comentarios = comentario.objects.filter(comentador_id=request.user.id)
     return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
 
-def editar_posteo(request):
-    return render(request,"editar_posteo.html")
+def busqueda_por_fecha(request,fecha):
+    posteos = post.objects.filter(fecha=fecha)
+    return render(request,"feed.html",{'posteos':posteos})
 
+def busqueda_por_comentario(request,comentatario_buscado):
+    posteos = post.objects.filter(comentario_contains=comentatario_buscado)
+    return render(request,"feed.html",{'posteos':posteos})
 
-
-
-
+#---------------------------------------------------------------------------------------------------
+#                                     VISTAS PARA EL TRECER SPRINT
+#---------------------------------------------------------------------------------------------------
 
 
 @login_required
@@ -119,10 +136,13 @@ def eliminar_post(request,id):
     messages.success(request, 'Post eliminado correctamente')
     return redirect('perfil_usuario')
 
-"""def editar_post(request,id):
+@login_required
+def editar_post(request,id):
     post_editar = post.objects.get(id=id)
     return render(request,"editar_post.html",{'post_editar':post_editar})
 
+
+@login_required
 def editar_post_guardar(request,id):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
@@ -134,18 +154,49 @@ def editar_post_guardar(request,id):
         messages.success(request, 'Post editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
-    return redirect('perfil_usuario')"""
+    return redirect('perfil_usuario')
 
-def crear_comentario(request):
-    contenido = request.POST['txtcontenido']
-    usuario_match = usuario.objects.get(id=request.user.id)
-    if comentario != "" and contenido != "":
-        comentario_creado = comentario.objects.create(contenido=contenido, comentador=usuario_match, post_id=1)
-        comentario_creado.save()
-        messages.success(request, 'Comentario creado correctamente')
+@login_required
+def eliminar_comentario(request,id):
+    comentario_eliminado = comentario.objects.get(id=id)
+    comentario_eliminado.delete()
+    messages.success(request, 'Comentario eliminado correctamente')
+    return redirect('perfil_usuario')
+
+
+
+#---------------------------------------------------------------------------------------------------
+#                                     VISTAS PARA EL CUARTO SPRINT
+#---------------------------------------------------------------------------------------------------
+
+def dar_me_gusta(request,id):
+    post_me_gusta = post.objects.get(id=id)
+    post_me_gusta.me_gusta += 1
+    post_me_gusta.save()
+    return redirect('leer_posteo',id)
+
+def dar_no_me_gusta(request,id):
+    post_no_me_gusta = post.objects.get(id=id)
+    post_no_me_gusta.no_me_gusta += 1
+    post_no_me_gusta.save()
+    return redirect('leer_posteo',id)
+
+
+def editar_perfil(request,id):
+    usuario_editar = usuario.objects.get(id=id)
+    return render(request,"editar_perfil.html")
+
+def editar_perfil_guardar(request,id):
+    nombre = request.POST['txtnombre']
+    email = request.POST['txtemail']
+    foto = request.POST['txtfoto']
+    if nombre != "" and email != "":
+        usuario_editar = usuario.objects.get(id=id)
+        usuario_editar.nombre = nombre
+        usuario_editar.email = email
+        usuario_editar.foto = foto
+        usuario_editar.save()
+        messages.success(request, 'Perfil editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
-    return redirect('feed')
-
-
-
+    return redirect('perfil_usuario')
