@@ -1,17 +1,20 @@
-
+/* --- DEFICION DEL GRID --- */
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1,2fr);
+  grid-template-columns: 2fr 6fr 1fr;
   grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(auto, auto);
+  grid-auto-columns: minmax(auto, auto);
 
 }
 
 .posts{
-  background-color: rgb(205, 151, 255);
+  background-color: rgb(92, 174, 228);
   grid-column: 2 / 4;
   grid-row: 1 / 5;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .lista {
@@ -20,10 +23,64 @@
   grid-row: 1 / 5;
 }
 
-
 .otras_cosas {
-  background-color: rgb(241, 241, 92);
+  background-color: rgb(23, 167, 66);
   grid-column: 4/4;
   grid-row: 1;
 }
 
+
+/* --- DEFICION DEL FLEX-BOX --- */
+.row > div{
+	padding: 30px;
+  }
+  
+
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+  
+  @media only screen and (max-width: 768px) {
+	
+	[class*="col-"] {
+	  width: 100%;
+	}
+  }
+
+
+   
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Helvetica;
+    width: 100%;
+  }
+
+ 
+  .main-section {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .cards {
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    margin: var(--cardMargin);
+    border: rgb(148, 10, 10);
+    border-color: rgb(255, 6, 6);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    background: rgb(196, 26, 26);
+    
+  }

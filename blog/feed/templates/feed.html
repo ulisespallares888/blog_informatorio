@@ -7,30 +7,28 @@
 
   
     <div class="posts">
-        <div>
-
+        <section class="main-section row">
+            
     {% for post in posteos %}
 
-        <div class="card" style="width: 18rem;" >
+        <div class="card" style="width: 16rem;  border: 10px; margin: 10px;" >
             <img src="{{post.imagen.url}}" class="card-img-top" alt="{{post.tipo_17_ODS}}"  >
             <div class="card-body">
-                <h5 class="card-title">titulo: {{ post.titulo }}</h5>
+                <h5 class="card-title"> {{ post.titulo }}</h5>
                 <div class="card-text">
-                   <p>contenido: {{ post.pre_contenido }}</p> 
+                   <p>{{ post.pre_contenido }}</p> 
                 </div>
                 <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
                 <a>me gusta: {{post.me_gusta}}</a>
                 <a>no me gusta: {{post.no_megusta}}</a>
                 <a>visitas: {{post.visitas}}</a>
-                <br>
-               
-                
+                <br>              
             </div>
-        </div>
+        </div> 
 
     {% endfor %}
 
-        </div>
+    </section>
 
     </div>
     <div class="lista">Lista de Objetivos
