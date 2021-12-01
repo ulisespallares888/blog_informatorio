@@ -28,7 +28,7 @@ def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
     imagen = request.FILES.get('txtimagen','default.jpg')
-    pre_contenido = str(contenido)[0:150] + "..."
+    pre_contenido = str(contenido)[0:150] + "[...]"
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
         post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1,imagen=imagen)

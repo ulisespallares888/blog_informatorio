@@ -4,3 +4,4 @@ from feed.models import *
 admin.site.register(post)
 admin.site.register(comentario)
 admin.site.register(usuario)
+admin.site.register(categoria)
