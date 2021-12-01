@@ -13,7 +13,7 @@ from feed.models import *
 
 
 def feed(request):
-    posteos = post.objects.all()
+    posteos = post.objects.all() 
     return render(request,"feed.html",{'posteos':posteos})
 
 

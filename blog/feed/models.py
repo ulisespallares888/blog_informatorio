@@ -11,7 +11,7 @@ class usuario(models.Model):
     id = models.AutoField(primary_key=True)
     usuario_fk = models.OneToOneField(User, on_delete=models.CASCADE)
     tipo_usuario = models.CharField(max_length=10 )
-    foto= models.FileField(upload_to='fotos_perfil', default='fotos_perfil/foto_default.png')
+    foto= models.FileField(upload_to='fotos_perfil', default='foto_default.png')
     def __str__(self):
         return self.usuario_fk.username
 
@@ -20,12 +20,12 @@ class post(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
     pre_contenido = models.TextField()
-    categoria = models.ManyToManyField(categoria,  default=1)
+    categoria = models.ForeignKey(categoria, on_delete=models.CASCADE,  default=1, null=False)
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
     me_gusta = models.IntegerField(default=0)
     no_megusta = models.IntegerField(default=0)
-    imagen = models.FileField(upload_to='imagenes_posts', default='feed/static/images/post_default.jpg')
+    imagen = models.FileField(upload_to='imagenes_posts', default='post_default.jpg')
     visitas = models.IntegerField(default=0)
 
     def __str__(self):
