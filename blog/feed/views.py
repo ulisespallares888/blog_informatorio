@@ -27,7 +27,6 @@ def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
     imagen = request.FILES.get('txtimagen','default.jpg')
-    print(imagen)
     pre_contenido = str(contenido)[0:150] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)
     if titulo != "" and contenido != "":
@@ -50,6 +49,7 @@ def crear_usuario(request):
     password = request.POST['txtpassword']
     password2 = request.POST['txtpassword2']
     rol = request.POST['txtrol']
+    foto = request.FILES.get('txtimagen','foto_default.jpg')
 
     if nombre != "" and email != "" and password != "" and password2 != "" and rol != "":
         usename_exists = User.objects.filter(username=nombre).exists()
@@ -59,7 +59,7 @@ def crear_usuario(request):
             if password == password2:
                 usuario_creado = User.objects.create(username=nombre,email=email,password=password)
                 usuario_creado.save()
-                usuario_rol = usuario.objects.create(usuario_fk_id=usuario_creado.id ,tipo_usuario=rol)
+                usuario_rol = usuario.objects.create(usuario_fk_id=usuario_creado.id ,tipo_usuario=rol,foto=foto)
                 usuario_rol.save()
                 messages.success(request, 'Usuario creado correctamente')
                 return redirect('login')
