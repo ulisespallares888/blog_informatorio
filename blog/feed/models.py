@@ -41,7 +41,7 @@ class post(models.Model):
     actualizado_en = models.DateTimeField(auto_now=True)
     me_gusta = models.IntegerField(default=0)
     no_megusta = models.IntegerField(default=0)
-    imagen = models.ImageField(upload_to='imagenes_posts',default='feed/static/images/default.jpg')
+    imagen = models.FileField(upload_to='imagenes_posts', default='feed/static/images/default.jpg')
     visitas = models.IntegerField(default=0)
 
     def __str__(self):

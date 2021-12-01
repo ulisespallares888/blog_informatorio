@@ -26,8 +26,7 @@ def leer_posteo(request,id):
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
-    imagen = request.GET.get('id_imagen')
-    
+    imagen = request.FILES.get('txtimagen','default.jpg')
     print(imagen)
     pre_contenido = str(contenido)[0:150] + "..."
     usuario_match = usuario.objects.get(id=request.user.id)

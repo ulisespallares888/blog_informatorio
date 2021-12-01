@@ -4,7 +4,7 @@
 
     <h1>este es el perfil de usuario</h1>
 
-    <form action="agregar_post/" method="POST" class="form" > {% csrf_token %}
+    <form action="agregar_post/" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
         <div class="form-group">
             <label for="titulo">Titulo</label>
             <input type="text" class="form-control" id="txttitulo" name="txttitulo" placeholder="Titulo">
@@ -14,8 +14,8 @@
             <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="3"></textarea>
         </div>
 
-        <div class="form-group">
-            <input id="id_image" type="file" accept="imagen/*" name="id_image">
+        <div >
+            <input type="file" id="txtimagen"  name="txtimagen">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>  
@@ -42,7 +42,7 @@
              {% endif %}
              {% endfor %}
             
-             <img src="{{post.image.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
+             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
 
              <br>
          </div>
