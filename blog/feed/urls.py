@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path
-from django.urls.conf import include
+from django.urls.conf import include, re_path
 from feed import views
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('login',views.login, name='login'),
     path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
     path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
+    #re_path(r'^feed/buscar_por_catetoria/(?P<id>[0-9]+)$', views.buscar_por_catetoria, name='buscar_por_catetoria'),
     #path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
    
 ]

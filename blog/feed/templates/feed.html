@@ -8,6 +8,8 @@
   
     <div class="posts">
         <section class="main-section row">
+    
+    {% if posteos %}
             
     {% for post in posteos %}
 
@@ -28,6 +30,10 @@
 
     {% endfor %}
 
+    {% else %}
+        <h2 style="text-align: center;">No hay posts con esa categoría</h2>
+    {% endif %}
+
     </section>
 
     </div>
@@ -37,7 +43,8 @@
         <a href="feed" >Todos </a>
         <br>
         {% for categoria in categorias %}
-        <li><a href="buscar_por_catetoria/{{categoria.id}}">{{categoria.name}} </a></li>
+        <!--"buscar_por_catetoria/{{categoria.id}}"-->
+        <li><a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  >{{categoria.name}} </a></li>
         
         {% endfor %} 
       </ol>

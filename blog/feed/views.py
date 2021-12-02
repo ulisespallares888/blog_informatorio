@@ -123,7 +123,6 @@ def buscar_por_catetoria(request,id):
     if id == 'feed':
         return redirect('feed')
     else:
-        feed(request)
         posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
         categorias = categoria.objects.all()
         return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
