@@ -119,7 +119,6 @@ def perfil_usuario(request):
 
 
 def buscar_por_catetoria(request,id):
-    
     if id == 'feed':
         return redirect('feed')
     else:

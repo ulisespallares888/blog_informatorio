@@ -43,7 +43,7 @@
         <a href="feed" >Todos </a>
         <br>
         {% for categoria in categorias %}
-        <!--"buscar_por_catetoria/{{categoria.id}}"-->
+       
         <li><a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  >{{categoria.name}} </a></li>
         
         {% endfor %} 
