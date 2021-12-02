@@ -13,10 +13,9 @@ from feed.models import *
 
 
 def feed(request):
-    posteos = post.objects.all() 
+    posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
-
 
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
@@ -31,6 +30,7 @@ def agregar_post(request):
     imagen = request.FILES.get('txtimagen','default.jpg')
     pre_contenido = str(contenido)[0:150] + "[...]"
     usuario_match = usuario.objects.get(id=request.user.id)
+    #categoria_match = categoria.objects.get(id=request.POST['txtcategoria'])
     if titulo != "" and contenido != "":
         post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1,imagen=imagen)
         post_creado.save()
@@ -117,6 +117,18 @@ def perfil_usuario(request):
     comentarios = comentario.objects.filter(comentador_id=request.user.id)
     return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
 
+
+def buscar_por_catetoria(request,id):
+    
+    if id == 'feed':
+        return redirect('feed')
+    else:
+        feed(request)
+        posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
+        categorias = categoria.objects.all()
+        return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
+    
+
 def busqueda_por_fecha(request,fecha):
     posteos = post.objects.filter(fecha=fecha)
     return render(request,"feed.html",{'posteos':posteos})
@@ -124,6 +136,8 @@ def busqueda_por_fecha(request,fecha):
 def busqueda_por_comentario(request,comentatario_buscado):
     posteos = post.objects.filter(comentario_contains=comentatario_buscado)
     return render(request,"feed.html",{'posteos':posteos})
+
+
 
 #---------------------------------------------------------------------------------------------------
 #                                     VISTAS PARA EL TRECER SPRINT

@@ -71,6 +71,7 @@
     flex-direction: column;
     flex-direction: row;
     flex-wrap: wrap;
+    
   }
   .cards {
     width: var(--cardWidth);

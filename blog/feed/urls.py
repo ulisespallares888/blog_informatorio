@@ -5,7 +5,7 @@ from django.urls.conf import include
 from feed import views
 
 urlpatterns = [
-    path('', views.feed, name='feed'),
+    path('feed', views.feed, name='feed'),
     path('registrarse/',views.registrarse, name='registrarse'),
     path('registrarse/crear_usuario/',views.crear_usuario, name='crear_usuario'),
     path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
@@ -16,6 +16,7 @@ urlpatterns = [
     path('crear_comentario/',views.crear_comentario, name='crear_comentario'),
     path('login',views.login, name='login'),
     path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
+    path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
     #path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
-    
+   
 ]
