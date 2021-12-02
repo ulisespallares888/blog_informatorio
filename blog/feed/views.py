@@ -14,7 +14,8 @@ from feed.models import *
 
 def feed(request):
     posteos = post.objects.all() 
-    return render(request,"feed.html",{'posteos':posteos})
+    categorias = categoria.objects.all()
+    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
 
 
 def leer_posteo(request,id):

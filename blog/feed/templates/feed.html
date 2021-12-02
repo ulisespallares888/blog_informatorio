@@ -11,7 +11,7 @@
             
     {% for post in posteos %}
 
-        <div class="card" style="width: 16rem;  border: 10px; margin: 10px;" >
+        <div class="card" style="width: 16rem;  border: 10px; margin: 5px;" >
             <img src="{{post.imagen.url}}" class="card-img-top" alt="{{post.tipo_17_ODS}}"  >
             <div class="card-body">
                 <h5 class="card-title"> {{ post.titulo }}</h5>
@@ -31,30 +31,34 @@
     </section>
 
     </div>
-    <div class="lista">Lista de Objetivos
-  
+    <div class="lista">Objetivos de Desarrollo Sostenibles
+      <br>
       <ul>
-        <a href="#">Fin de la pobreza </a>
-        <li><a href="#">Hambre cero</a> </li>
-        <li><a href="#">Salud</a></li>
-        <li><a href="#">Educacion</a></li>
-        <li><a href="#"> Igualdad de genero </a> </li>
-        <li><a href="#">Salud</a></li>
-        <li><a href="#">Educacion</a></li>
-        <li><a href="#">Objetivo 4</a> </li>
-        <li><a href="#">Objetivo 5</a> </li>
-        <li><a href="#">Objetivo 6</a> </li>
-        <li><a href="#">Objetivo 7</a> </li>
-        <li><a href="#">Objetivo 8</a> </li>
-        <li><a href="#">Objetivo 9</a> </li>
-        <li><a href="#">Objetivo 10</a> </li>
-  
-  
+        {% for categoria in categorias %}
+        <a href="#">{{categoria.name}} </a>
+        <br>
+        {% endfor %} 
       </ul>
   
     </div>
     
-    <div class="otras_cosas">Boton de crear post o cosas asi</div>
+    <div class="otras_cosas">
+      Buscar post por comentarios
+      <br>
+      <form class=" d-flex justify-content-center ">
+        <input class="form-control me-1" type="search" placeholder="Cometario" aria-label="Search" style="width: auto;">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+      <br>
+      Buscar post por fecha
+      <br>
+      <form class=" d-flex justify-content-center ">
+        <input class="form-control me-1" type="date"  style="width: auto;">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+      <br>
+
+    </div>
   </div>
     
 
