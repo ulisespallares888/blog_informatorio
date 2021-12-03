@@ -40,7 +40,7 @@ class post(models.Model):
 
 class comentario(models.Model):
     post = models.ForeignKey(post, on_delete=models.CASCADE)
-    comentador = models.ForeignKey(usuario, on_delete=models.CASCADE, null=True)
+    comentador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     contenido = models.TextField()
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
@@ -50,7 +50,7 @@ class comentario(models.Model):
 
 
 class reaccion(models.Model):
-    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(post, on_delete=models.CASCADE)
     me_gusta = models.BooleanField(default=False)
     no_megusta = models.BooleanField(default=False)

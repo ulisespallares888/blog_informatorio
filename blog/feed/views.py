@@ -88,6 +88,7 @@ def iniciar_sesion(request):
         usuario_existe = User.objects.filter(username=nombre).exists()
         if usuario_existe:
             user = authenticate(request, username=nombre, password=contrasenia)
+            print(user)
             if user is not None:
                 login(request,user)
                 messages.success(request, f'Bienvenido {nombre}')
