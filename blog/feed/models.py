@@ -2,6 +2,12 @@ from django.db import models
 from  django.contrib.auth.models import User
 from PIL.Image  import Image
 
+
+class tipo_usuario(models.Model):
+    nombre = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nombre
+
 class categoria(models.Model):
     name = models.CharField(max_length=50)
     def __str__(self):
@@ -10,8 +16,8 @@ class categoria(models.Model):
 class usuario(models.Model):
     id = models.AutoField(primary_key=True)
     usuario_fk = models.OneToOneField(User, on_delete=models.CASCADE)
-    tipo_usuario = models.CharField(max_length=10 )
-    foto= models.FileField(upload_to='fotos_perfil', default='foto_default.png')
+    tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, null=True)
+    foto= models.FileField(upload_to='fotos_perfil', default='foto_default.jpg')
     def __str__(self):
         return self.usuario_fk.username
 
@@ -42,3 +48,14 @@ class comentario(models.Model):
         return salida
 
 
+class megusta(models.Model):
+    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
+    post = models.ForeignKey(post, on_delete=models.CASCADE)
+    def __str__(self):
+        return '{} {}'.format(self.usuario, self.post)
+
+class nomegusta(models.Model):
+    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
+    post = models.ForeignKey(post, on_delete=models.CASCADE)
+    def __str__(self):
+        return '{} {}'.format(self.usuario, self.post)

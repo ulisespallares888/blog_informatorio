@@ -13,18 +13,18 @@
             
     {% for post in posteos %}
 
-        <div class="card" style="width: 16rem;  border: 10px; margin: 5px;" >
-            <img src="{{post.imagen.url}}" class="card-img-top" alt="{{post.tipo_17_ODS}}"  >
+        <div class="card" style="width: 16rem;  border: 5px; margin: 6px; height: auto;"  >
+            <img src="{{post.imagen.url}}" class="card-img-top"   >
             <div class="card-body" >
-                <h5 class="card-title"> {{ post.titulo }}</h5>
-                <div class="card-text" >
+                <h5 class="card-title"  > {{ post.titulo }}</h5>
+                <div class="cardbody"></div>
+                <div class="card-text" style="width: auto; height: 6rem;" >
                    <p>{{ post.pre_contenido }}</p> 
                 </div>
                 <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
-                <a>me gusta: {{post.me_gusta}}</a>
-                <a>no me gusta: {{post.no_megusta}}</a>
-                <a>visitas: {{post.visitas}}</a>
-                <br>              
+                <a href="{% url 'leer_posteo' id=post.id %}" style="text-align: left; font-family: Verdana;" >Leer articulo</a>
+                <br>
+               
             </div>
         </div> 
 
@@ -40,7 +40,7 @@
     <div class="lista">Objetivos de Desarrollo Sostenibles
       <br>
       <ol>
-        <a href="feed" >Todos </a>
+        <a href="{% url 'feed' %}" >Todos </a>
         <br>
         {% for categoria in categorias %}
        

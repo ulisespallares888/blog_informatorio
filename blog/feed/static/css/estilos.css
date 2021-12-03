@@ -6,15 +6,18 @@
   grid-gap: 10px;
   grid-auto-rows: minmax(auto, auto);
   grid-auto-columns: minmax(auto, auto);
+  
 
 }
 
 .posts{
-  background-color: rgb(92, 174, 228);
+  background-color: rgb(245, 245, 245);
   grid-column: 2 / 4;
   grid-row: 1 / 5;
   padding: 10px;
+  grid-template-rows: auto;
   border-radius: 10px;
+  
 }
 
 .lista {

@@ -14,10 +14,11 @@
             <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="3"></textarea>
         </div>
         <div class="form-group">
-            <select name="select">
-                <option value="value1">Value 1</option>
-                <option value="value2">Value 2</option>
-                <option value="value3">Value 3</option>
+            <select class="form-gourp form-select" name="txtcategoria" id="txtcategoria" required>
+                {% for categoria in categorias %}
+                    <option value="{{categoria.id}}" >{{categoria.name}}</option>
+                    
+                {% endfor %}
               </select>
         </div>
 

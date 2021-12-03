@@ -27,12 +27,12 @@ def leer_posteo(request,id):
 def agregar_post(request):
     titulo = request.POST['txttitulo']
     contenido = request.POST['txtcontenido']
-    imagen = request.FILES.get('txtimagen','default.jpg')
-    pre_contenido = str(contenido)[0:150] + "[...]"
+    imagen = request.FILES.get('txtimagen','post_default.jpg')
+    categoria_match = request.POST.get('txtcategoria')
+    pre_contenido = str(contenido)[0:60] + "[...]"
     usuario_match = usuario.objects.get(id=request.user.id)
-    #categoria_match = categoria.objects.get(id=request.POST['txtcategoria'])
     if titulo != "" and contenido != "":
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, tipo_17_ODS=1,imagen=imagen)
+        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, categoria_id=categoria_match,imagen=imagen)
         post_creado.save()
         messages.success(request, 'Post creado correctamente')
     else:
@@ -70,7 +70,7 @@ def crear_usuario(request):
     return redirect('registrarse')
 
 
-def login(request):
+def acceder(request):
     return render(request,"login.html")
 
 def iniciar_sesion(request):
@@ -79,9 +79,9 @@ def iniciar_sesion(request):
     if username != "" and password !="":
         usuario_existe = User.objects.filter(username=username).exists()
         if usuario_existe:
-            user = authenticate(username=username, password=password)
+            user = authenticate(request,username=username, password=password)
             if user is not None:
-                login(request, user)
+                login(request,user)
                 messages.success(request, f'Bienvenido {username}')
                 return redirect('feed')
             else:
@@ -115,16 +115,14 @@ def crear_comentario(request):
 def perfil_usuario(request):
     posteos = post.objects.filter(posteador_id=request.user.id)
     comentarios = comentario.objects.filter(comentador_id=request.user.id)
-    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios})
+    categorias = categoria.objects.all()
+    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios, 'categorias':categorias})
 
 
 def buscar_por_catetoria(request,id):
-    if id == 'feed':
-        return redirect('feed')
-    else:
-        posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
-        categorias = categoria.objects.all()
-        return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
+    posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
+    categorias = categoria.objects.all()
+    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
     
 
 def busqueda_por_fecha(request,fecha):

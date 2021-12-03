@@ -47,7 +47,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ user.username }}
+                  {{ user.username }} 
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'perfil_usuario'%}">Perfil</a></li>
@@ -57,8 +57,8 @@
               {% else %}
             <form class="d-flex ">
               
-              <a href="registrarse" class="btn btn-warning me-2" >Signin</a>
-              <a href="login" class="btn btn-warning me-2" >Login</a>
+              <a href="{% url 'registrarse' %}" class="btn btn-warning me-2" >Signin</a>
+              <a href="{% url 'acceder' %}" class="btn btn-warning me-2" >Login</a>
             </form>
             {% endif %}
          
