@@ -14,7 +14,10 @@
     {% for post in posteos %}
 
         <div class="card" style="width: 16rem;  border: 5px; margin: 6px; height: auto;"  >
-            <img src="{{post.imagen.url}}" class="card-img-top"   >
+          <a href="{% url 'leer_posteo' id=post.id %}">
+            <img src="{{post.imagen.url}}" class="card-img-top" >   
+          </a>
+            
             <div class="card-body" >
                 <h5 class="card-title"  > {{ post.titulo }}</h5>
                 <div class="cardbody"></div>

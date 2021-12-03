@@ -4,7 +4,7 @@
 
     <h1>este es el perfil de usuario</h1>
 
-    <form action="agregar_post/" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
+    <form action="{% url 'agregar_post' %} " method="POST"  enctype="multipart/form-data"> {% csrf_token %}
         <div class="form-group">
             <label for="titulo">Titulo</label>
             <input type="text" class="form-control" id="txttitulo" name="txttitulo" placeholder="Titulo">
@@ -33,11 +33,13 @@
 
      <br>
      <br>
+     <h4>Mis Posts</h4>
      {% for post in posteos %}
 
      <div class="card" style="width: 18rem;">
+        
          <div class="card-body">
-             
+            <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
              <h5 class="card-title">titulo: {{ post.titulo }}</h5>
            
              <p class="card-text">contenido: {{ post.pre_contenido }}</p>
@@ -51,8 +53,7 @@
                  <p class="card-text">comentario: {{ comentario.contenido }}</p>
              {% endif %}
              {% endfor %}
-            
-             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
+                     
 
              <br>
          </div>

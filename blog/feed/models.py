@@ -22,7 +22,7 @@ class usuario(models.Model):
         return self.usuario_fk.username
 
 class post(models.Model):
-    posteador = models.ForeignKey(usuario, on_delete=models.CASCADE, null=True)
+    posteador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
     pre_contenido = models.TextField()

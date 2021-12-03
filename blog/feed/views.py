@@ -7,6 +7,7 @@ from feed.models import *
 
 
 
+
 #---------------------------------------------------------------------------------------------------
 #                                    VISTAS PARA EL PRIMER SPRINT
 #---------------------------------------------------------------------------------------------------
@@ -30,7 +31,7 @@ def agregar_post(request):
     imagen = request.FILES.get('txtimagen','post_default.jpg')
     categoria_match = request.POST.get('txtcategoria')
     pre_contenido = str(contenido)[0:60] + "[...]"
-    usuario_match = usuario.objects.get(id=request.user.id)
+    usuario_match = User.objects.get(id = request.user.id)
     if titulo != "" and contenido != "":
         post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, categoria_id=categoria_match,imagen=imagen)
         post_creado.save()
@@ -58,7 +59,7 @@ def crear_usuario(request):
             messages.warning(request, 'El usuario ya existe')
         else:
             if password == password2:
-                usuario_creado = User.objects.create(username=nombre,email=email,password=password)
+                usuario_creado = User.objects.create_user(username=nombre,email=email,password=password)
                 usuario_creado.save()
                 usuario_rol = usuario.objects.create(usuario_fk_id=usuario_creado.id ,tipo_usuario_id=rol,foto=foto)
                 usuario_rol.save()
@@ -72,21 +73,23 @@ def crear_usuario(request):
 
 
 def acceder(request):
-    return render(request,"login.html")
+    return render(request,"registration/login.html")
 
 
 
 #--------------arreglar el iniciar sesion en la parte-------------
 def iniciar_sesion(request):
-    username = request.POST['txtusuario']
-    password = request.POST['txtpassword']
-    if username != "" and password !="":
-        usuario_existe = User.objects.filter(username=username).exists()
+    nombre = request.POST['txtusuario']
+    contrasenia = request.POST['txtpassword']
+    if nombre != "" and contrasenia !="":
+        usuario_existe = User.objects.filter(username=nombre).exists()
         if usuario_existe:
-            user = authenticate(request,username=username, password=password)
+            print("usuario existe y es",usuario_existe)
+            user = authenticate(request, username=nombre, password=contrasenia)
+            print("autenticador",user, nombre,contrasenia)
             if user is not None:
                 login(request,user)
-                messages.success(request, f'Bienvenido {username}')
+                messages.success(request, f'Bienvenido {nombre}')
                 return redirect('feed')
             else:
                 messages.warning(request, 'Usuario y/o contraseña incorrectos')
@@ -117,6 +120,7 @@ def crear_comentario(request):
 
 @login_required
 def perfil_usuario(request):
+    print('request',request.user.id)
     posteos = post.objects.filter(posteador_id=request.user.id)
     comentarios = comentario.objects.filter(comentador_id=request.user.id)
     categorias = categoria.objects.all()

@@ -7,7 +7,7 @@
 <body>
     <div class="card " >
         <div class="card-body" >
-            <form action="crear_usuario/" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+            <form action="{% url 'crear_usuario' %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                 <div class="form-gourp">
                     <input type="text" placeholder="Nombre de usuario" id="txtnombre" name="txtnombre" class="form-control" minlength="1" maxlength="50">
                 </div>
