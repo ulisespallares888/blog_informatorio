@@ -16,7 +16,7 @@ class categoria(models.Model):
 class usuario(models.Model):
     id = models.AutoField(primary_key=True)
     usuario_fk = models.OneToOneField(User, on_delete=models.CASCADE)
-    tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, null=True)
+    tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, null=False)
     foto= models.FileField(upload_to='fotos_perfil', default='foto_default.jpg')
     def __str__(self):
         return self.usuario_fk.username

@@ -41,7 +41,8 @@ def agregar_post(request):
 
 
 def registrarse(request):
-    return render(request,"registrarse.html")
+    tipo_usuario_match = tipo_usuario.objects.all()
+    return render(request,"registrarse.html",{'tipo_usuario_match':tipo_usuario_match})
 
 
 def crear_usuario(request):
@@ -49,7 +50,7 @@ def crear_usuario(request):
     email = request.POST['txtemail']
     password = request.POST['txtpassword']
     password2 = request.POST['txtpassword2']
-    rol = request.POST['txtrol']
+    rol = request.POST.get('txttrol')
     foto = request.FILES.get('txtimagen','foto_default.jpg')
     if nombre != "" and email != "" and password != "" and password2 != "" and rol != "":
         usename_exists = User.objects.filter(username=nombre).exists()
@@ -59,10 +60,10 @@ def crear_usuario(request):
             if password == password2:
                 usuario_creado = User.objects.create(username=nombre,email=email,password=password)
                 usuario_creado.save()
-                usuario_rol = usuario.objects.create(usuario_fk_id=usuario_creado.id ,tipo_usuario=rol,foto=foto)
+                usuario_rol = usuario.objects.create(usuario_fk_id=usuario_creado.id ,tipo_usuario_id=rol,foto=foto)
                 usuario_rol.save()
                 messages.success(request, 'Usuario creado correctamente')
-                return redirect('login')
+                return redirect('acceder')
             else:
                 messages.warning(request, 'Las contraseñas no coinciden')
     else:
@@ -73,6 +74,9 @@ def crear_usuario(request):
 def acceder(request):
     return render(request,"login.html")
 
+
+
+#--------------arreglar el iniciar sesion en la parte-------------
 def iniciar_sesion(request):
     username = request.POST['txtusuario']
     password = request.POST['txtpassword']
@@ -85,12 +89,12 @@ def iniciar_sesion(request):
                 messages.success(request, f'Bienvenido {username}')
                 return redirect('feed')
             else:
-                messages.warning(request, 'Usuario o contraseña incorrectos')
+                messages.warning(request, 'Usuario y/o contraseña incorrectos')
         else:
             messages.warning(request, 'Usuario no existe')
     else:
         messages.warning(request, 'Hay campos vacios')
-    return redirect('login')
+    return redirect('acceder')
 
 #---------------------------------------------------------------------------------------------------
 #                                     VISTAS PARA EL SEGUNDO SPRINT

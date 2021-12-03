@@ -15,7 +15,7 @@ urlpatterns = [
     path('eliminar_post/<id>',views.eliminar_post, name='eliminar_post'),
     path('perfil_usuario/',views.perfil_usuario, name='perfil_usuario'),
     path('crear_comentario/',views.crear_comentario, name='crear_comentario'),
-    path('iniciar_sesion',views.iniciar_sesion, name='iniciar_sesion'),
+    path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
     path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
     path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
     
