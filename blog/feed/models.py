@@ -10,6 +10,7 @@ class tipo_usuario(models.Model):
 
 class categoria(models.Model):
     name = models.CharField(max_length=50)
+    imagen = models.ImageField(upload_to='categoria',default='categoria_default.png')
     def __str__(self):
         return self.name
 
@@ -48,14 +49,11 @@ class comentario(models.Model):
         return salida
 
 
-class megusta(models.Model):
+class reaccion(models.Model):
     usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
     post = models.ForeignKey(post, on_delete=models.CASCADE)
+    me_gusta = models.BooleanField(default=False)
+    no_megusta = models.BooleanField(default=False)
     def __str__(self):
         return '{} {}'.format(self.usuario, self.post)
 
-class nomegusta(models.Model):
-    usuario = models.ForeignKey(usuario, on_delete=models.CASCADE)
-    post = models.ForeignKey(post, on_delete=models.CASCADE)
-    def __str__(self):
-        return '{} {}'.format(self.usuario, self.post)

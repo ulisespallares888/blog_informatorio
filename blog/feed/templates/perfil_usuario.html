@@ -2,7 +2,11 @@
 
 {% block content %}
 
+
     <h1>este es el perfil de usuario</h1>
+    {% if usuarios %}
+    <img src="{{usuarios.foto.url}}" style="width: 30px; height: 30px; border-radius: 30px;" >
+    {% endif %}
 
     <form action="{% url 'agregar_post' %} " method="POST"  enctype="multipart/form-data"> {% csrf_token %}
         <div class="form-group">

@@ -19,6 +19,7 @@ urlpatterns = [
     path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
     path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
     path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
+    path('reaccionar/<id>/<reac>',views.reaccionar, name='reaccionar'),
     path('accounts/',include('django.contrib.auth.urls')),
     
     

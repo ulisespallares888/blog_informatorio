@@ -14,6 +14,7 @@ from feed.models import *
 
 
 def feed(request):
+    #usuarios = usuario.objects.get(usuario_fk_id=request.user.id)
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
@@ -21,6 +22,8 @@ def feed(request):
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
     comentarios_del_posteo = comentario.objects.filter(post_id=id)
+    un_posteo.visitas += 1
+    un_posteo.save()
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
 
 #agragar bien el tipo_17_ods
@@ -84,9 +87,7 @@ def iniciar_sesion(request):
     if nombre != "" and contrasenia !="":
         usuario_existe = User.objects.filter(username=nombre).exists()
         if usuario_existe:
-            print("usuario existe y es",usuario_existe)
             user = authenticate(request, username=nombre, password=contrasenia)
-            print("autenticador",user, nombre,contrasenia)
             if user is not None:
                 login(request,user)
                 messages.success(request, f'Bienvenido {nombre}')
@@ -120,7 +121,6 @@ def crear_comentario(request):
 
 @login_required
 def perfil_usuario(request):
-    print('request',request.user.id)
     posteos = post.objects.filter(posteador_id=request.user.id)
     comentarios = comentario.objects.filter(comentador_id=request.user.id)
     categorias = categoria.objects.all()
@@ -188,16 +188,49 @@ def eliminar_comentario(request,id):
 #                                     VISTAS PARA EL CUARTO SPRINT
 #---------------------------------------------------------------------------------------------------
 
-def dar_me_gusta(request,id):
-    post_me_gusta = post.objects.get(id=id)
-    post_me_gusta.me_gusta += 1
-    post_me_gusta.save()
-    return redirect('leer_posteo',id)
-
-def dar_no_me_gusta(request,id):
-    post_no_me_gusta = post.objects.get(id=id)
-    post_no_me_gusta.no_me_gusta += 1
-    post_no_me_gusta.save()
+def reaccionar(request,id,reac):
+    reaccion_exists = reaccion.objects.filter(usuario_id=request.user.id,post_id=id).exists()
+    post_reaccionar = post.objects.get(id=id)
+    if not reaccion_exists:
+        if reac == "mg":
+            reaccion_creado = reaccion.objects.create(usuario_id=request.user.id,post_id=id,me_gusta=True,no_megusta=False)
+            post_reaccionar.me_gusta += 1
+        else:
+            reaccion_creado = reaccion.objects.create(usuario_id=request.user.id,post_id=id,me_gusta=False,no_megusta=True)
+            post_reaccionar.no_megusta += 1
+        reaccion_creado.save()
+    else:
+        reaccion_bus = reaccion.objects.get(usuario_id=request.user.id,post_id=id)
+        if reac == "mg":
+            if reaccion_bus.me_gusta == True and reaccion_bus.no_megusta == False:
+                reaccion_bus.me_gusta=False
+                reaccion_bus.no_megusta=False
+                post_reaccionar.me_gusta -= 1
+            elif reaccion_bus.me_gusta == False and reaccion_bus.no_megusta == False:
+                reaccion_bus.me_gusta=True
+                post_reaccionar.me_gusta += 1
+            else:
+                if reaccion_bus.me_gusta == False and reaccion_bus.no_megusta == True:
+                    reaccion_bus.me_gusta=True
+                    reaccion_bus.no_megusta=False
+                    post_reaccionar.me_gusta += 1
+                    post_reaccionar.no_megusta -= 1
+        else:
+            if reaccion_bus.me_gusta == True and reaccion_bus.no_megusta == False:
+                reaccion_bus.me_gusta=False
+                reaccion_bus.no_megusta=True
+                post_reaccionar.me_gusta -= 1
+                post_reaccionar.no_megusta += 1
+            elif reaccion_bus.me_gusta == False and reaccion_bus.no_megusta == False:
+                reaccion_bus.no_megusta=True
+                post_reaccionar.no_megusta += 1
+            else:
+                if reaccion_bus.me_gusta == False and reaccion_bus.no_megusta == True:
+                    reaccion_bus.no_megusta=False
+                    post_reaccionar.no_megusta -= 1
+        reaccion_bus.save()
+    post_reaccionar.save()
+    messages.success(request, 'Reaccion realizada correctamente')
     return redirect('leer_posteo',id)
 
 

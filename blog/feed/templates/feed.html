@@ -2,9 +2,10 @@
 
 {% block content %}
 
+ 
+ 
 
 <div class="wrapper">
-
   
     <div class="posts ">
         <section class="main-section row">
@@ -25,6 +26,17 @@
                    <p>{{ post.pre_contenido }}</p> 
                 </div>
                 <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
+                <p class="card-text"><small class="text-muted">{{ post.visitas }}</small></p>
+                
+               
+                  <a class="btn-outline-success" href="{%url 'reaccionar' id=post.id reac='mg' %}">Megusta--{{post.me_gusta}}</a>
+                  
+                
+                  <a class="btn-outline-success" href="{%url 'reaccionar' id=post.id reac='nmg' %}">Nomegusta--{{post.no_megusta}}</a>
+                
+                
+                
+                
                 <a href="{% url 'leer_posteo' id=post.id %}" style="text-align: left; font-family: Verdana;" >Leer articulo</a>
                 <br>
                
@@ -34,7 +46,7 @@
     {% endfor %}
 
     {% else %}
-        <h2 style="text-align: center;">No hay posts con esa categoría</h2>
+        <h2 style="text-align: center;">No hay posts</h2>
     {% endif %}
 
     </section>
@@ -54,7 +66,16 @@
   
     </div>
     
+    
+
     <div class="otras_cosas">
+      
+      {% if user.is_authenticated %}
+      <br>
+        <a href="{% url 'perfil_usuario' %}" >Crear Posteo</a>
+        <br>
+      {% endif %}
+
       Buscar post por comentarios
       <br>
       <form class=" d-flex justify-content-center ">
