@@ -19,6 +19,8 @@ urlpatterns = [
     path('iniciar_sesion/',views.iniciar_sesion, name='iniciar_sesion'),
     path('leer_posteo/<id>',views.leer_posteo, name='leer_posteo'),
     path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
+    path('busqueda_por_comentario',views.busqueda_por_comentario, name='busqueda_por_comentario'),
+    path('busqueda_por_fecha',views.busqueda_por_fecha, name='busqueda_por_fecha'),
     path('reaccionar/<id>/<reac>',views.reaccionar, name='reaccionar'),
     path('accounts/',include('django.contrib.auth.urls')),
     

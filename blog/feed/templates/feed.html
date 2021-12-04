@@ -78,17 +78,24 @@
 
       Buscar post por comentarios
       <br>
-      <form class=" d-flex justify-content-center ">
-        <input class="form-control me-1" type="search" placeholder="Cometario" aria-label="Search" style="width: auto;">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+
+      <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_comentario' %}" method="GET"> {% csrf_token %}
+        <div class="btn-group " method="GET">
+            <input class="form-control col-xl-12 " id="comentario_buscado" name="comentario_buscado" style="width: auto;" type="text" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-outline-success" >Buscar</button>
+       </div>
+    </form>
+
+     
       <br>
       Buscar post por fecha
       <br>
-      <form class=" d-flex justify-content-center ">
-        <input class="form-control me-1" type="date"  style="width: auto;">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+      <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_fecha' %}" method="GET"> {% csrf_token %}
+        <div class="btn-group " method="GET">
+            <input class="form-control col-xl-12 " id="fecha_buscada" name="fecha_buscada" style="width: auto;" type="date"  placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-outline-success" >Buscar</button>
+       </div>
+    </form>
       <br>
 
     </div>

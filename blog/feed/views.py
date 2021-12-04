@@ -1,3 +1,4 @@
+from django.db.models.fields import DateTimeCheckMixin, DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import auth
@@ -14,7 +15,7 @@ from feed.models import *
 
 
 def feed(request):
-    #usuarios = usuario.objects.get(usuario_fk_id=request.user.id)
+    
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
@@ -134,13 +135,17 @@ def buscar_por_catetoria(request,id):
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
     
 
-def busqueda_por_fecha(request,fecha):
-    posteos = post.objects.filter(fecha=fecha)
-    return render(request,"feed.html",{'posteos':posteos})
+def busqueda_por_fecha(request):
+    fecha_bus = request.GET.get('fecha_buscada')
+    posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
+    categorias = categoria.objects.all()
+    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
 
-def busqueda_por_comentario(request,comentatario_buscado):
-    posteos = post.objects.filter(comentario_contains=comentatario_buscado)
-    return render(request,"feed.html",{'posteos':posteos})
+def busqueda_por_comentario(request):
+    comentario_bus = request.GET.get('comentario_buscado')
+    categorias = categoria.objects.all()
+    posteos = post.objects.filter( comentario__contenido__contains=comentario_bus)
+    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
 
 
 
@@ -188,7 +193,7 @@ def eliminar_comentario(request,id):
 #---------------------------------------------------------------------------------------------------
 #                                     VISTAS PARA EL CUARTO SPRINT
 #---------------------------------------------------------------------------------------------------
-
+@login_required
 def reaccionar(request,id,reac):
     reaccion_exists = reaccion.objects.filter(usuario_id=request.user.id,post_id=id).exists()
     post_reaccionar = post.objects.get(id=id)
@@ -234,11 +239,12 @@ def reaccionar(request,id,reac):
     messages.success(request, 'Reaccion realizada correctamente')
     return redirect('leer_posteo',id)
 
-
+@login_required
 def editar_perfil(request,id):
     usuario_editar = usuario.objects.get(id=id)
     return render(request,"editar_perfil.html")
 
+@login_required
 def editar_perfil_guardar(request,id):
     nombre = request.POST['txtnombre']
     email = request.POST['txtemail']
