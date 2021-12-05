@@ -39,8 +39,32 @@
                 </ul>
                 {% if user.is_authenticated %}
                 <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item dropdown" >
+                        <a href="#" class="nav-link " data-bs-toggle="dropdown" >
+                            <img src="/static/img/no_tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" >
+                            <a href="{% url 'perfil_usuario'%}" 
+                            class="dropdown-item" 
+                            style="border-radius: 10px; 
+                                    background-color: seagreen ;">Juan le ha dado me gusta a tu post</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{% url 'perfil_usuario'%}" 
+                                class="dropdown-item" 
+                                style="border-radius: 10px;">Sofia le ha dado me gusta a tu post</a>
+                                       
+                        </div>
+                    </li>
+
+
+                    
+                    
+                    
+                    
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user.username}}</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {{user.username}}
+                        </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Perfil</a>
                             <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Crear Post</a>
@@ -55,8 +79,6 @@
                       <a href="{% url 'acceder' %}" class="btn btn-light me-2" style="border-color: grey;">Acceder</a>
                     </form>
                     {% endif %}
-
-
                 </ul>
 
               
