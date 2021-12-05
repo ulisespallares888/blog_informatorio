@@ -56,6 +56,7 @@
       <br>
       <ol>
         Objetivos de Desarrollo Sostenibles
+        
         <a href="{% url 'feed' %}" >Todos </a>
         <br>
         <section class="main-section2 ">
@@ -75,11 +76,11 @@
 
     <div class="otras_cosas">
       
-      {% if user.is_authenticated %}
+     
       <br>
-        <a href="{% url 'perfil_usuario' %}" >Crear Posteo</a>
+        <a  class="btn btn-success " href="{% url 'perfil_usuario' %}" >Crear Posteo</a>
         <br>
-      {% endif %}
+      
 
       Buscar post por comentarios
       <br>

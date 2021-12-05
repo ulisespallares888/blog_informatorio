@@ -27,7 +27,7 @@
 }
 
 .otras_cosas {
-  background-color: rgb(23, 167, 66);
+  background-color:whitesmoke;
   grid-column: 4/4;
   grid-row: 1;
 }

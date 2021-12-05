@@ -5,6 +5,7 @@ from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from feed.models import *
+import datetime
 
 
 
@@ -137,6 +138,7 @@ def buscar_por_catetoria(request,id):
 
 def busqueda_por_fecha(request):
     fecha_bus = request.GET.get('fecha_buscada')
+    print(fecha_bus)
     posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
