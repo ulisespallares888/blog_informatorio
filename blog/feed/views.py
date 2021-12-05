@@ -16,10 +16,9 @@ import datetime
 
 
 def feed(request):
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
-    print(notif_user,len(notif_user))
     contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user}
     return render(request,"feed.html",contexto)
 
@@ -128,18 +127,18 @@ def crear_comentario(request):
 
 @login_required
 def perfil_usuario(request):
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     posteos = post.objects.filter(posteador_id=request.user.id)
     comentarios = comentario.objects.filter().exclude(comentador_id=request.user.id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
-    return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios, 'categorias':categorias})
-
+    contexto = {'posteos':posteos, 'comentarios':comentarios, 'categorias':categorias, 'notif_user':notif_user}
+    return render(request,"perfil_usuario.html",contexto)
 
 def buscar_por_catetoria(request,id):
     posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
     
-
 def busqueda_por_fecha(request):
     fecha_bus = request.GET.get('fecha_buscada')
     print(fecha_bus)

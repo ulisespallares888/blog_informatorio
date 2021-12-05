@@ -29,13 +29,18 @@
                 <p class="card-text"><small class="text-muted">{{ post.visitas }}</small></p>
                 
                
-                  <a class="btn-outline-success" href="{%url 'reaccionar' id=post.id reac='mg' %}">Megusta--{{post.me_gusta}}</a>
+                  <a  href="{%url 'reaccionar' id=post.id reac='mg' %}">
+                   <img src="static/img/me_gusta_true.png" alt="" style="width: 1rem; height: 1rem;"> </a>
+                    {{post.me_gusta}}
+                  
                   
                 
-                  <a class="btn-outline-success" href="{%url 'reaccionar' id=post.id reac='nmg' %}">Nomegusta--{{post.no_megusta}}</a>
+                  <a  href="{%url 'reaccionar' id=post.id reac='nmg' %}">
+                    <img src="static/img/no_megusta_true.png" alt="" style="width: 1rem; height: 1rem;"> </a>
+                    {{post.no_megusta}}
                 
                 
-                
+                <br>
                 
                 <a href="{% url 'leer_posteo' id=post.id %}" style="text-align: left; font-family: Verdana;" >Leer articulo</a>
                 <br>

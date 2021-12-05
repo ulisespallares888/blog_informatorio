@@ -2,7 +2,7 @@
 
 
 
-<li class="nav-item dropdown" >
+<li class="nav-item dropdown"  >
     <a href="#" class="nav-link " data-bs-toggle="dropdown" >
         {% if notif_user %}
         <img src="/static/img/tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
@@ -10,22 +10,35 @@
         <img src="/static/img/no_tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
         {% endif %}
     </a>
-    <div class="dropdown-menu dropdown-menu-end" >
+    <div class="dropdown-menu dropdown-menu-end" id="global2" id="mensajes">
         {% for notificacion in notif_user %}
-        {% if notificacion.leido == False %}
-            <a href="{% url 'perfil_usuario'%}" 
-            class="dropdown-item" 
-            style="border-radius: 10px; background-color: seagreen ;">
-            {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
-        
-        {% else %}
-
-            <a href="{% url 'perfil_usuario'%}" 
-            class="dropdown-item" 
-            style="border-radius: 10px;">
-             {{notificacion.usuario_id}} le ha dado me gusta a tu post</a>
-        
-        {% endif %}
+            {% if notificacion.me_gusta == True %}
+                {% if notificacion.leido == False %}
+                    <a href="{% url 'perfil_usuario'%}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                    {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
+                {% else %}
+                    <a href="{% url 'perfil_usuario'%}" class="dropdown-item"  style="border-radius: 10px;">
+                    {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
+                {% endif %}
+                
+                {% elif notificacion.no_megusta == True %}
+                    {% if notificacion.leido == False %}
+                        <a href="{% url 'perfil_usuario'%}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                        {{notificacion.nombre_usuario}} le ha dado no me gusta a tu post</a>
+                    {% else %}
+                        <a href="{% url 'perfil_usuario'%}" class="dropdown-item"  style="border-radius: 10px;">
+                        {{notificacion.nombre_usuario}} le ha dado no me gusta a tu post</a>
+                    {% endif %}
+                {% elif notificacion.comentario == True %}
+                    {% if notificacion.leido == False %}
+                        <a href="{% url 'perfil_usuario'%}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                        {{notificacion.nombre_usuario}} ha comentado tu post</a>
+                    {% else %}
+                        <a href="{% url 'perfil_usuario'%}" class="dropdown-item"  style="border-radius: 10px;">
+                        {{notificacion.nombre_usuario}} ha comentado tu post</a>
+                    {% endif %}
+                
+            {% endif %}
 
     
         <div class="dropdown-divider"></div>

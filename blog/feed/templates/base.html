@@ -12,8 +12,8 @@
     <title>EcoInfo</title>
 </head>
 <body>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <div class="container-fluid">
+      <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light ">
+        <div class="container-fluid" >
             <a href="{% url 'feed'%}" class="navbar-brand">EcoInfo</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -44,14 +44,15 @@
                     <!-- 
                         Acá va el código para mostrar las notificaciones
                     -->
-                                
-                    
-                    
+                                                    
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            {{user.username}}
+                            
+                            <img src="/static/img/avatar_dafault.png" alt="Perfil usuario" style="height: 2rem; width: 2rem;">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
+                            <h6 style="text-align: center;" >{{user.username}}</h6>
+                            <div class="dropdown-divider"></div>
                             <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Perfil</a>
                             <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Crear Post</a>
                             <div class="dropdown-divider"></div>
