@@ -57,3 +57,14 @@ class reaccion(models.Model):
     def __str__(self):
         return '{} {}'.format(self.usuario, self.post)
 
+
+class notificaciones(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(post, on_delete=models.CASCADE)
+    leido = models.BooleanField(default=False)
+    creado_en = models.DateTimeField(auto_now_add=True)
+    comentario=models.BooleanField(default=False)
+    me_gusta=models.BooleanField(default=False)
+    no_megusta=models.BooleanField(default=False)
+    def __str__(self):
+        return '{} {}'.format(self.usuario, self.post)
