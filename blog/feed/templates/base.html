@@ -40,38 +40,11 @@
                 {% if user.is_authenticated %}
                 
                 <ul class="nav navbar-nav ms-auto">
-                    <li class="nav-item dropdown" >
-                        <a href="#" class="nav-link " data-bs-toggle="dropdown" >
-                            {% if notif_user %}
-                            <img src="/static/img/tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
-                            {% else %}
-                            <img src="/static/img/no_tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
-                            {% endif %}
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" >
-                            {% for notificacion in notif_user %}
-                            {% if notificacion.leido == False %}
-                                <a href="{% url 'perfil_usuario'%}" 
-                                class="dropdown-item" 
-                                style="border-radius: 10px; background-color: seagreen ;">
-                                {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
-                            
-                            {% else %}
-
-                                <a href="{% url 'perfil_usuario'%}" 
-                                class="dropdown-item" 
-                                style="border-radius: 10px;">
-                                 {{notificacion.usuario_id}} le ha dado me gusta a tu post</a>
-                            
-                            {% endif %}
-
-                        
-                            <div class="dropdown-divider"></div>
-                            
-                            
-                            {% endfor %}                                    
-                        </div>
-                    </li>              
+                    {% include 'notificaciones.html' %}
+                    <!-- 
+                        Acá va el código para mostrar las notificaciones
+                    -->
+                                
                     
                     
                     <li class="nav-item dropdown">

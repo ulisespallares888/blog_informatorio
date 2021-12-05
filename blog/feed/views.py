@@ -114,6 +114,8 @@ def iniciar_sesion(request):
 def crear_comentario(request):
     contenido = request.POST['txtcontenido']
     usuario_match = usuario.objects.get(id=request.user.id)
+    nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, nombre_usuario=request.user,  post_id=id, comentario = True)
+    nueva_notif.save()
     if comentario != "" and contenido != "":
         comentario_creado = comentario.objects.create(contenido=contenido, comentador=usuario_match, post_id=1)
         comentario_creado.save()
@@ -127,7 +129,7 @@ def crear_comentario(request):
 @login_required
 def perfil_usuario(request):
     posteos = post.objects.filter(posteador_id=request.user.id)
-    comentarios = comentario.objects.filter(comentador_id=request.user.id)
+    comentarios = comentario.objects.filter().exclude(comentador_id=request.user.id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     return render(request,"perfil_usuario.html",{'posteos':posteos, 'comentarios':comentarios, 'categorias':categorias})
 
