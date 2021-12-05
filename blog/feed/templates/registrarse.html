@@ -5,8 +5,11 @@
 
 
 <body>
-    <div class="card " >
+    <div class="div_contenedor">
+    <div class="div_centrado" >
+    <div class="card ">
         <div class="card-body" >
+            <h2 style="text-align: center;">Registrate</h2>
             <form action="{% url 'crear_usuario' %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                 <div class="form-gourp">
                     <input type="text" placeholder="Nombre de usuario" id="txtnombre" name="txtnombre" class="form-control" minlength="1" maxlength="50">
@@ -35,8 +38,12 @@
 
                 
                 <br>
-                <div >
-                    <input type="file" id="txtimagen"  name="txtimagen">
+                <div>
+                    
+                    <h5 style="text-align: center;">Agregar foto de perfil</h5>
+                    <input type="file"  id="txtimagen"  name="txtimagen"  class="form-control" accept="image/*">
+                    
+                    
                 </div>
 
                 <div class="form-gourp">
@@ -46,7 +53,10 @@
                 </div>
             </form>
         </div>
+        <h6 style="text-align: center;" >Si ya tenes cuenta inicia sesión <a href="{% url 'acceder'%}">acá</a> </h6>
     </div>
+</div>
+</div>
     <div>
         {% if mesagess %}
     {% for message in mesagess %}

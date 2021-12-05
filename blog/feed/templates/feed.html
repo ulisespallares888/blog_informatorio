@@ -5,10 +5,10 @@
  
  
 
-<div class="wrapper">
+<div class="wrapper" >
   
-    <div class="posts ">
-    <section class="main-section row">
+    <div class="posts " id="global">
+    <section class="main-section row" id="mensajes">
     
     {% if posteos %}
             
@@ -52,24 +52,27 @@
     </section>
 
     </div>
-    <div class="lista">
+    <div class="lista" id=global>
+      <div id="mensajes">
       <br>
-      <ol>
+      <ol style="margin-left: -20px; text-align: center;">
         Objetivos de Desarrollo Sostenibles
-        
-        <a href="{% url 'feed' %}" >Todos </a>
+        <br>
+       
+        <a class=" btn btn-success" href="{% url 'feed' %}" style="background:seagreen; width: 12rem; " >Todos </a>
+        <br>
         <br>
         <section class="main-section2 ">
         {% for categoria in categorias %}
        
-        <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  >
-         <img src="{{categoria.imagen.url}} " alt="asdad" style="height: 80px; width: 80px; "> 
+        <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  style="margin-left: 1rem;" >
+         <img src="{{categoria.imagen.url}} " alt="asdad" style="height: 10rem; width: 10rem; "> 
         </a>
         </selection>
       
         {% endfor %} 
       </ol>
-  
+    </div>
     </div>
     
     
@@ -78,7 +81,7 @@
       
      
       <br>
-        <a  class="btn btn-success " href="{% url 'perfil_usuario' %}" >Crear Posteo</a>
+        <a  class="btn btn-success " href="{% url 'perfil_usuario' %}"  style="width: auto; margin-left: 5rem;">Crear Posteo</a>
         <br>
       
 
@@ -87,7 +90,7 @@
 
       <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_comentario' %}" method="GET"> {% csrf_token %}
         <div class="btn-group " method="GET">
-            <input class="form-control col-xl-12 " id="comentario_buscado" name="comentario_buscado" style="width: auto;" type="text" placeholder="Buscar" aria-label="Search">
+            <input class="form-control col-xl-8 " id="comentario_buscado" name="comentario_buscado" style="width: auto;" type="text" placeholder="Buscar" aria-label="Search">
             <button class="btn btn-outline-success" >Buscar</button>
        </div>
     </form>

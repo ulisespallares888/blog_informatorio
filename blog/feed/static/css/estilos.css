@@ -3,7 +3,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: 2fr 6fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 5px;
   grid-auto-rows: minmax(auto, auto);
   grid-auto-columns: minmax(auto, auto);
   
@@ -11,25 +11,30 @@
 }
 
 .posts{
-  background-color: rgb(245, 245, 245);
+  background-color: whitesmoke;
   grid-column: 2 / 4;
   grid-row: 1 / 5;
   padding: 10px;
   grid-template-rows: auto;
   border-radius: 10px;
-  
+  min-width: 16rem;
 }
 
 .lista {
-  background-color: rgb(255, 132, 132);
+  background-color: whitesmoke;
+  border-radius: 10px;
   grid-column: 1;
   grid-row: 1 / 5;
+  min-width: 4rem;
+  margin-left: 5px;
 }
 
 .otras_cosas {
   background-color:whitesmoke;
+  border-radius: 10px;
   grid-column: 4/4;
   grid-row: 1;
+  min-width: 1rem;
 }
 
 
@@ -95,3 +100,31 @@
     background: rgb(196, 26, 26);
     
   }
+
+
+
+.div_contenedor{
+    height: 80vh; 
+    width: 25rem;      
+}
+
+.div_centrado{
+  width: 20rem;  
+  height: 10rem;
+    position: absolute;
+    top:50%;
+    left: 50%;           
+    margin-top: -15rem;
+    margin-left: -9rem;
+}
+
+#global {
+	height: 50rem;
+	width: auto;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+	overflow-y: scroll;
+}
+#mensajes {
+	height: auto;
+}

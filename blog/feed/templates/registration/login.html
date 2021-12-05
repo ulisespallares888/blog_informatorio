@@ -2,9 +2,12 @@
 
 {% block content %}
 
-<h4 style="text-align: center;" >Iniciar sesión </h4>
-<div class="card bg-warning " >
+<body>
+    <div class="div_contenedor">
+    <div class="div_centrado">
+    <div class="card bg-light " style="width: 20rem;">
     <div class="card-body" >
+        <h2 style="text-align: center;">Iniciar sesión</h2>
         <form action="{% url 'iniciar_sesion' %} " method="POST" class="form"> {% csrf_token %}            <div class="form-gourp">
         <input type="text" placeholder="Nombre de usuario" id="txtusuario" name="txtusuario" class="form-control" maxlength="254">
         </div>
@@ -18,7 +21,11 @@
         </button>
         <br>
         </form>
+
+       
+        
     </div>
+    <h6 style="text-align: center;" >Si no tenes cuenta registrate <a href="{% url 'registrarse'%}">acá</a> </h6>
 
     {% if messages %}
     {% for message in messages %}
@@ -31,5 +38,7 @@
 
     
 </div>
-
+</div>
+</div>    
+</body>
 {% endblock %}
