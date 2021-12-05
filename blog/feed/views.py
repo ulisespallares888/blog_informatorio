@@ -16,8 +16,7 @@ import datetime
 
 
 def feed(request):
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()
-
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     print(notif_user,len(notif_user))
@@ -200,7 +199,6 @@ def eliminar_comentario(request,id):
 #---------------------------------------------------------------------------------------------------
 @login_required
 def reaccionar(request,id,reac):
-    nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, post_id=id)
     reaccion_exists = reaccion.objects.filter(usuario_id=request.user.id,post_id=id).exists()
     post_reaccionar = post.objects.get(id=id)
     if not reaccion_exists:
@@ -211,6 +209,8 @@ def reaccionar(request,id,reac):
             reaccion_creado = reaccion.objects.create(usuario_id=request.user.id,post_id=id,me_gusta=False,no_megusta=True)
             post_reaccionar.no_megusta += 1
         reaccion_creado.save()
+        nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, nombre_usuario=request.user,  post_id=id, me_gusta=reaccion_creado.me_gusta, no_megusta=reaccion_creado.no_megusta)
+
     else:
         reaccion_bus = reaccion.objects.get(usuario_id=request.user.id,post_id=id)
         if reac == "mg":
@@ -241,7 +241,7 @@ def reaccionar(request,id,reac):
                     reaccion_bus.no_megusta=False
                     post_reaccionar.no_megusta -= 1
         reaccion_bus.save()
-        
+        nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, post_id=id, nombre_usuario=request.user,  me_gusta=reaccion_bus.me_gusta, no_megusta=reaccion_bus.no_megusta)
     post_reaccionar.save()
     messages.success(request, 'Reaccion realizada correctamente')
     return redirect('leer_posteo',id)

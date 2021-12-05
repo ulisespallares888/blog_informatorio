@@ -60,6 +60,7 @@ class reaccion(models.Model):
 
 class notificaciones(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre_usuario = models.CharField(max_length=50, default=None)
     post = models.ForeignKey(post, on_delete=models.CASCADE)
     leido = models.BooleanField(default=False)
     creado_en = models.DateTimeField(auto_now_add=True)
