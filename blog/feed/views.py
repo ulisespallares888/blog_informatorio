@@ -141,7 +141,6 @@ def buscar_por_catetoria(request,id):
     
 def busqueda_por_fecha(request):
     fecha_bus = request.GET.get('fecha_buscada')
-    print(fecha_bus)
     posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
@@ -149,7 +148,7 @@ def busqueda_por_fecha(request):
 def busqueda_por_comentario(request):
     comentario_bus = request.GET.get('comentario_buscado')
     categorias = categoria.objects.all()
-    posteos = post.objects.filter( comentario__contenido__contains=comentario_bus)
+    posteos = post.objects.filter(comentario__contenido__contains=comentario_bus).distinct().order_by('creado_en').reverse()
     return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
 
 
