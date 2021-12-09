@@ -112,6 +112,25 @@
     </form>
       <br>
 
+    <div colspan="2">
+     
+      {% if top_posts %}
+        <h2>Top 10 posts</h2>
+        <ol>
+        {% for post in top_posts %}
+          <li>
+            <a href="{% url 'leer_posteo' id=post.id %}">
+              {{ post.titulo }}
+            </a>
+            {{ post.me_gusta }}
+          </li>
+        {% endfor %}
+
+        {% else %}
+          <h2>No hay posts</h2>
+        {% endif %}       
+    </div>
+
     </div>
   </div>
     

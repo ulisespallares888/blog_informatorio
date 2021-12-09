@@ -19,7 +19,8 @@ def feed(request):
     notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
-    contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user}
+    top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
+    contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts}
     return render(request,"feed.html",contexto)
 
 def leer_posteo(request,id):
@@ -29,7 +30,7 @@ def leer_posteo(request,id):
     un_posteo.save()
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
 
-#agragar bien el tipo_17_ods
+
 @login_required
 def agregar_post(request):
     titulo = request.POST['txttitulo']
@@ -83,7 +84,6 @@ def acceder(request):
 
 
 
-#--------------arreglar el iniciar sesion en la parte-------------
 def iniciar_sesion(request):
     nombre = request.POST['txtusuario']
     contrasenia = request.POST['txtpassword']
@@ -266,3 +266,6 @@ def editar_perfil_guardar(request,id):
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
+
+
+    
