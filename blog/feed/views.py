@@ -17,15 +17,16 @@ import datetime
 
 def feed(request):
     notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
+    notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
-    contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts}
+    contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
-    comentarios_del_posteo = comentario.objects.filter(post_id=id)
+    comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
     un_posteo.visitas += 1
     un_posteo.save()
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})

@@ -2,14 +2,15 @@
 
 
 
-<li class="nav-item dropdown"  >
+<li class="nav-item dropdown"  id="feedback-bg-info">
     <a href="#" class="nav-link " data-bs-toggle="dropdown" >
-        {% if notif_user %}
+        {% if notif_user and notif_no_leidas  %}
         <img src="/static/img/tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
         {% else %}
-        <img src="/static/img/no_tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
+            <img src="/static/img/no_tiene_notificacion_2.png" alt="" style="width:2rem; height: 2rem;">
         {% endif %}
     </a>
+    
     <div class="dropdown-menu dropdown-menu-end" id="global2" id="mensajes">
         {% for notificacion in notif_user %}
             {% if notificacion.me_gusta == True %}
@@ -29,6 +30,7 @@
                         <a href="{% url 'perfil_usuario'%}" class="dropdown-item"  style="border-radius: 10px;">
                         {{notificacion.nombre_usuario}} le ha dado no me gusta a tu post</a>
                     {% endif %}
+                    
                 {% elif notificacion.comentario == True %}
                     {% if notificacion.leido == False %}
                         <a href="{% url 'perfil_usuario'%}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
@@ -43,9 +45,12 @@
     
         <div class="dropdown-divider"></div>
         
-        
-        {% endfor %}                                    
+        {% endfor %}      
+                                    
     </div>
+    
+     
+
 </li> 
 
 
