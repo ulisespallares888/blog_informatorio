@@ -22,6 +22,7 @@ urlpatterns = [
     path('busqueda_por_comentario',views.busqueda_por_comentario, name='busqueda_por_comentario'),
     path('busqueda_por_fecha',views.busqueda_por_fecha, name='busqueda_por_fecha'),
     path('reaccionar/<id>/<reac>',views.reaccionar, name='reaccionar'),
+    
     path('accounts/',include('django.contrib.auth.urls')),
     
     

@@ -24,6 +24,9 @@ def feed(request):
     contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
+
+    return render(request,"notificaciones.html")
+
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
     comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
@@ -267,6 +270,7 @@ def editar_perfil_guardar(request,id):
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
+
 
 
     

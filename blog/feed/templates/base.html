@@ -10,10 +10,16 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <title>EcoInfo</title>
 </head>
+
 <body>
-      <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light ">
+
+
+
+      <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light "  >
         <div class="container-fluid" >
             <a href="{% url 'feed'%}" class="navbar-brand">EcoInfo</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -78,9 +84,7 @@
 
 
 
-
-
-
+    
     {% block content %}
     
     <!-- 
@@ -90,10 +94,10 @@
     -->
 
     {% endblock %}
-
-    <script src= "{% static 'js/archivo.js' %}"></script>
+    
 </body>
 
-
-
+<script type="text/javascript" src="{% static 'js/archivo.js' %}"></script>
 </html>
+
+
