@@ -24,8 +24,11 @@ def feed(request):
     contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
+def nosotros(request):
+    return render(request,"nosotros.html")
 
-    return render(request,"notificaciones.html")
+def los_17_ods(request):
+    return render(request,"que_son_los_17_ods.html")
 
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
