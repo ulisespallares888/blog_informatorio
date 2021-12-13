@@ -69,4 +69,4 @@ class notificaciones(models.Model):
     me_gusta=models.BooleanField(default=False)
     no_megusta=models.BooleanField(default=False)
     def __str__(self):
-        return '{} {}'.format(self.usuario, self.post)
+        return '{} {} {}'.format(self.usuario, self.post, self.leido)

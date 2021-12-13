@@ -1,6 +1,6 @@
 import contextlib
 from typing import ContextManager
-from django.db.models.expressions import Subquery
+from django.db.models.expressions import F, Subquery
 from django.db.models.fields import DateTimeCheckMixin, DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
@@ -43,12 +43,13 @@ def leer_posteo(request,id):
     un_posteo.save()
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
 
-
+@login_required
 def abrir_notificacion(request,id):
-    notif = notificaciones.objects.get(post_id=id)
-    
+    notif = notificaciones.objects.filter(post_id=id).first()
     notif.leido = True
+    print(notif)
     notif.save()
+    
     return redirect('leer_posteo',id)
 
 @login_required

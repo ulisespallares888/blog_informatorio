@@ -17,25 +17,25 @@
                     <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
                     {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
                 {% else %}
-                    <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
+                    <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
                     {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
                 {% endif %}
                 
                 {% elif notificacion.no_megusta == True %}
                     {% if notificacion.leido == False %}
-                        <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                        <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
                         {{notificacion.nombre_usuario}} le ha dado no me gusta a tu post</a>
                     {% else %}
-                        <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
+                        <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
                         {{notificacion.nombre_usuario}} le ha dado no me gusta a tu post</a>
                     {% endif %}
                     
                 {% elif notificacion.comentario == True %}
                     {% if notificacion.leido == False %}
-                        <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                        <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
                         {{notificacion.nombre_usuario}} ha comentado tu post</a>
                     {% else %}
-                        <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
+                        <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
                         {{notificacion.nombre_usuario}} ha comentado tu post</a>
                     {% endif %}
                 
