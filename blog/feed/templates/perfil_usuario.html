@@ -2,10 +2,21 @@
 
 {% block content %}
 
+<br><br><br>
+<div>
+    {% if mis_categorias %}
+        {% for mi_categoria in mis_categorias %}
+                <p> mis categorias: {{ mi_categoria.name }} </p>
+    
+        {% endfor %}
+    {% endif %}
+</div>
+
+<img src="" alt="">
 
     <h1>este es el perfil de usuario</h1>
-    {% if usuarios %}
-    <img src="{{usuarios.foto.url}}" style="width: 30px; height: 30px; border-radius: 30px;" >
+    {% if  user.is_authenticated %}
+    <img src="{{usuario_actual.foto.url }}" style="width: 30px; height: 30px; border-radius: 30px;" >
     {% endif %}
 
     <form action="{% url 'agregar_post' %} " method="POST"  enctype="multipart/form-data"> {% csrf_token %}
@@ -38,7 +49,7 @@
      <br>
      <br>
      <h4>Mis Posts</h4>
-     {% for post in posteos %}
+     {% for post in mis_posteos %}
 
      <div class="card" style="width: 18rem;">
         
@@ -52,7 +63,7 @@
              
 
 
-             {% for comentario in comentarios %}
+             {% for comentario in mis_comentarios %}
              {% if comentario.post_id == post.id %}
                  <p class="card-text">comentario: {{ comentario.contenido }}</p>
              {% endif %}
@@ -64,5 +75,7 @@
      </div>
 
  {% endfor %}
+
+
 
 {% endblock %}

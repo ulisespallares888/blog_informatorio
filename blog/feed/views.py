@@ -1,3 +1,6 @@
+import contextlib
+from typing import ContextManager
+from django.db.models.expressions import Subquery
 from django.db.models.fields import DateTimeCheckMixin, DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
@@ -13,6 +16,9 @@ import datetime
 #---------------------------------------------------------------------------------------------------
 #                                    VISTAS PARA EL PRIMER SPRINT
 #---------------------------------------------------------------------------------------------------
+
+
+  
 
 
 def feed(request):
@@ -135,30 +141,50 @@ def crear_comentario(request):
 @login_required
 def perfil_usuario(request):
     notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
-    posteos = post.objects.filter(posteador_id=request.user.id)
-    comentarios = comentario.objects.filter().exclude(comentador_id=request.user.id).order_by('creado_en').reverse()
+    mis_posteos = post.objects.filter(posteador_id=request.user.id).order_by('creado_en').reverse()
+    mis_categorias = categoria.objects.filter(id__in = mis_posteos )
+    mis_comentarios = comentario.objects.filter(comentador_id=request.user.id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
-    contexto = {'posteos':posteos, 'comentarios':comentarios, 'categorias':categorias, 'notif_user':notif_user}
+    usuario_actual = usuario.objects.get(id=request.user.id)
+    contexto = {'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual}
     return render(request,"perfil_usuario.html",contexto)
 
 def buscar_por_catetoria(request,id):
     posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
-    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
+    top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
+    notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    return render(request,"feed.html",contexto)
     
 def busqueda_por_fecha(request):
     fecha_bus = request.GET.get('fecha_buscada')
     posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
-    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
+    top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
+    notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    return render(request,"feed.html",contexto)
 
 def busqueda_por_comentario(request):
     comentario_bus = request.GET.get('comentario_buscado')
     categorias = categoria.objects.all()
     posteos = post.objects.filter(comentario__contenido__contains=comentario_bus).distinct().order_by('creado_en').reverse()
-    return render(request,"feed.html",{'posteos':posteos,'categorias':categorias})
+    top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
+    notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    return render(request,"feed.html",contexto)
 
-
+def busqueda_por_titulo(request):
+    titulo_bus = request.GET.get('titulo_buscado')
+    categorias = categoria.objects.all()
+    top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
+    posteos = post.objects.filter(titulo__contains=titulo_bus).order_by('creado_en').reverse()
+    contexto = {'posteos':posteos,'categorias':categorias,'top_posts':top_posts}
+    return render(request,"feed.html",contexto)
 
 #---------------------------------------------------------------------------------------------------
 #                                     VISTAS PARA EL TRECER SPRINT

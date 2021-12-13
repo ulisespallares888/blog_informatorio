@@ -21,6 +21,7 @@ urlpatterns = [
     path('buscar_por_catetoria/<id>',views.buscar_por_catetoria, name='buscar_por_catetoria'),
     path('busqueda_por_comentario',views.busqueda_por_comentario, name='busqueda_por_comentario'),
     path('busqueda_por_fecha',views.busqueda_por_fecha, name='busqueda_por_fecha'),
+    path('busqueda_por_titulo',views.busqueda_por_titulo, name='busqueda_por_titulo'),
     path('reaccionar/<id>/<reac>',views.reaccionar, name='reaccionar'),
     path('nosotros/',views.nosotros, name='nosotros'),
     path('los_17_ods/',views.los_17_ods, name='los_17_ods'),

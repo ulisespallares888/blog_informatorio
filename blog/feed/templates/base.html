@@ -33,15 +33,15 @@
                     <li class="nav-item">
                         <a href="{% url 'nosotros' %}" class="nav-link">Nosotros</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Messages</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Inbox</a>
-                            <a href="#" class="dropdown-item">Drafts</a>
-                            <a href="#" class="dropdown-item">Sent Items</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#"class="dropdown-item">Trash</a>
-                        </div>
+                    <li class="nav-item ">
+                        
+
+                            <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_titulo' %}" method="GET"> {% csrf_token %}
+                                <div class="btn-group " method="GET">
+                                    <input class="form-control col-xl-8 " id="titulo_buscado" name="titulo_buscado" style="width: 30rem;" type="text" placeholder="Buscar por titulo" aria-label="Search">
+                                    <button class="btn btn-outline-success" >Buscar</button>
+                            </div>
+                            </form>
                     </li>
                 </ul>
                 {% if user.is_authenticated %}
