@@ -107,7 +107,6 @@ def iniciar_sesion(request):
             print(user)
             if user is not None:
                 login(request,user)
-                messages.success(request, f'Bienvenido {nombre}')
                 return redirect('feed')
             else:
                 messages.warning(request, 'Usuario y/o contraseña incorrectos')
