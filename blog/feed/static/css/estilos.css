@@ -20,6 +20,7 @@
   grid-template-rows: auto;
   border-radius: 10px;
   min-width: 16rem;
+  height: auto;
 }
 
 .lista {

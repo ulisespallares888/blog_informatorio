@@ -38,10 +38,15 @@ def los_17_ods(request):
 
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
-    comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
     un_posteo.visitas += 1
     un_posteo.save()
-    return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
+    comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
+    comentadores_comentario = User.objects.filter(id__in=comentarios_del_posteo.values('comentador_id'))
+    usuarios = usuario.objects.filter(usuario_fk_id__in=comentadores_comentario.values('id'))
+    print("usuarios",usuarios)
+    print(comentadores_comentario)
+    contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo,'usuarios':usuarios}
+    return render(request,"leer_post.html",contexto)
 
 @login_required
 def abrir_notificacion(request,id):

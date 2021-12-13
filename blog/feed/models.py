@@ -41,6 +41,7 @@ class post(models.Model):
 class comentario(models.Model):
     post = models.ForeignKey(post, on_delete=models.CASCADE)
     comentador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
     contenido = models.TextField()
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)

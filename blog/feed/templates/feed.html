@@ -25,29 +25,12 @@
                    <p>{{ post.pre_contenido }}</p> 
                 </div>
                 <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
-                <p class="card-text"><small class="text-muted">{{ post.visitas }}</small></p>
-                
+                               
                 <a href="{% url 'leer_posteo' id=post.id %}" style="color: #167dff; " > 
                    Leer más 
                  
                 </a>
-               
-                  <a  href="{%url 'reaccionar' id=post.id reac='mg' %}">
-                   <img src="/static/img/me_gusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
-                    {{post.me_gusta}}
-                  
-                  
-                
-                  <a  href="{%url 'reaccionar' id=post.id reac='nmg' %}">
-                    <img src="/static/img/no_megusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
-                    {{post.no_megusta}}
-                
-                
-                <br>
-                
-                <a href="{% url 'leer_posteo' id=post.id %}" style="text-align: left; font-family: Verdana;" >Leer articulo</a>
-                <br>
-               
+                              
             </div>
         </div> 
 
@@ -119,15 +102,16 @@
     <div colspan="2">
      
       {% if top_posts %}
-        <h2 style="text-align: center;">Top 10 posts</h2>
+        <h4 style="text-align: center;">Los post con más <br>  Me gusta </h4>
         <div class="dropdown-divider"></div>
         <ol>
         {% for post in top_posts %}
+        
           <li>
             <a href="{% url 'leer_posteo' id=post.id %}">
               {{ post.titulo }}
             </a>
-            {{ post.me_gusta }}
+            
           </li>
         {% endfor %}
 

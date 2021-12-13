@@ -52,9 +52,8 @@
         
     <form action="{% url 'crear_comentario' id=un_posteo.id %}">
         {% csrf_token %}  
-        <div class="form-group">
-        <input type="text"  id="txtcontenido" name="txtcontenido" placeholder="  Comentar" style="border-radius: 20px; width: 35rem; height: 2rem; border-style: solid; border-width: 1px ;" >
-        <button type="submit" class="btn btn-primary" >  Comentar</button>
+        <div class="form-group" >
+        <input clase="form-control" type="text"  id="txtcontenido" name="txtcontenido" placeholder="Comentar" style=" width: 42rem; height: 2rem; border-style: solid; border-width: 1px ;" >
         </div>
     </form>
     <br>
@@ -63,7 +62,14 @@
     {% for un_comentario in comentarios_del_posteo %}
         <div class="box01">
             <div class="box02" >
-                <p>{{ un_comentario.comentador_id }} </p>
+                asd
+                {% if usuarios %}
+                    {% for usuario in usuarios %}
+                        {% if usuario.nombre == un_comentario.comentador_id %}
+                            <p>{{ usuario.id }} </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
             &nbsp;
             <div class="box03" >
