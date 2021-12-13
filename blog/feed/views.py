@@ -47,7 +47,6 @@ def leer_posteo(request,id):
 def abrir_notificacion(request,id):
     notif = notificaciones.objects.filter(post_id=id).first()
     notif.leido = True
-    print(notif)
     notif.save()
     
     return redirect('leer_posteo',id)

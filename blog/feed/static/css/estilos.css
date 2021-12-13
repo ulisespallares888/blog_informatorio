@@ -156,8 +156,7 @@ a {
   position: center;
   width:50%;
   height: auto;
-  text-align: center;
- 
+  text-align: center;  
   margin: auto;	
   padding: 1rem,;
 }
@@ -177,4 +176,10 @@ a {
 .box03{
   width: auto;
   height: auto;
+}
+
+#global_comentarios{
+  height: 10rem;
+	width: auto;	
+	overflow-y: scroll;
 }

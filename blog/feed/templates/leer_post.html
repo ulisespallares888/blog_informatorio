@@ -24,21 +24,42 @@
     <br>
     <div class="dropdown-divider"></div>
     <br>
-    <p style="text-align:left;" >{{ un_posteo.contenido }}</p>
+    <p style="text-align:left; text-indent: 20px;" >{{ un_posteo.contenido }}</p>
     
+    <div class="dropdown-divider"></div>
+
+    
+    <a  href="{%url 'reaccionar' id=un_posteo.id reac='mg' %}">
+        <img src="/static/img/me_gusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
+         {{un_posteo.me_gusta}}
+       
+       
+     
+    <a  href="{%url 'reaccionar' id=un_posteo.id reac='nmg' %}">
+         <img src="/static/img/no_megusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
+         {{un_posteo.no_megusta}}
+     
+    <p class="card-text"><small class="text-muted">{{ un_posteo.visitas }} personas han visto este post</small></p>
+
     
     <div class="dropdown-divider"></div>
     <h4>Comentarios</h4>
-    <div class="dropdown-divider"></div>
-    <div style=" text-align:left; " >
+    
+
+    <div  style=" text-align:left; border-width: 1px;" >
+        
+
+        
     <form action="{% url 'crear_comentario' id=un_posteo.id %}">
         {% csrf_token %}  
         <div class="form-group">
-        <input type="text"  id="txtcontenido" name="txtcontenido" placeholder="Comentar" style="border-radius: 20px; width: 35rem; height: 2rem ;" >
-        <button type="submit" class="btn btn-primary" style="border-radius: 20px; border-color: grey; "> Comentar</button>
+        <input type="text"  id="txtcontenido" name="txtcontenido" placeholder="  Comentar" style="border-radius: 20px; width: 35rem; height: 2rem; border-style: solid; border-width: 1px ;" >
+        <button type="submit" class="btn btn-primary" >  Comentar</button>
         </div>
     </form>
     <br>
+    <div id="global_comentarios">
+    <div id="mensajes">
     {% for un_comentario in comentarios_del_posteo %}
         <div class="box01">
             <div class="box02" >
@@ -53,6 +74,8 @@
         
     {% endfor %}
     </div>
+    
+
 {% endif %}
 
 </div>
