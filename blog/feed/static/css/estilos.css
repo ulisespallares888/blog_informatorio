@@ -32,6 +32,7 @@
 }
 
 .otras_cosas {
+  width: 18rem;
   background-color:whitesmoke;
   border-radius: 10px;
   grid-column: 4/4;
@@ -149,13 +150,31 @@ a {
   color: #000;
 }
 
-.leer_post {
-  width: 50rem;
+
+
+.leer_post{
+  position: center;
+  width:50%;
   height: auto;
-  border: 1px solid #ddd;
-
-  background: #f1f1f1;
-  overflow-y: scroll;
   text-align: center;
+ 
+  margin: auto;	
+  padding: 1rem,;
+}
 
+
+
+.box01{
+  width: auto;
+  height: auto;
+  display: flex;
+}
+.box02{
+  width: auto;
+  height: auto;
+}
+
+.box03{
+  width: auto;
+  height: auto;
 }

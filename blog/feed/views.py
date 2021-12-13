@@ -122,13 +122,12 @@ def iniciar_sesion(request):
 
 #configurar a que post va el comentario y por quien es creado
 @login_required
-def crear_comentario(request):
-    contenido = request.POST['txtcontenido']
-    usuario_match = usuario.objects.get(id=request.user.id)
-    nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, nombre_usuario=request.user,  post_id=id, comentario = True)
+def crear_comentario(request,id):
+    contenido = request.GET.get('txtcontenido')
+    nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, nombre_usuario=request.user.username,  post_id=id, comentario = True)
     nueva_notif.save()
     if comentario != "" and contenido != "":
-        comentario_creado = comentario.objects.create(contenido=contenido, comentador=usuario_match, post_id=1)
+        comentario_creado = comentario.objects.create(contenido=contenido, comentador=request.user, post_id=id)
         comentario_creado.save()
         messages.success(request, 'Comentario creado correctamente')
     else:

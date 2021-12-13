@@ -8,24 +8,57 @@
  -->
 <h1>acá se puede leer el post completo</h1>
 
-<div class="leer_post">
 
+
+
+<div>
+    <br>
+<div class="leer_post">
     {% if un_posteo %}
     <h1>{{ un_posteo.titulo }}</h1>
-    <p>{{ un_posteo.contenido }}</p>
-    <p>{{ un_posteo.fecha }}</p>
-    <p>{{ un_posteo.autor }}</p>
-    <p>{{ un_posteo.categoria }}</p>
-
-    <h2>Comentarios</h2>
+    <p>{{ un_posteo.creado_en }}</p>
+    <p>Autor: {{ un_posteo.posteador }}</p>
+    <div class="dropdown-divider"></div>
+    
+    <img src="{{un_posteo.imagen.url}}" alt="" style="width: 25rem; height: 25rem;">
+    <br>
+    <div class="dropdown-divider"></div>
+    <br>
+    <p style="text-align:left;" >{{ un_posteo.contenido }}</p>
+    
+    
+    <div class="dropdown-divider"></div>
+    <h4>Comentarios</h4>
+    <div class="dropdown-divider"></div>
+    <div style=" text-align:left; " >
+    <form action="{% url 'crear_comentario' id=un_posteo.id %}">
+        {% csrf_token %}  
+        <div class="form-group">
+        <input type="text"  id="txtcontenido" name="txtcontenido" placeholder="Comentar" style="border-radius: 20px; width: 35rem; height: 2rem ;" >
+        <button type="submit" class="btn btn-primary" style="border-radius: 20px; border-color: grey; "> Comentar</button>
+        </div>
+    </form>
+    <br>
     {% for un_comentario in comentarios_del_posteo %}
-        <p>{{ un_comentario.contenido }}</p>
-        <p>{{ un_comentario.comentador_id }}</p>
+        <div class="box01">
+            <div class="box02" >
+                <p>{{ un_comentario.comentador_id }} </p>
+            </div>
+            &nbsp;
+            <div class="box03" >
+                <p> {{ un_comentario.contenido }}</p>
+            </div>
+            <br>
+        </div>
+        
     {% endfor %}
-
+    </div>
 {% endif %}
 
 </div>
+</div>
+
+
 
 
 

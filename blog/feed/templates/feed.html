@@ -27,6 +27,10 @@
                 <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
                 <p class="card-text"><small class="text-muted">{{ post.visitas }}</small></p>
                 
+                <a href="{% url 'leer_posteo' id=post.id %}" style="color: #167dff; " > 
+                   Leer más 
+                 
+                </a>
                
                   <a  href="{%url 'reaccionar' id=post.id reac='mg' %}">
                    <img src="/static/img/me_gusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
