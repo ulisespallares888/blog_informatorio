@@ -44,6 +44,13 @@ def leer_posteo(request,id):
     return render(request,"leer_post.html",{'un_posteo':un_posteo, 'comentarios_del_posteo':comentarios_del_posteo})
 
 
+def abrir_notificacion(request,id):
+    notif = notificaciones.objects.get(post_id=id)
+    
+    notif.leido = True
+    notif.save()
+    return redirect('leer_posteo',id)
+
 @login_required
 def agregar_post(request):
     titulo = request.POST['txttitulo']

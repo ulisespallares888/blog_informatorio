@@ -14,7 +14,7 @@
         {% for notificacion in notif_user %}
             {% if notificacion.me_gusta == True %}
                 {% if notificacion.leido == False %}
-                    <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                    <a href="{% url 'abrir_notificacion' id=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
                     {{notificacion.nombre_usuario}} le ha dado me gusta a tu post</a>
                 {% else %}
                     <a href="{% url 'leer_posteo' id=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px;">
