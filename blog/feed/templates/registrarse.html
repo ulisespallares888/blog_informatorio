@@ -3,10 +3,21 @@
 
 {% block content %}
 
-
 <body>
+    <br><br>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+
     <div class="div_contenedor">
     <div class="div_centrado" >
+        <br><br>
     <div class="card ">
         <div class="card-body" >
             <h2 style="text-align: center;">Registrarse</h2>
@@ -48,12 +59,19 @@
 
                 <div class="form-gourp">
                     <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
-                        Aceptar
+                        Registrarse
                     </button>
                 </div>
             </form>
+
+            <br>
+            <a href="{% url 'acceder'%}">
+                <button  class="btn btn-secondary btn-block text-white col-xl-12 " >
+                    Si ya tenes cuenta inicia sesión acá
+                </button>
+                </a>
         </div>
-        <h6 style="text-align: center;" >Si ya tenes cuenta inicia sesión <a href="{% url 'acceder'%}">acá</a> </h6>
+        
     </div>
 </div>
 </div>

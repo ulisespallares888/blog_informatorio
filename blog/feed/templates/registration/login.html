@@ -3,8 +3,18 @@
 {% block content %}
 
 <body>
+    <br><br>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
     <div class="div_contenedor">
     <div class="div_centrado">
+        <br><br>
     <div class="card bg-light " style="width: 20rem;">
     <div class="card-body" >
         <h2 style="text-align: center;">Iniciar sesión</h2>
@@ -22,20 +32,18 @@
         <br>
         </form>
 
+        <br>
+            <a href="{% url 'registrarse'%}">
+                <button  class="btn btn-secondary btn-block text-white col-xl-12 " >
+                    Si no tenes cuenta registrate acá
+                </button>
+                </a>
        
         
     </div>
-    <h6 style="text-align: center;" >Si no tenes cuenta registrate <a href="{% url 'registrarse'%}">acá</a> </h6>
+   
 
-    {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-danger" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-    {% endif %}
-
-
+   
     
 </div>
 </div>

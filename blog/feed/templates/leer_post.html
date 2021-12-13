@@ -8,7 +8,9 @@
  -->
 <h1>acá se puede leer el post completo</h1>
 
-{% if un_posteo %}
+<div class="leer_post">
+
+    {% if un_posteo %}
     <h1>{{ un_posteo.titulo }}</h1>
     <p>{{ un_posteo.contenido }}</p>
     <p>{{ un_posteo.fecha }}</p>
@@ -22,6 +24,10 @@
     {% endfor %}
 
 {% endif %}
+
+</div>
+
+
 
 
 {% endblock%}
