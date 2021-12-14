@@ -17,7 +17,7 @@
     <p>Autor: {{ un_posteo.posteador }}</p>
     <div class="dropdown-divider"></div>
     
-    <img src="{{un_posteo.imagen.url}}" alt="" style="width: 25rem; height: 25rem;">
+    <img src="{{un_posteo.imagen.url}}" alt="" style="width: 40rem; height: 25rem;">
     <br>
     <div class="dropdown-divider"></div>
     <br>
@@ -50,8 +50,9 @@
     <form action="{% url 'crear_comentario' id=un_posteo.id %}">
         {% csrf_token %}  
         <div class="form-group" >
-        <input clase="form-control" type="text"  id="txtcontenido" name="txtcontenido" placeholder="Comentar" style=" width: 42rem; height: 2rem; border-style: solid; border-width: 1px ;" >
-        </div>
+        <input clase="form-control" type="text"  id="txtcontenido" name="txtcontenido" placeholder="Comentar" style=" width: 35rem; height: 2rem; border-style: solid; border-width: 1px ;" >
+        <button type="submit"  class="btn btn-secondary" >Comentar</button>
+    </div>
     </form>
     <br>
     <div id="global_comentarios">
