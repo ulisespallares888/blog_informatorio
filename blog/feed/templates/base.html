@@ -60,8 +60,8 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <h6 style="text-align: center;" >{{user.username}}</h6>
                             <div class="dropdown-divider"></div>
-                            <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Perfil</a>
-                            <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Crear Post</a>
+                            <a href="{% url 'perfil_usuario'%}" class="dropdown-item">Mi contenido</a>
+                            <a href="{% url 'editar_perfil' id=user.id %}" class="dropdown-item">Editar perfil</a>
                             <div class="dropdown-divider"></div>
                             <a href="{% url 'logout'%}" class="dropdown-item">Salir</a>
                         </div>

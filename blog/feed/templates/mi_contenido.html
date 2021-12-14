@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<body style="background: whitesmoke;" >
+    
 
 <br><br><br>
         {% if messages %}
@@ -22,33 +24,43 @@
         {% endif %}
 
 <br><br><br>
-<div>
-    {% if mis_categorias %}
-        {% for mi_categoria in mis_categorias %}
-                <p> mis categorias: {{ mi_categoria.name }} </p>
-    
-        {% endfor %}
-    {% endif %}
-</div>
 
+<div class="perfil_usuario" ></div>
 <img src="" alt="">
-
-    <h1>este es el perfil de usuario</h1>
     {% if  user.is_authenticated %}
     <img src="{{usuario_actual.foto.url }}" style="width: 30px; height: 30px; border-radius: 30px;" >
+    {{ user.username }}
+    
+    <div>
+        {% if mis_categorias %}
+            {% for mi_categoria in mis_categorias %}
+                    <p>{{ mi_categoria.name }} </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
     {% endif %}
 
-    <h4>Para poder crear posteos debe estar registrado como posteador</h4>
+    
+
+    <div class="card" style="height: 33rem; width: 60rem; margin: auto;"> 
+        {% if usuario_actual.tipo_usuario_id == 1 %}
+    <small style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >Para poder crear posteos debe estar registrado como Posteador</small>
+    {% endif %}
+        <div class="card-body" >
     <form action="{% url 'agregar_post' %} " method="POST"  enctype="multipart/form-data"> {% csrf_token %}
+        
         <div class="form-group">
-            <label for="titulo">Titulo</label>
-            <input type="text" class="form-control" id="txttitulo" name="txttitulo" placeholder="Titulo">
+                        
+            <input type="text" class="form-control" id="txttitulo" name="txttitulo" placeholder="Título">
+        </div>
+        <br>
+        <div class="form-group">
+                        
+            <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="10" placeholder="Contenido"></textarea>
         </div>
         <div class="form-group">
-            <label for="contenido">Contenido</label>
-            <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="3"></textarea>
-        </div>
-        <div class="form-group">
+            <br>
             <select class="form-gourp form-select" name="txtcategoria" id="txtcategoria" required>
                 {% for categoria in categorias %}
                     <option value="{{categoria.id}}" >{{categoria.name}}</option>
@@ -56,18 +68,21 @@
                 {% endfor %}
               </select>
         </div>
+        <br>
 
         <div >
             <input type="file" id="txtimagen"  name="txtimagen">
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>  
-
+        <br>
+        <button type="submit" class="btn btn-primary">Postear</button>  
+        
     </form>
+    </div>
+</div>
 
 
      <br>
-     <br>
+     
      <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
 
@@ -97,5 +112,8 @@
  {% endfor %}
 
 
+ 
+</div>
+</body>
 
 {% endblock %}

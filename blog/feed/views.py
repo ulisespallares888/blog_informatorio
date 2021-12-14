@@ -157,12 +157,12 @@ def crear_comentario(request,id):
 def perfil_usuario(request):
     notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     mis_posteos = post.objects.filter(posteador_id=request.user.id).order_by('creado_en').reverse()
-    mis_categorias = categoria.objects.filter(id__in = mis_posteos )
+    mis_categorias = categoria.objects.filter(id__in = mis_posteos.values('categoria_id'))
     mis_comentarios = comentario.objects.filter(comentador_id=request.user.id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     usuario_actual = usuario.objects.get( usuario_fk_id =request.user.id)
     contexto = {'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual}
-    return render(request,"perfil_usuario.html",contexto)
+    return render(request,"mi_contenido.html",contexto)
 
 def buscar_por_catetoria(request,id):
     posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
@@ -297,8 +297,10 @@ def reaccionar(request,id,reac):
 
 @login_required
 def editar_perfil(request,id):
-    usuario_editar = usuario.objects.get(id=id)
-    return render(request,"editar_perfil.html")
+    user_editar = User.objects.get(id=id)
+    usuario_editar = usuario.objects.get(usuario_fk_id=id)
+    contexto = {'user_editar':user_editar,'usuario_editar':usuario_editar}
+    return render(request,"editar_perfil.html",contexto)
 
 @login_required
 def editar_perfil_guardar(request,id):

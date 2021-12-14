@@ -27,5 +27,6 @@ urlpatterns = [
     path('los_17_ods/',views.los_17_ods, name='los_17_ods'),
     path('accounts/',include('django.contrib.auth.urls')), 
     path('abrir_notificacion/<id>', views.abrir_notificacion, name='abrir_notificacion'),
+    path('editar_perfil/<id>', views.editar_perfil, name='editar_perfil'),
     #path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
 ]
