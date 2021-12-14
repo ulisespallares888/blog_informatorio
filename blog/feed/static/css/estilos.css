@@ -186,6 +186,45 @@ a {
 }
 
 
-.perfil_usuario{
- 
+
+.perfil_usuario {
+  display: grid;
+  padding-top: 4rem;
+  grid-template-columns: 2fr 6fr 1fr;
+  grid-gap: 5px;
+  grid-auto-rows: minmax(auto, auto);
+  grid-auto-columns: minmax(auto, auto);
+  
+
+}
+
+
+.usuario_datos {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  grid-column: 1;
+  grid-row: 1 / 5;
+  min-width: 4rem;
+  margin-left: 5px;
+}
+
+.post{
+  background-color: whitesmoke;
+  grid-column: 2 / 4;
+  grid-row: 1 / 5;
+  padding: 0px;
+  margin-left: 10px;
+  grid-template-rows: auto;
+  border-radius: 10px;
+  min-width: 16rem;
+  height: auto;
+}
+
+.comantarios {
+  width: 18rem;
+  background-color:whitesmoke;
+  border-radius: 10px;
+  grid-column: 4/4;
+  grid-row: 1;
+  min-width: 1rem;
 }

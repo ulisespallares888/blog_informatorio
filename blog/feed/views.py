@@ -159,9 +159,10 @@ def perfil_usuario(request):
     mis_posteos = post.objects.filter(posteador_id=request.user.id).order_by('creado_en').reverse()
     mis_categorias = categoria.objects.filter(id__in = mis_posteos.values('categoria_id'))
     mis_comentarios = comentario.objects.filter(comentador_id=request.user.id).order_by('creado_en').reverse()
+    posteos = post.objects.filter(comentario__comentador_id=request.user.id).distinct()
     categorias = categoria.objects.all()
     usuario_actual = usuario.objects.get( usuario_fk_id =request.user.id)
-    contexto = {'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual}
+    contexto = {'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual, 'posteos':posteos}
     return render(request,"mi_contenido.html",contexto)
 
 def buscar_por_catetoria(request,id):

@@ -24,22 +24,7 @@
         {% endif %}
 
 <br><br><br>
-
-<div class="perfil_usuario" ></div>
-<img src="" alt="">
-    {% if  user.is_authenticated %}
-    <img src="{{usuario_actual.foto.url }}" style="width: 30px; height: 30px; border-radius: 30px;" >
-    {{ user.username }}
-    
-    <div>
-        {% if mis_categorias %}
-            {% for mi_categoria in mis_categorias %}
-                    <p>{{ mi_categoria.name }} </p>
-            {% endfor %}
-        {% endif %}
-    </div>
-    
-    {% endif %}
+ 
 
     
 
@@ -80,40 +65,67 @@
     </div>
 </div>
 
+<div class="perfil_usuario" ></div>
+
+    <div class="usuario_datos"> 
+       
+        <img src="{{usuario_actual.foto.url }}" style="width: 15rem; height: 8rem; border-top-left-radius: 10px; border-top-right-radius: 10px; " >
+        <br>
+        {{ user.username }}
+        <br>
+        {{ user.email }}
+       <br>
+        <h6>Mis categorias</h6>
+       
+            {% if mis_categorias %}
+                {% for mi_categoria in mis_categorias %}
+                        <p>{{ mi_categoria.name }} </p>
+                {% endfor %}
+            {% endif %}
+        
+    </div>
+
 
      <br>
      
-     <h4>Mis Posts</h4>
+     
+<div class="post" ib="global">
+    <section class="main-section row" id="mensajes">
+    <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
-
-     <div class="card" style="width: 18rem;">
+     <div class="card" style="width: 15rem;">
         
          <div class="card-body">
             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
              <h5 class="card-title">titulo: {{ post.titulo }}</h5>
            
              <p class="card-text">contenido: {{ post.pre_contenido }}</p>
-             
-             <p class="card-text">  categoria: {{post.categoria}} </p>
-             
-
-
-             {% for comentario in mis_comentarios %}
-             {% if comentario.post_id == post.id %}
-                 <p class="card-text">comentario: {{ comentario.contenido }}</p>
-             {% endif %}
-             {% endfor %}
-                     
-
-             <br>
          </div>
      </div>
 
  {% endfor %}
-
-
- 
 </div>
+</section> 
+</div>
+
+<div class="comatarios" >
+    {%if mis_comentarios %}
+        {% for post in posteos %}
+            <p> {{post.titulo}} </p>
+             {% for comentario in mis_comentarios %}
+             
+                {% if comentario.post_id == post.id %}
+                    
+                    <p> {{ comentario.contenido }}</p>
+                    
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>
+</div>
+
+
 </body>
 
 {% endblock %}
