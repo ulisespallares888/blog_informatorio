@@ -22,7 +22,7 @@ import datetime
 
 
 def feed(request):
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
+    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
@@ -43,16 +43,16 @@ def leer_posteo(request,id):
     comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
     usuarios_user = User.objects.filter(id__in=comentarios_del_posteo.values('comentador_id'))
     usuarios = usuario.objects.filter(usuario_fk_id__in=usuarios_user.values('id'))
-    print(usuarios) 
     contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo,'usuarios':usuarios}
     return render(request,"leer_post.html",contexto)
 
 @login_required
 def abrir_notificacion(request,id):
+    
     notif = notificaciones.objects.filter(post_id=id).first()
+    print(notif)
     notif.leido = True
     notif.save()
-    
     return redirect('leer_posteo',id)
 
 @login_required
@@ -284,6 +284,7 @@ def reaccionar(request,id,reac):
                     post_reaccionar.no_megusta -= 1
         reaccion_bus.save()
         nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, post_id=id, nombre_usuario=request.user,  me_gusta=reaccion_bus.me_gusta, no_megusta=reaccion_bus.no_megusta)
+        
     post_reaccionar.save()
     messages.success(request, 'Reaccion realizada correctamente')
     return redirect('leer_posteo',id)
