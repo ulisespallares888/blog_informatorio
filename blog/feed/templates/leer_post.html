@@ -58,21 +58,19 @@
     <div id="mensajes">
     {% for un_comentario in comentarios_del_posteo %}
         <div class="box01">
-            {% for usuario in usuarios %}
+           
                
             <div class="box02" >
-               {% if usuario.id == un_comentario.comentador_id %}
-                <img src="{{usuario.foto.url}}" alt="" style="width: 2rem; height: 2rem; border-radius: 15px;">
-                
-                {{un_comentario.nombre_comentador}}
+               
+                <strong>{{un_comentario.nombre_comentador}}:</strong>
                 
             </div>
             &nbsp;
             <div class="box03" >
                  {{ un_comentario.contenido }}
             </div>
-            {% endif %}
-            {% endfor %}
+            
+            
         </div>
         
         
