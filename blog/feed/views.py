@@ -154,7 +154,7 @@ def perfil_usuario(request):
     mis_categorias = categoria.objects.filter(id__in = mis_posteos )
     mis_comentarios = comentario.objects.filter(comentador_id=request.user.id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
-    usuario_actual = usuario.objects.get(id=request.user.id)
+    usuario_actual = usuario.objects.get( usuario_fk_id =request.user.id)
     contexto = {'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual}
     return render(request,"perfil_usuario.html",contexto)
 
