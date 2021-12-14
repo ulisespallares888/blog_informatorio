@@ -41,7 +41,10 @@ def leer_posteo(request,id):
     un_posteo.visitas += 1
     un_posteo.save()
     comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
-    contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo}
+    usuarios_user = User.objects.filter(id__in=comentarios_del_posteo.values('comentador_id'))
+    usuarios = usuario.objects.filter(usuario_fk_id__in=usuarios_user.values('id'))
+    print(usuarios) 
+    contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo,'usuarios':usuarios}
     return render(request,"leer_post.html",contexto)
 
 @login_required

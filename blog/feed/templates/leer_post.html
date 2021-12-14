@@ -6,14 +6,11 @@
 <!--
     Acá se va mostrar el post enterito con comentarios y todo 
  -->
-<h1>acá se puede leer el post completo</h1>
-
-
-
 
 <div>
-    <br>
+    
 <div class="leer_post">
+    <br><br><br><br><br>
     {% if un_posteo %}
     <h1>{{ un_posteo.titulo }}</h1>
     <p>{{ un_posteo.creado_en }}</p>
@@ -61,15 +58,23 @@
     <div id="mensajes">
     {% for un_comentario in comentarios_del_posteo %}
         <div class="box01">
+            {% for usuario in usuarios %}
+               
             <div class="box02" >
-                {{ un_comentario.nombre_comentador }}
+               {% if usuario.id == un_comentario.comentador_id %}
+                <img src="{{usuario.foto.url}}" alt="" style="width: 2rem; height: 2rem; border-radius: 15px;">
+                
+                {{un_comentario.nombre_comentador}}
+                
             </div>
             &nbsp;
             <div class="box03" >
-                <p> {{ un_comentario.contenido }}</p>
+                 {{ un_comentario.contenido }}
             </div>
-            <br>
+            {% endif %}
+            {% endfor %}
         </div>
+        
         
     {% endfor %}
     </div>
