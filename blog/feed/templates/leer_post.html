@@ -10,7 +10,18 @@
 <div>
     
 <div class="leer_post">
+    
     <br><br><br><br><br>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+{% endif %}
+
     {% if un_posteo %}
     <h1>{{ un_posteo.titulo }}</h1>
     <p>{{ un_posteo.creado_en }}</p>
@@ -41,8 +52,11 @@
     
     <div class="dropdown-divider"></div>
     <h4>Comentarios</h4>
+    {% if  user.is_authenticated == False %}
     
-
+    <p><small>Para comentar debe estar registrado como <strong>Posteador</strong> o almenos como <strong>Comentador</strong> </small></p>
+    {% endif %}
+    
     <div  style=" text-align:left; border-width: 1px;" >
         
 

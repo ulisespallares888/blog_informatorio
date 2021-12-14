@@ -57,19 +57,25 @@ def abrir_notificacion(request,id):
 
 @login_required
 def agregar_post(request):
-    titulo = request.POST['txttitulo']
-    contenido = request.POST['txtcontenido']
-    imagen = request.FILES.get('txtimagen','post_default.jpg')
-    categoria_match = request.POST.get('txtcategoria')
-    pre_contenido = str(contenido)[0:60] + "[...]"
-    usuario_match = User.objects.get(id = request.user.id)
-    if titulo != "" and contenido != "":
-        post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, categoria_id=categoria_match,imagen=imagen)
-        post_creado.save()
-        messages.success(request, 'Post creado correctamente')
+    tipo_usuario_actual = usuario.objects.get(usuario_fk_id=request.user.id)
+    if tipo_usuario_actual.tipo_usuario_id == 2:
+        titulo = request.POST['txttitulo']
+        contenido = request.POST['txtcontenido']
+        imagen = request.FILES.get('txtimagen','post_default.jpg')
+        categoria_match = request.POST.get('txtcategoria')
+        pre_contenido = str(contenido)[0:60] + "[...]"
+        usuario_match = User.objects.get(id = request.user.id)
+        if titulo != "" and contenido != "":
+            post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, categoria_id=categoria_match,imagen=imagen)
+            post_creado.save()
+            messages.success(request, 'Post creado correctamente')
+        else:
+            messages.warning(request, 'Hay campos vacios')
+        return redirect('perfil_usuario') 
     else:
-        messages.warning(request, 'Hay campos vacios')
-    return redirect('perfil_usuario')
+        messages.warning(request, 'No tienes permisos para crear un posteos, registrate como usuario Postador')
+        return redirect('perfil_usuario')
+    
 
 
 def registrarse(request):
@@ -140,7 +146,7 @@ def crear_comentario(request,id):
     if comentario != "" and contenido != "":
         comentario_creado = comentario.objects.create(contenido=contenido, comentador=request.user, post_id=id,nombre_comentador=request.user.username)
         comentario_creado.save()
-        messages.success(request, 'Comentario creado correctamente')
+        messages.success(request, 'El comentario ha sido creado correctamente espere que el administrador lo apruebe')
     else:
         messages.warning(request, 'Hay campos vacios')
 
