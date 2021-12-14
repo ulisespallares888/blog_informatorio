@@ -39,7 +39,7 @@
          <img src="/static/img/no_megusta_true.png" alt="" style="width: 2rem; height: 2rem;"> </a>
          {{un_posteo.no_megusta}}
      
-    <p class="card-text"><small class="text-muted">{{ un_posteo.visitas }} personas han visto este post</small></p>
+    <p class="card-text"><small class="text-muted">Este post ha sido visto {{ un_posteo.visitas }} veces</small></p>
 
     
     <div class="dropdown-divider"></div>
@@ -62,14 +62,7 @@
     {% for un_comentario in comentarios_del_posteo %}
         <div class="box01">
             <div class="box02" >
-                asd
-                {% if usuarios %}
-                    {% for usuario in usuarios %}
-                        {% if usuario.nombre == un_comentario.comentador_id %}
-                            <p>{{ usuario.id }} </p>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                {{ un_comentario.nombre_comentador }}
             </div>
             &nbsp;
             <div class="box03" >

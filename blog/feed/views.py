@@ -41,11 +41,7 @@ def leer_posteo(request,id):
     un_posteo.visitas += 1
     un_posteo.save()
     comentarios_del_posteo = comentario.objects.filter(post_id=id,aprobado=True).order_by('creado_en').reverse()
-    comentadores_comentario = User.objects.filter(id__in=comentarios_del_posteo.values('comentador_id'))
-    usuarios = usuario.objects.filter(usuario_fk_id__in=comentadores_comentario.values('id'))
-    print("usuarios",usuarios)
-    print(comentadores_comentario)
-    contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo,'usuarios':usuarios}
+    contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo}
     return render(request,"leer_post.html",contexto)
 
 @login_required
@@ -139,7 +135,7 @@ def crear_comentario(request,id):
     nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, nombre_usuario=request.user.username,  post_id=id, comentario = True)
     nueva_notif.save()
     if comentario != "" and contenido != "":
-        comentario_creado = comentario.objects.create(contenido=contenido, comentador=request.user, post_id=id)
+        comentario_creado = comentario.objects.create(contenido=contenido, comentador=request.user, post_id=id,nombre_comentador=request.user.username)
         comentario_creado.save()
         messages.success(request, 'Comentario creado correctamente')
     else:
