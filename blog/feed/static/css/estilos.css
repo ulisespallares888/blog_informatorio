@@ -220,8 +220,8 @@ a {
   height: auto;
 }
 
-.comantarios {
-  width: 18rem;
+.comentarios {
+  width: auto;
   background-color:whitesmoke;
   border-radius: 10px;
   grid-column: 4/4;

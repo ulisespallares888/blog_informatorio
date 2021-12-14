@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<div class="perfil_usuario" ></div>
+<div class="perfil_usuario" >
 
     <div class="usuario_datos"> 
        
@@ -97,33 +97,37 @@
         
          <div class="card-body">
             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:150px;">
-             <h5 class="card-title">titulo: {{ post.titulo }}</h5>
+             <h5 class="card-title"> {{ post.titulo }}</h5>
            
-             <p class="card-text">contenido: {{ post.pre_contenido }}</p>
+             <p class="card-text"> {{ post.pre_contenido }}</p>
          </div>
      </div>
 
- {% endfor %}
-</div>
-</section> 
+    {% endfor %}
+    </section> 
 </div>
 
-<div class="comatarios" >
+
+
+
+<div class="cometarios" style="background: rgb(6, 107, 20);">
     {%if mis_comentarios %}
         {% for post in posteos %}
             <p> {{post.titulo}} </p>
              {% for comentario in mis_comentarios %}
-             
                 {% if comentario.post_id == post.id %}
-                    
-                    <p> {{ comentario.contenido }}</p>
-                    
+                    <p>  >> {{ comentario.contenido }}</p>
                 {% endif %}
             {% endfor %}
         {% endfor %}
     {% endif %}
 </div>
+
+
 </div>
+
+</div>
+
 
 
 </body>
