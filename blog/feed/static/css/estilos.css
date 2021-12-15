@@ -6,9 +6,8 @@
   grid-template-columns: 2fr 6fr 1fr;
   grid-gap: 5px;
   grid-auto-rows: minmax(auto, auto);
-  grid-auto-columns: minmax(auto, auto);
+  grid-auto-columns: auto;
   
-
 }
 
 .posts{
@@ -219,9 +218,6 @@ a {
 }
 
 .comentarios {
- 
-  
-
   background-color:whitesmoke;
   border-radius: 10px;
   grid-column: 4/4;

@@ -13,26 +13,23 @@
             
     {% for post in posteos %}
 
-        <div class="card" style="width: 16rem;  border: 5px; margin: 6px; height: auto;"  >
+        <div class="card" style="width: 16rem;  border: 5px; margin: 6px; height: auto; "  >
           <a href="{% url 'leer_posteo' id=post.id %}">
-            <img src="{{post.imagen.url}}" class="card-img-top" >   
+            <img src="{{post.imagen.url}}" class="card-img-top" style="width: 16rem; margin-left: -2rem; margin-top: -2rem;">   
           </a>
-            
+          
             <div class="card-body" >
               <a href="{% url 'leer_posteo' id=post.id %}">
-                <h5 class="card-title"  > {{ post.titulo }}</h5>
+                <h5 class="card-title" style="margin-left: -2rem; width:15rem ; " > {{ post.titulo }}</h5>
               </a>
-                <div class="cardbody"></div>
-                <div class="card-text" style="width: auto; height: 6rem;" >
-                   <p>{{ post.pre_contenido }}</p> 
+                <div class="card-body"></div>
+                <div class="card-text" style="margin-left: -2rem; width:15rem ; margin-top:-2rem; " >
+                   <small>{{ post.pre_contenido }}</small> 
                 </div>
-                <p class="card-text"><small class="text-muted">{{ post.creado_en }}</small></p>
+                <br>
+                <p class="card-text"><small class="text-muted" style="margin-left: -2rem; width:16rem ; ">{{ post.creado_en }}</small></p>
                                
-                <a href="{% url 'leer_posteo' id=post.id %}" style="color: #167dff; " > 
-                   Leer más 
-                 
-                </a>
-                              
+                                              
             </div>
         </div> 
 
