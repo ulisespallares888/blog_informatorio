@@ -235,3 +235,9 @@ a {
   width: auto;	
   overflow-y: scroll;
 }
+
+#global_mis_catetorias{
+  height: 35rem;
+  width: auto;	
+  overflow-y: scroll;
+}

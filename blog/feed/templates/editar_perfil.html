@@ -1,9 +1,87 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-    
+
 {% block content %}
-<br><br><br><br>
-<h5>aca se edita el perfil</h5>
 
+<body>
+    <br><br>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+
+    <div class="div_contenedor">
+    <div class="div_centrado" >
+        <br><br>
+    <div class="card ">
+        <div class="card-body" >
+            <h2 style="text-align: center;">Editar Perfil</h2>
+            <form action="{% url 'crear_usuario' %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                <div class="form-gourp">
+                    <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
+                </div>
+                <br>
+                <div class="form-gourp">
+                    <input type="email" placeholder="Email" id="txtemail" value="{{user.email}}" name="txtemail" class="form-control" maxlength="254">
+                </div>
+                <br>
+                <div class="form-gourp">
+                    <input type="password" placeholder="Contraseña" id="txtpassword" value="" name="txtpassword" class="form-control" maxlength="254">
+                </div>
+                <br>
+                <div class="form-gourp">
+                    <input type="password" placeholder="Confirmar contraseña" id="txtpassword2" value="" name="txtpassword2" class="form-control" maxlength="254">
+                </div>
+                <br>
+                <div class="form-gourp">
+                    <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
+                        {% for tipo_usuario in tipo_usuario_actual %}
+                            <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
+                        {% endfor %}
+                        
+                      </select>
+                      
+                </div>
+
+                
+                <br>
+                <div>
+                    
+                    <h5 style="text-align: center;">Cambiar foto de perfil</h5>
+                    <input type="file"  id="txtimagen"  name="txtimagen"  class="form-control" accept="image/*">
+                    
+                    
+                </div>
+
+                <div class="form-gourp">
+                    <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+
+            
+        </div>
+        
+    </div>
+</div>
+</div>
+    <div>
+        {% if mesagess %}
+    {% for message in mesagess %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    
+    {% endif %}
+    </div>
+    
 
 {% endblock %}

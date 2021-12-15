@@ -297,9 +297,10 @@ def reaccionar(request,id,reac):
 
 @login_required
 def editar_perfil(request,id):
+    tipo_usuario_actual = tipo_usuario.objects.all()
     user_editar = User.objects.get(id=id)
     usuario_editar = usuario.objects.get(usuario_fk_id=id)
-    contexto = {'user_editar':user_editar,'usuario_editar':usuario_editar}
+    contexto = {'user_editar':user_editar,'usuario_editar':usuario_editar,'tipo_usuario_actual':tipo_usuario_actual}
     return render(request,"editar_perfil.html",contexto)
 
 @login_required

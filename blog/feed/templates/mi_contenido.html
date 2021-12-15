@@ -26,22 +26,33 @@
 <div class="perfil_usuario"  >
 
     <div class="usuario_datos"  style="margin-left: 1rem;"> 
-       
+        
         <img src="{{usuario_actual.foto.url }}" style="width: 12rem; height: 12rem; border-radius: 6rem;  " >
+        <a  href="{% url 'editar_perfil' id=user.id %}" class="btn btn-warning" tipe="submit"  
+        style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: 10rem; margin-top: -8rem; " ><h3>≡</h3> </a>
         <br>
-        {{ user.username }}
-        <br>
-        {{ user.email }}
-       <br>
-        <h6>Categorias a las que haz aportado</h6>
+        
+         <h5 style="text-align: center;">{{ user.username }}</h5> 
+        
+        <h5 style="text-align: center;">{{ user.email }}</h5> 
+        <div class="dropdown-divider"></div>
        
+        <h5 style="text-align: center;" >Categorías a las que haz aportado</h5>
+        <div class="dropdown-divider"></div>
+        <div id=global_mis_catetorias >
             {% if mis_categorias %}
+            <div id= mensajes >
                 {% for mi_categoria in mis_categorias %}
-                <li>{{ mi_categoria.name }} </li>
+                <a href= ""  style="margin-left: 1rem;" >
+                    <br>
+                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; margin-left: 1rem; "> 
+                    <br>
+                  </a>
                         
                 {% endfor %}
+            </div>
             {% endif %}
-        
+        </div>
     </div>
 
     
