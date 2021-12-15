@@ -82,7 +82,7 @@
             <input type="file" id="txtimagen"  name="txtimagen">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Postear</button>  
+        <button type="submit" class="btn btn-primary">Crear posteo</button>  
         
     </form>
     </div>
@@ -94,26 +94,32 @@
     <section class="main-section row" id="mensajes" style="margin-left: auto;">
     <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
+     
      <div class="card" style="width: 14rem; margin-right: 10px; margin-block-end: 10px;" >
         <div class="box01" style="margin-top: -25px;">
            
                
             <div class="box02" >             
-                <button class="btn btn-warning" tipe="submit" disabled style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: -25px;" ><h3>≡</h3>  </button>                
+                <a  href="{% url 'editar_post' id=post.id %}" class="btn btn-warning" tipe="submit"  style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: -25px;" ><h3>≡</h3>  </a>                
             </div>
             
             <div class="box03" >
-                <button class="btn btn-danger" tipe="submit" disable style="width: 3rem; height: 3rem; border-radius: 25px; margin-left: 115px"  > <h3>X </h3> </button>
+                <a href="{% url 'eliminar_post' id=post.id %}" class="btn btn-danger btnEliminacion" tipe="submit"  style="width: 3rem; height: 3rem; border-radius: 25px; margin-left: 115px"  > <h3>X </h3> </a>
             </div>
             
             
         </div>
-         <div class="card-body" >
-             
+         <div class="card-body">
+            <a href="{% url 'leer_posteo' id=post.id %}">
             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:10rem; margin-left:-1rem;">
-             <h5 class="card-title"> {{ post.titulo }}</h5>
-           
-             <p class="card-text"> {{ post.pre_contenido }}</p>
+            <br><br> 
+            <h5 class="card-title"> {{ post.titulo }}</h5>
+            </a>
+            
+             <p class="card-text" > {{ post.pre_contenido }}</p>
+             <a href="{% url 'leer_posteo' id=post.id %}" style="color: #167dff; " > 
+                Leer más 
+            </a>
          </div>
      </div>
 
@@ -130,7 +136,7 @@
     <div class="dropdown-divider"></div>
     {%if mis_comentarios %}
         {% for post in posteos %}
-            {{post.titulo}} 
+           <strong>{{post.titulo}} </strong> 
              {% for comentario in mis_comentarios %}
                 {% if comentario.post_id == post.id %}
                     <li> {{ comentario.contenido }}  
