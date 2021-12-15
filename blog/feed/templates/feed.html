@@ -3,6 +3,8 @@
 {% block content %}
 
  
+<body style="background:whitesmoke;" >
+  
 
 <div class="wrapper" >
   
@@ -13,7 +15,7 @@
             
     {% for post in posteos %}
 
-        <div class="card" style="width: 16rem;  border: 5px; margin: 6px; height: auto; "  >
+        <div class="card" style="width: 16rem; border: 5px;  margin: 6px; height: auto; "  >
           <a href="{% url 'leer_posteo' id=post.id %}">
             <img src="{{post.imagen.url}}" class="card-img-top" style="width: 16rem; margin-left: -2rem; margin-top: -2rem;">   
           </a>
@@ -42,10 +44,10 @@
     </section>
 
     </div>
-    <div class="lista" id=global style="margin-right: -10px;">
+    <div class="lista" id=global style="margin-right: -10px; margin-left: -2rem;">
       <div id="mensajes">
       <br>
-      <ol style="margin-left: -20px; text-align: center;">
+      <ol style="margin-left: auto; text-align: center;">
         Objetivos de Desarrollo Sostenibles
         <br>
        
@@ -57,11 +59,11 @@
        
         <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  style="margin-left: 1rem;" >
           <br>
-          <img src="{{categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; "> 
+          <img src="{{categoria.imagen.url}} " alt="categorias" style="height: 5rem; width: 5rem; "> 
           
         </a>
-        
-        </selection>
+      </selection>
+       
       
         {% endfor %} 
       </ol>
@@ -131,5 +133,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
-    
+</body>
 {% endblock %}

@@ -15,7 +15,7 @@
   grid-column: 2 / 4;
   grid-row: 1 / 5;
   padding: 0px;
-  margin-left: 10px;
+  
   grid-template-rows: auto;
   border-radius: 10px;
   min-width: 16rem;
@@ -124,7 +124,7 @@
 }
 
 #global {
-	height: 100rem;
+	height: 105rem;
 	width: auto;
 	border: 1px solid #ddd;
 
@@ -212,7 +212,7 @@ a {
   padding: 0px;
   margin-left: auto;
   grid-template-rows: auto;
-  border-radius: 10px;
+ 
   min-width: 16rem;
   height: auto;
 }
@@ -227,7 +227,7 @@ a {
 
 
 #global_comentarios{
-  height: 30rem;
+  height: 60rem;
   width: auto;	
   overflow-y: scroll;
 }

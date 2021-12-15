@@ -39,33 +39,43 @@
        
         <h5 style="text-align: center;" >Categorías a las que haz aportado</h5>
         <div class="dropdown-divider"></div>
-        <div id=global_mis_catetorias >
-            {% if mis_categorias %}
-            <div id= mensajes >
+        
+        <div class="lista" id=global_comentarios style="margin-right: -10px; margin-left: auto;">
+            <div id="mensajes">
+            <br>
+                        
+              <section class="main-section2 ">
                 {% for mi_categoria in mis_categorias %}
                 <a href= ""  style="margin-left: 1rem;" >
                     <br>
-                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; margin-left: 1rem; "> 
+                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 5rem; width: 5rem; "> 
                     <br>
                   </a>
                         
                 {% endfor %}
-            </div>
-            {% endif %}
-        </div>
+            </selection>
+             
+            
+              
+            
+          </div>
+
+          </div>
+
     </div>
 
     
      
-<div class="post" ib="global">
+<div class="post" >
 
     <!---------- Posteo nuevo ---------->
+    {% if usuario_actual.tipo_usuario_id == 1 %}
+    <small style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >Para poder crear posteos debe estar registrado como Posteador</small>
+    {% endif %}
     <h4>Nuevo post</h4>
     
     <div class="card" style="height: 33rem; width: 45rem;"> 
-        {% if usuario_actual.tipo_usuario_id == 1 %}
-    <small style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >Para poder crear posteos debe estar registrado como Posteador</small>
-    {% endif %}
+    
         <div class="card-body" >
     <form action="{% url 'agregar_post' %} " method="POST"  enctype="multipart/form-data"> {% csrf_token %}
         
@@ -106,7 +116,7 @@
     <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
      
-     <div class="card" style="width: 14rem; margin-right: 10px; margin-block-end: 10px;" >
+     <div class="card" style="width: 14rem; margin-right: 10px; margin-block-end: 10px; height: auto;" >
         <div class="box01" style="margin-top: -25px;">
            
                

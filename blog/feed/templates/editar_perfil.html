@@ -21,8 +21,8 @@
     <div class="card ">
         <div class="card-body" >
             <h4 style="text-align: center;">Editar Perfil</h4>
-            <img src="{{usuario_editar.foto.url }}" style="width: 12rem; height: 12rem; border-radius: 6rem; margin-left: 3rem;  " >
-            <br><br>
+            
+            <br>
             <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                 <div class="form-gourp">
                     <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
