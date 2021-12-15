@@ -94,6 +94,7 @@
     <section class="main-section row" id="mensajes" style="margin-left: auto;">
     <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
+     
      <div class="card" style="width: 14rem; margin-right: 10px; margin-block-end: 10px;" >
         <div class="box01" style="margin-top: -25px;">
            
@@ -108,12 +109,17 @@
             
             
         </div>
-         <div class="card-body" >
-             
+         <div class="card-body">
+            <a href="{% url 'leer_posteo' id=post.id %}">
             <img src="{{post.imagen.url}}" alt="{{post.tipo_17_ODS}}" style="width:10rem; margin-left:-1rem;">
-             <h5 class="card-title"> {{ post.titulo }}</h5>
-           
-             <p class="card-text"> {{ post.pre_contenido }}</p>
+            <br><br> 
+            <h5 class="card-title"> {{ post.titulo }}</h5>
+            </a>
+            
+             <p class="card-text" > {{ post.pre_contenido }}</p>
+             <a href="{% url 'leer_posteo' id=post.id %}" style="color: #167dff; " > 
+                Leer más 
+            </a>
          </div>
      </div>
 

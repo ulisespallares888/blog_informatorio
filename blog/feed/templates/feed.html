@@ -19,7 +19,9 @@
           </a>
             
             <div class="card-body" >
+              <a href="{% url 'leer_posteo' id=post.id %}">
                 <h5 class="card-title"  > {{ post.titulo }}</h5>
+              </a>
                 <div class="cardbody"></div>
                 <div class="card-text" style="width: auto; height: 6rem;" >
                    <p>{{ post.pre_contenido }}</p> 
