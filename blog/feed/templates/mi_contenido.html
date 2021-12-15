@@ -142,9 +142,16 @@
 
 
 
-<div class="cometarios" style=" margin-left: 4rem;">
+<div class="cometarios" style=" margin-left: 4rem;" >
+    
+
+      
     <h4>Mis comentarios</h4>
     <div class="dropdown-divider"></div>
+    <div id="global_mis_catetorias" >
+        <div id="mansajes">
+
+    
     {%if mis_comentarios %}
         {% for post in posteos %}
            <strong>{{post.titulo}} </strong> 
@@ -158,6 +165,8 @@
             <br>
         {% endfor %}
     {% endif %}
+</div>
+</div>
 </div>
 
 

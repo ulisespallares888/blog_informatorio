@@ -107,7 +107,10 @@
      
       {% if top_posts %}
         <h4 style="text-align: center;">Los post con más <br>  Me gusta </h4>
+        <div id="global_mis_categorias" ></div>
         <div class="dropdown-divider"></div>
+        <div id="global_mis_catetorias" >
+          <div id="mansajes">
         <ol>
         {% for post in top_posts %}
         
@@ -121,9 +124,10 @@
 
         {% else %}
           <h2>No hay posts</h2>
-        {% endif %}       
+        {% endif %}     
+        </div>
+        </div>
     </div>
-
     </div>
   </div>
     

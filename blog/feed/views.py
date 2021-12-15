@@ -310,12 +310,15 @@ def editar_perfil_guardar(request,id):
     nombre = request.POST['txtnombre']
     email = request.POST['txtemail']
     foto = request.FILES.get('txtfoto')
+    rol = request.POST.get('txttrol')
+
     if nombre != "" and email != "":
         usuario_editar = usuario.objects.get(id=id)
         user_editar = User.objects.get(id=id)
         user_editar.nombre = nombre
         user_editar.email = email
         usuario_editar.foto = foto
+        usuario_editar.tipo_usuario_id = rol
         usuario_editar.save()
         user_editar.save()
         messages.success(request, 'Perfil editado correctamente')
