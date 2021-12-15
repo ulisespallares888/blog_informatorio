@@ -228,3 +228,10 @@ a {
   grid-row: 1;
   min-width: 1rem;
 }
+
+
+#global_comentarios{
+  height: 30rem;
+  width: auto;	
+  overflow-y: scroll;
+}
