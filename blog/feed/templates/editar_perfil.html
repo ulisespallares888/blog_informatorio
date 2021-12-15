@@ -20,8 +20,10 @@
         <br><br>
     <div class="card ">
         <div class="card-body" >
-            <h2 style="text-align: center;">Editar Perfil</h2>
-            <form action="{% url 'crear_usuario' %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+            <h4 style="text-align: center;">Editar Perfil</h4>
+            <img src="{{usuario_editar.foto.url }}" style="width: 12rem; height: 12rem; border-radius: 6rem; margin-left: 3rem;  " >
+            <br><br>
+            <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                 <div class="form-gourp">
                     <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
                 </div>
@@ -53,7 +55,7 @@
                 <div>
                     
                     <h5 style="text-align: center;">Cambiar foto de perfil</h5>
-                    <input type="file"  id="txtimagen"  name="txtimagen"  class="form-control" accept="image/*">
+                    <input type="file"  id="txtfoto"  name="txtfoto"  class="form-control" accept="image/*">
                     
                     
                 </div>

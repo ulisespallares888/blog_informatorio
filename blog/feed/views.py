@@ -227,12 +227,14 @@ def editar_post_guardar(request,id):
     titulo = request.POST.get('txttitulo',"titulo_nada")
     contenido = request.POST.get('txtcontenido',"contenido_nada")
     categoria = request.POST.get('txtcategoria',"categoria_nada")
+    imagen = request.FILES.get('txtimagen',"imagen_nada")
     if titulo != "" and contenido != "":
         post_editar = post.objects.get(id=id)
         post_editar.titulo = titulo
         post_editar.contenido = contenido
         post_editar.pre_contenido = contenido[:200]
         post_editar.catetoria_id = categoria
+        post_editar.imagen = imagen
         post_editar.save()
     
         messages.success(request, 'Post editado correctamente')
@@ -307,13 +309,15 @@ def editar_perfil(request,id):
 def editar_perfil_guardar(request,id):
     nombre = request.POST['txtnombre']
     email = request.POST['txtemail']
-    foto = request.POST['txtfoto']
+    foto = request.FILES.get('txtfoto')
     if nombre != "" and email != "":
         usuario_editar = usuario.objects.get(id=id)
-        usuario_editar.nombre = nombre
-        usuario_editar.email = email
+        user_editar = User.objects.get(id=id)
+        user_editar.nombre = nombre
+        user_editar.email = email
         usuario_editar.foto = foto
         usuario_editar.save()
+        user_editar.save()
         messages.success(request, 'Perfil editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
