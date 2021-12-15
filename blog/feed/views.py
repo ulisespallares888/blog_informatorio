@@ -63,7 +63,7 @@ def agregar_post(request):
         contenido = request.POST['txtcontenido']
         imagen = request.FILES.get('txtimagen','post_default.jpg')
         categoria_match = request.POST.get('txtcategoria')
-        pre_contenido = str(contenido)[0:60] + "[...]"
+        pre_contenido = str(contenido)[0:100] + "[...]"
         usuario_match = User.objects.get(id = request.user.id)
         if titulo != "" and contenido != "":
             post_creado = post.objects.create(titulo=titulo,contenido=contenido,posteador=usuario_match,pre_contenido=pre_contenido, categoria_id=categoria_match,imagen=imagen)
@@ -228,6 +228,7 @@ def editar_post_guardar(request,id):
     contenido = request.POST.get('txtcontenido',"contenido_nada")
     categoria = request.POST.get('txtcategoria',"categoria_nada")
     imagen = request.FILES.get('txtimagen',"imagen_nada")
+    pre_contenido = str(contenido)[0:100] + "[...]"
     if titulo != "" and contenido != "":
         post_editar = post.objects.get(id=id)
         post_editar.titulo = titulo
@@ -235,6 +236,7 @@ def editar_post_guardar(request,id):
         post_editar.pre_contenido = contenido[:200]
         post_editar.catetoria_id = categoria
         post_editar.imagen = imagen
+        post_editar.pre_contenido = pre_contenido
         post_editar.save()
     
         messages.success(request, 'Post editado correctamente')
