@@ -23,12 +23,34 @@
             {% endfor %}
         {% endif %}
 
-<br><br><br>
- 
+<div class="perfil_usuario"  >
+
+    <div class="usuario_datos"  style="margin-left: 1rem;"> 
+       
+        <img src="{{usuario_actual.foto.url }}" style="width: 12rem; height: 12rem; border-radius: 6rem;  " >
+        <br>
+        {{ user.username }}
+        <br>
+        {{ user.email }}
+       <br>
+        <h6>Mis categorias</h6>
+       
+            {% if mis_categorias %}
+                {% for mi_categoria in mis_categorias %}
+                        <p>{{ mi_categoria.name }} </p>
+                {% endfor %}
+            {% endif %}
+        
+    </div>
 
     
+     
+<div class="post" ib="global">
 
-    <div class="card" style="height: 33rem; width: 60rem; margin: auto;"> 
+    <!---------- Posteo nuevo ---------->
+    <h4>Nuevo post</h4>
+    
+    <div class="card" style="height: 33rem; width: 45rem;"> 
         {% if usuario_actual.tipo_usuario_id == 1 %}
     <small style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >Para poder crear posteos debe estar registrado como Posteador</small>
     {% endif %}
@@ -65,32 +87,9 @@
     </div>
 </div>
 
-<div class="perfil_usuario" >
-
-    <div class="usuario_datos"> 
-       
-        <img src="{{usuario_actual.foto.url }}" style="width: 15rem; height: 8rem; border-top-left-radius: 10px; border-top-right-radius: 10px; " >
-        <br>
-        {{ user.username }}
-        <br>
-        {{ user.email }}
-       <br>
-        <h6>Mis categorias</h6>
-       
-            {% if mis_categorias %}
-                {% for mi_categoria in mis_categorias %}
-                        <p>{{ mi_categoria.name }} </p>
-                {% endfor %}
-            {% endif %}
-        
-    </div>
-
-
-     <br>
-     
-     
-<div class="post" ib="global">
-    <section class="main-section row" id="mensajes">
+<!-- Mis posteos -->
+<br>
+    <section class="main-section row" id="mensajes" style="margin-left: auto;">
     <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
      <div class="card" style="width: 15rem;">
@@ -110,7 +109,9 @@
 
 
 
-<div class="cometarios" style="background: rgb(6, 107, 20);">
+<div class="cometarios" style=" margin-left: 4rem;">
+    <h4>Mis comentarios</h4>
+    <div class="dropdown-divider"></div>
     {%if mis_comentarios %}
         {% for post in posteos %}
             <p> {{post.titulo}} </p>
