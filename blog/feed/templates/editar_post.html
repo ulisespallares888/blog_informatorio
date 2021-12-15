@@ -36,7 +36,7 @@
     <br>
     <div class="form-group">
                     
-        <textarea class="form-control" id="txtcontenido" name="txtcontenido" value="{{post_editar.contenido}}" rows="10" placeholder="Contenido"></textarea>
+        <textarea class="form-control" id="txtcontenido" name="txtcontenido" rows="10" placeholder="Contenido">"{{post_editar.contenido}}"</textarea>
     </div>
     <div class="form-group">
         <br>
@@ -49,12 +49,13 @@
     </div>
     <br>
 
-    <div >
-        <input type="file" id="txtimagen"  name="txtimagen"  value="{{post_editar.imagen.url}}">
+    <div class="form-gourp">
+        <input type="file" id="txtimagen"  name="txtimagen" >
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Guardar cambios</button>  
-    
+    <div class="form-group">
+         <button type="submit" class="btn btn-primary" >Guardar cambios</button>  
+    </div>
 </form>
 </div>
 </div>

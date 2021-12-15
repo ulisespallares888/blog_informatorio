@@ -217,7 +217,6 @@ def eliminar_post(request,id):
 @login_required
 def editar_post(request,id):
     post_editar = post.objects.get(id=id)
-    print(post_editar.titulo)
     categorias = categoria.objects.all()
     contexto = {'post_editar':post_editar, 'categorias':categorias}
     return render(request,"editar_post.html",contexto)
@@ -225,15 +224,17 @@ def editar_post(request,id):
 
 @login_required
 def editar_post_guardar(request,id):
-    titulo = request.GET.get('txttitulo')
-    contenido = request.GET.get('txtcontenido')
+    titulo = request.POST.get('txttitulo',"titulo_nada")
+    contenido = request.POST.get('txtcontenido',"contenido_nada")
+    categoria = request.POST.get('txtcategoria',"categoria_nada")
     if titulo != "" and contenido != "":
         post_editar = post.objects.get(id=id)
-        print(id)
         post_editar.titulo = titulo
         post_editar.contenido = contenido
-        #post_editar.save()
-        print(post_editar.titulo)
+        post_editar.pre_contenido = contenido[:200]
+        post_editar.catetoria_id = categoria
+        post_editar.save()
+    
         messages.success(request, 'Post editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
