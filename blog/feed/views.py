@@ -211,35 +211,34 @@ def busqueda_por_titulo(request):
 def eliminar_post(request,id):
     post_eliminado = post.objects.get(id=id)
     post_eliminado.delete()
-    messages.success(request, 'Post eliminado correctamente')
+    messages.success(request, 'El post {} ha sido eliminado correctamente'.format(post_eliminado.titulo))
     return redirect('perfil_usuario')
 
 @login_required
 def editar_post(request,id):
     post_editar = post.objects.get(id=id)
-    return render(request,"editar_post.html",{'post_editar':post_editar})
+    print(post_editar.titulo)
+    categorias = categoria.objects.all()
+    contexto = {'post_editar':post_editar, 'categorias':categorias}
+    return render(request,"editar_post.html",contexto)
 
 
 @login_required
 def editar_post_guardar(request,id):
-    titulo = request.POST['txttitulo']
-    contenido = request.POST['txtcontenido']
+    titulo = request.GET.get('txttitulo')
+    contenido = request.GET.get('txtcontenido')
     if titulo != "" and contenido != "":
         post_editar = post.objects.get(id=id)
+        print(id)
         post_editar.titulo = titulo
         post_editar.contenido = contenido
-        post_editar.save()
+        #post_editar.save()
+        print(post_editar.titulo)
         messages.success(request, 'Post editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
-
-@login_required
-def eliminar_comentario(request,id):
-    comentario_eliminado = comentario.objects.get(id=id)
-    comentario_eliminado.delete()
-    messages.success(request, 'Comentario eliminado correctamente')
-    return redirect('perfil_usuario')
+    #return redirect('editar_post',id)
 
 
 
@@ -293,7 +292,6 @@ def reaccionar(request,id,reac):
         nueva_notif = notificaciones.objects.create(usuario_id=request.user.id, post_id=id, nombre_usuario=request.user,  me_gusta=reaccion_bus.me_gusta, no_megusta=reaccion_bus.no_megusta)
         
     post_reaccionar.save()
-    messages.success(request, 'Reaccion realizada correctamente')
     return redirect('leer_posteo',id)
 
 @login_required

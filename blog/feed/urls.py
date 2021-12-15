@@ -28,5 +28,8 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')), 
     path('abrir_notificacion/<id>', views.abrir_notificacion, name='abrir_notificacion'),
     path('editar_perfil/<id>', views.editar_perfil, name='editar_perfil'),
-    #path('mostar_comentarios/',views.mostar_comentarios, name='mostar_comentarios'),
+    path('editar_post/<id>', views.editar_post, name='editar_post'),
+    path('editar_post_guardar/<id>', views.editar_post_guardar, name='editar_post_guardar'),
+
+    
 ]

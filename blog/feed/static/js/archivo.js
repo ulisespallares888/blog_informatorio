@@ -1,10 +1,15 @@
 
-function recargar(){
-    $.ajax({
-       url: url = $("#Url").attr("{% url 'feed' %}"),
-        success: function(data){
-            $('#seccionRecargar').html(data);
-        }
-    });
-};
+(function () {
 
+    const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+
+    btnEliminacion.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const confirmacion = confirm('¿Seguro de eliminar el contacto?');
+            if (!confirmacion) {
+                e.preventDefault();
+            }
+        });
+    });
+    
+})();

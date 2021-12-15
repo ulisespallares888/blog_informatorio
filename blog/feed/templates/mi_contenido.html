@@ -82,7 +82,7 @@
             <input type="file" id="txtimagen"  name="txtimagen">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Postear</button>  
+        <button type="submit" class="btn btn-primary">Crear posteo</button>  
         
     </form>
     </div>
@@ -99,11 +99,11 @@
            
                
             <div class="box02" >             
-                <button class="btn btn-warning" tipe="submit" disabled style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: -25px;" ><h3>≡</h3>  </button>                
+                <a  href="{% url 'editar_post' id=post.id %}" class="btn btn-warning" tipe="submit"  style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: -25px;" ><h3>≡</h3>  </a>                
             </div>
             
             <div class="box03" >
-                <button class="btn btn-danger" tipe="submit" disable style="width: 3rem; height: 3rem; border-radius: 25px; margin-left: 115px"  > <h3>X </h3> </button>
+                <a href="{% url 'eliminar_post' id=post.id %}" class="btn btn-danger btnEliminacion" tipe="submit"  style="width: 3rem; height: 3rem; border-radius: 25px; margin-left: 115px"  > <h3>X </h3> </a>
             </div>
             
             
@@ -130,7 +130,7 @@
     <div class="dropdown-divider"></div>
     {%if mis_comentarios %}
         {% for post in posteos %}
-            {{post.titulo}} 
+           <strong>{{post.titulo}} </strong> 
              {% for comentario in mis_comentarios %}
                 {% if comentario.post_id == post.id %}
                     <li> {{ comentario.contenido }}  
