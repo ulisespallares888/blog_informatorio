@@ -307,9 +307,10 @@ def editar_perfil(request,id):
 
 @login_required
 def editar_perfil_guardar(request,id):
+    usuario_bus = usuario.objects.get(usuario_fk_id=id)
     nombre = request.POST['txtnombre']
     email = request.POST['txtemail']
-    foto = request.FILES.get('txtfoto')
+    foto = request.FILES.get('txtfoto',usuario_bus.foto)
     rol = request.POST.get('txttrol')
 
     if nombre != "" and email != "":
