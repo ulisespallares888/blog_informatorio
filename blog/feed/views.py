@@ -238,8 +238,7 @@ def editar_post_guardar(request,id):
         post_editar.imagen = imagen
         post_editar.pre_contenido = pre_contenido
         post_editar.save()
-        messages.success(request, 'El post {} ha sido editado correctamente'.format(post_editar.titulo))
-        messages.success(request, 'Post editado correctamente')
+        messages.success(request, 'Los cambios han sido guardados correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
     return redirect('perfil_usuario')
