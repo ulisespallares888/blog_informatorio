@@ -18,59 +18,116 @@
     <div class="div_contenedor">
     <div class="div_centrado" >
         <br><br>
-    <div class="card ">
-        <div class="card-body" >
-            <h4 style="text-align: center;">Editar Perfil</h4>
-            
-            <br>
-            <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
-                <div class="form-gourp">
-                    <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
-                </div>
-                <br>
-                <div class="form-gourp">
-                    <input type="email" placeholder="Email" id="txtemail" value="{{user.email}}" name="txtemail" class="form-control" maxlength="254">
-                </div>
-                <br>
-                <div class="form-gourp">
-                    <input type="password" placeholder="Contraseña" id="txtpassword" value="" name="txtpassword" class="form-control" maxlength="254">
-                </div>
-                <br>
-                <div class="form-gourp">
-                    <input type="password" placeholder="Confirmar contraseña" id="txtpassword2" value="" name="txtpassword2" class="form-control" maxlength="254">
-                </div>
-                <br>
-                <div class="form-gourp">
-                    <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
-                        {% for tipo_usuario in tipo_usuario_actual %}
-                            <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
-                        {% endfor %}
-                        
-                      </select>
-                      
-                </div>
 
-                
-                <br>
-                <div>
-                    
-                    <h5 style="text-align: center;">Cambiar foto de perfil</h5>
-                    <input type="file"  id="txtfoto"  name="txtfoto"  class="form-control" accept="image/*">
-                    
-                    
-                </div>
+    <div class="box01" > 
 
-                <div class="form-gourp">
-                    <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
-                        Guardar cambios
-                    </button>
-                </div>
-            </form>
+        <div class="box02" ><!-- Editar nombre, foto, email-->
 
-            
-        </div>
+            <div class="card ">
+                <div class="card-body" >
+                    <h4 style="text-align: center;">Editar Perfil</h4>
+                    
+                    <br>
+                    <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                        <div class="form-gourp">
+                            <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
+                        </div>
+                        <br>
+                        <div class="form-gourp">
+                            <input type="email" placeholder="Email" id="txtemail" value="{{user.email}}" name="txtemail" class="form-control" maxlength="254">
+                        </div>
+                          <br>
+                        <div class="form-gourp">
+                            <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
+                                {% for tipo_usuario in tipo_usuario_actual %}
+                                    <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
+                                {% endfor %}
+                                
+                              </select>
+                              
+                        </div>
         
+                        
+                        <br>
+                        <div>
+                            
+                            <h5 style="text-align: center;">Cambiar foto de perfil</h5>
+                            <input type="file"  id="txtfoto"  name="txtfoto"  class="form-control" accept="image/*">
+                            
+                            
+                        </div>
+        
+                        <div class="form-gourp">
+                            <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </form>
+        
+                    
+                </div>
+                
+            </div>
+            
+
+
+        </div><!-- Editar nombre, foto, email-->
+        
+        <div class="box03"><!-- Editar contraseña-->  
+
+            <div class="card ">
+                <div class="card-body" >
+                    <h4 style="text-align: center;">Editar Perfil</h4>
+                    
+                    <br>
+                    <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                       
+                        <div class="form-gourp">
+                            <input type="password" placeholder="Contraseña" id="txtpassword" value="" name="txtpassword" class="form-control" maxlength="254">
+                        </div>
+                        <br>
+                        <div class="form-gourp">
+                            <input type="password" placeholder="Confirmar contraseña" id="txtpassword2" value="" name="txtpassword2" class="form-control" maxlength="254">
+                        </div>
+                        <br>
+                        <div class="form-gourp">
+                            <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
+                                {% for tipo_usuario in tipo_usuario_actual %}
+                                    <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
+                                {% endfor %}
+                                
+                              </select>
+                              
+                        </div>
+        
+                        
+                        <br>
+                        <div>
+                            
+                            <h5 style="text-align: center;">Cambiar foto de perfil</h5>
+                            <input type="file"  id="txtfoto"  name="txtfoto"  class="form-control" accept="image/*">
+                            
+                            
+                        </div>
+        
+                        <div class="form-gourp">
+                            <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </form>
+        
+                    
+                </div>
+                
+            </div>
+
+
+        </div><!-- Editar contraseña-->  
+
     </div>
+    
+
 </div>
 </div>
     <div>
