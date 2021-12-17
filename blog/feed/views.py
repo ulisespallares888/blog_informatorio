@@ -88,9 +88,12 @@ def crear_usuario(request):
     rol = request.POST.get('txttrol')
     foto = request.FILES.get('txtimagen','foto_default.jpg')
     if nombre != "" and email != "" and password != "" and password2 != "" and rol != "":
+        if len(password) + len(password2) < 16:
+            messages.warning(request, 'El tamaño de contraseña debe ser mayor o igual a 8 caracteres')
+            return redirect('registrarse')
         usename_exists = User.objects.filter(username=nombre).exists()
         if usename_exists:
-            messages.warning(request, 'El usuario ya existe')
+            messages.warning(request, 'Ya existe un usuario con ese nombre')
         else:
             if password == password2:
                 usuario_creado = User.objects.create_user(username=nombre,email=email,password=password)

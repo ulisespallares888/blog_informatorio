@@ -33,14 +33,18 @@
                 <div class="form-gourp">
                     <input type="password" placeholder="Contraseña" id="txtpassword" name="txtpassword" class="form-control" maxlength="254">
                 </div>
+                <small  style="color: grey;" >(8 caracteres mín.)</small>
                 <br>
                 <div class="form-gourp">
                     <input type="password" placeholder="Confirmar contraseña" id="txtpassword2" name="txtpassword2" class="form-control" maxlength="254">
                 </div>
+                <small  style="color: grey;" >(8 caracteres mín.)</small>
                 <br>
                 <div class="form-gourp">
                     <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
+                        <option value="">--------------</option>
                         {% for tipo_usuario in tipo_usuario_match %}
+                        
                             <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
                         {% endfor %}
                         
