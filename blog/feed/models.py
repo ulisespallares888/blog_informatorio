@@ -27,7 +27,6 @@ class usuario(models.Model):
 
     def delete(self, *args, **kwargs):
         if self.foto != "foto_default.jpg":
-            print(self.foto)
             os.remove(self.foto.path)
         super(usuario,self).delete(*args, **kwargs)
 
@@ -51,7 +50,6 @@ class post(models.Model):
 
     def delete(self, *args, **kwargs):
         if self.imagen != "post_default.jpg":
-            print(self.imagen)
             os.remove(self.imagen.path)
         super(post,self).delete(*args, **kwargs)
     
