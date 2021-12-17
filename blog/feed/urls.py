@@ -26,9 +26,11 @@ urlpatterns = [
     path('nosotros/',views.nosotros, name='nosotros'),
     path('los_17_ods/',views.los_17_ods, name='los_17_ods'),
     path('accounts/',include('django.contrib.auth.urls')), 
-    path('abrir_notificacion/<id>', views.abrir_notificacion, name='abrir_notificacion'),
+    path('abrir_notificacion/<idn>/<idp>', views.abrir_notificacion, name='abrir_notificacion'),
     path('editar_perfil/<id>', views.editar_perfil, name='editar_perfil'),
     path('editar_post/<id>', views.editar_post, name='editar_post'),
     path('editar_post_guardar/<id>', views.editar_post_guardar, name='editar_post_guardar'),
-    path('editar_perfil_guardar/<id>', views.editar_perfil_guardar, name='editar_perfil_guardar'),    
+    path('editar_perfil_guardar/<id>', views.editar_perfil_guardar, name='editar_perfil_guardar'),  
+    path('editar_contraseña/<id>', views.editar_contraseña, name='editar_contraseña'),   
+
 ]

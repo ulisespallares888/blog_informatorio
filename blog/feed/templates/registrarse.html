@@ -18,7 +18,7 @@
     <div class="div_contenedor">
     <div class="div_centrado" >
         <br><br>
-    <div class="card ">
+    <div class="card bg-light" >
         <div class="card-body" >
             <h2 style="text-align: center;">Registrarse</h2>
             <form action="{% url 'crear_usuario' %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
@@ -55,7 +55,7 @@
                     <h5 style="text-align: center;">Agregar foto de perfil</h5>
                     <input type="file"  id="txtimagen"  name="txtimagen"  class="form-control" accept="image/*">
                     
-                    
+                    <br>
                 </div>
 
                 <div class="form-gourp">

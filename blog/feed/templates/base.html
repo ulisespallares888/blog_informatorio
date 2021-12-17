@@ -48,17 +48,29 @@
                 </ul>
                 {% if user.is_authenticated %}
                 
+
+
+
                 <ul class="nav navbar-nav ms-auto">
-                    {% include 'notificaciones.html' %}
-                    <!-- 
-                        Acá va el código para mostrar las notificaciones
-                    -->
-                                                    
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                   
+                   
+                                 
                             
-                            <img src="/static/img/avatar_dafault.png" alt="Perfil usuario" style="height: 2rem; width: 2rem;">
+
+                     
+
+                    <form class="d-flex ms-auto"> 
+                        <a href="{% url 'perfil_usuario' %}" class="btn btn-light me-2" style="border-color:grey; ">
+                                Perfil
                         </a>
+                        <a href="{% url 'logout' %}" class="btn btn-light me-2" style="border-color: grey; ">Salir</a>
+                      </form>
+
+                    <li class="nav-item dropdown">
+
+                        
+                        
+                        
                         <div class="dropdown-menu dropdown-menu-end">
                             <h6 style="text-align: center;" >{{user.username}}</h6>
                             <div class="dropdown-divider"></div>
@@ -108,8 +120,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-<footer style=" position:absolute;  width: 100% ;margin-top: 3.5rem; padding: 7px;
-background: seagreen ; border-top-right-radius: 10px; border-top-left-radius: 10px;"> 
+<footer style=" position:absolute;  width: 100% ;margin-top: 10rem; 
+background: seagreen ; border-top-right-radius: 10px; border-top-left-radius: 10px; height: 5rem; "> 
     
     <div class="container" >
         
@@ -119,8 +131,8 @@ background: seagreen ; border-top-right-radius: 10px; border-top-left-radius: 10
                     
                     <section class="buttons" >
                         <p>Grupo 12</p>
-                        <a href="https://github.com/ulisespallares888/blog_informatorio" class="fa fa-github"> </a>
-                        <a href="https://trello.com/b/UHoQJEJy/blog17ods" class="fa fa-trello"> </a>
+                        <a href="https://github.com/ulisespallares888/blog_informatorio" class="fa fa-github"  > </a>
+                        <a href="https://trello.com/b/UHoQJEJy/blog17ods" class="fa fa-trello" > </a>
                     </section>                      
                 
                     </div>

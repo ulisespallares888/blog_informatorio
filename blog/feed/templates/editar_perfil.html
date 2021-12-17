@@ -15,30 +15,31 @@
         {% endif %}
 
 
-    <div class="div_contenedor">
-    <div class="div_centrado" >
+    <div >
+    <div  >
         <br><br>
 
-    <div class="box01" > 
+    <div class="box01"  > 
 
-        <div class="box02" ><!-- Editar nombre, foto, email-->
+        <div class="box02" style="margin: auto;" ><!-- Editar nombre, foto, email-->
 
-            <div class="card ">
+            <div class="card bg-light " style="border-radius: 10px;">
                 <div class="card-body" >
                     <h4 style="text-align: center;">Editar Perfil</h4>
                     
                     <br>
-                    <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                    <form action="{% url 'editar_perfil_guardar' id=request.user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                         <div class="form-gourp">
-                            <input type="text" placeholder="Nombre de usuario" id="txtnombre" velue="{{user.name}}"name="txtnombre" class="form-control" minlength="1" maxlength="50">
+                            <input type="text" placeholder="Nombre de usuario" id="txtnombre" value="{{ user.username }}" name="txtnombre" class="form-control" minlength="1" maxlength="50">
                         </div>
                         <br>
                         <div class="form-gourp">
-                            <input type="email" placeholder="Email" id="txtemail" value="{{user.email}}" name="txtemail" class="form-control" maxlength="254">
+                            <input type="email" placeholder="Email" id="txtemail" value="{{ user.email }}" name="txtemail" class="form-control" maxlength="254">
                         </div>
                           <br>
                         <div class="form-gourp">
                             <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
+                                <option value="">--------------</option>
                                 {% for tipo_usuario in tipo_usuario_actual %}
                                     <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
                                 {% endfor %}
@@ -56,7 +57,7 @@
                             
                             
                         </div>
-        
+                        <br>
                         <div class="form-gourp">
                             <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >
                                 Guardar cambios
@@ -73,42 +74,29 @@
 
         </div><!-- Editar nombre, foto, email-->
         
-        <div class="box03"><!-- Editar contraseña-->  
+        <div class="box03" style="margin: auto; width: 20rem; margin-top: 0px;"><!-- Editar contraseña-->  
 
-            <div class="card ">
+            <div class="card bg-light " style="border-radius: 10px;" >
                 <div class="card-body" >
-                    <h4 style="text-align: center;">Editar Perfil</h4>
+                    <h4 style="text-align: center;">Cambiar Contraseña</h4>
                     
                     <br>
-                    <form action="{% url 'editar_perfil_guardar' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                    <form action="{% url 'editar_contraseña' id=user.id %}" method="POST" class="form" enctype="multipart/form-data" > {% csrf_token %}
                        
                         <div class="form-gourp">
-                            <input type="password" placeholder="Contraseña" id="txtpassword" value="" name="txtpassword" class="form-control" maxlength="254">
+                            <input type="password" placeholder="Contraseña actual" id="txtpassword_actual" value="" name="txtpassword_actual" class="form-control" maxlength="254">
                         </div>
                         <br>
                         <div class="form-gourp">
-                            <input type="password" placeholder="Confirmar contraseña" id="txtpassword2" value="" name="txtpassword2" class="form-control" maxlength="254">
+                            <input type="password" placeholder="Contraseña nueva" id="txtpassword_nueva" value="" name="txtpassword_nueva" class="form-control" maxlength="254">
                         </div>
                         <br>
                         <div class="form-gourp">
-                            <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
-                                {% for tipo_usuario in tipo_usuario_actual %}
-                                    <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
-                                {% endfor %}
-                                
-                              </select>
-                              
+                            <input type="password" placeholder="Confirmar contraseña nueva" id="txtpassword_nueva_confirm" value="" name="txtpassword_nueva_confirm" class="form-control" maxlength="254">
                         </div>
-        
+                        <br>
                         
-                        <br>
-                        <div>
-                            
-                            <h5 style="text-align: center;">Cambiar foto de perfil</h5>
-                            <input type="file"  id="txtfoto"  name="txtfoto"  class="form-control" accept="image/*">
-                            
-                            
-                        </div>
+        
         
                         <div class="form-gourp">
                             <button type="submit" class="btn btn-success btn-block text-white col-xl-12 " >

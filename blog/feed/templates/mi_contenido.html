@@ -27,18 +27,21 @@
 
     <div class="usuario_datos"  style="margin-left: 1rem;"> 
         
-        <img src="{{usuario_actual.foto.url }}" style="width: 12rem; height: 12rem; border-radius: 6rem;  " >
-        <a  href="{% url 'editar_perfil' id=user.id %}" class="btn btn-warning" tipe="submit"  
-        style=" width: 3rem; height: 3rem; border-radius: 25px; margin-left: 10rem; margin-top: -8rem; " ><h3>≡</h3> </a>
+        <img src="{{usuario_actual.foto.url }}" style="width: 12rem; height: 12rem; border-top-left-radius: 10px; border-top-right-radius: 10px;  " >
         <br>
         
-         <h5 style="text-align: center;">{{ user.username }}</h5> 
+         <h4 style="text-align: auto;">{{ user.username }}</h4> 
         
-        <h5 style="text-align: center;">{{ user.email }}</h5> 
+        <h6 style="text-align: auto;">{{ user.email }}</h6> 
 
-        <h5 style="text-align: center;">{{rol.nombre }}</h5> 
+        <h6 style="text-align: auto;">{{rol.nombre }}</h6> 
 
-
+        <a  href="{% url 'editar_perfil' id=user.id %}" class="btn btn-warning" tipe="submit" 
+        style="height: 2rem; width:12rem;">
+          Editar perfil
+        </a>
+        <br>
+        {% if  user.is_authenticated and not usuario_actual.tipo_usuario_id == 1 %}
         <div class="dropdown-divider"></div>
        
         <h5 style="text-align: center;" >Categorías a las que haz aportado</h5>
@@ -46,13 +49,12 @@
         
         <div class="lista" id=global_comentarios style="margin-right: -10px; margin-left: auto;">
             <div id="mensajes">
-            <br>
-                        
+                                    
               <section class="main-section2 ">
                 {% for mi_categoria in mis_categorias %}
                 <a href= ""  style="margin-left: 1rem;" >
                     <br>
-                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 5rem; width: 5rem; "> 
+                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; "> 
                     <br>
                   </a>
                         
@@ -65,8 +67,9 @@
           </div>
 
           </div>
-
+{% endif %}
     </div>
+    
 
     
      
@@ -74,9 +77,13 @@
 
     <!---------- Posteo nuevo ---------->
     {% if usuario_actual.tipo_usuario_id == 1 %}
-    <small style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >Para poder crear posteos debe estar registrado como Posteador</small>
+    <h5 style="text-align: center; padding: 10px; color: rgb(255, 0, 0); " >
+        Para poder crear posteos debe estar registrado como Posteador o pueder cambiar de rol editando su perfil
+    </h5>
     {% endif %}
-    <h4>Nuevo post</h4>
+
+    {% if  user.is_authenticated and not usuario_actual.tipo_usuario_id == 1 %}
+    <h4>Crear posteo</h4>
     
     <div class="card" style="height: 33rem; width: 45rem;"> 
     
@@ -112,10 +119,11 @@
     </form>
     </div>
 </div>
+{% endif %}
 
 <!-- Mis posteos -->
 <br>
-    <div id="global_comentarios" >
+    <div id="global_comentarios"  style="width: 45rem;">
     <section class="main-section row" id="mensajes" style="margin-left: auto;">
     <h4>Mis Posts</h4>
      {% for post in mis_posteos %}
@@ -181,6 +189,58 @@
     {% endif %}
 </div>
 </div>
+<!--%%%%%%%%%%%%%%%%%-->
+<br><br>
+<h4>Notificaciones</h4>
+    <div class="dropdown-divider"></div>
+    <div id="global_mis_catetorias" >
+        <div id="mansajes">
+
+    {%if notif_user %}
+        {% for notificacion in notif_user %}
+        {% if notificacion.me_gusta == True %}
+        {% if notificacion.leido == False %}
+            <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id  %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+            {{notificacion.nombre_usuario}} le ha dado me gusta a tu posteo</a>
+            <div class="dropdown-divider"></div>
+        {% else %}
+            <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px; background-color:lightgrey">
+            {{notificacion.nombre_usuario}} le ha dado me gusta a tu posteo</a>
+            <div class="dropdown-divider"></div>
+        {% endif %}
+        
+        {% elif notificacion.no_megusta == True %}
+            {% if notificacion.leido == False %}
+                <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                {{notificacion.nombre_usuario}} le ha dado no me gusta a tu posteo</a>
+                <div class="dropdown-divider"></div>
+            {% else %}
+                <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px; background-color:lightgrey">
+                {{notificacion.nombre_usuario}} le ha dado no me gusta a tu posteo</a>
+                <div class="dropdown-divider"></div>
+            {% endif %}
+            
+        {% elif notificacion.comentario == True %}
+            {% if notificacion.leido == False %}
+                <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id %}" class="dropdown-item" style="border-radius: 10px; background-color: seagreen ;">
+                {{notificacion.nombre_usuario}} ha comentado tu posteo</a>
+                <div class="dropdown-divider"></div>
+            {% else %}
+                <a href="{% url 'abrir_notificacion' idn=notificacion.id idp=notificacion.post_id %}" class="dropdown-item"  style="border-radius: 10px; background-color:lightgrey">
+                {{notificacion.nombre_usuario}} ha comentado tu posteo</a>
+                <div class="dropdown-divider">as</div>
+            {% endif %}
+
+    {% endif %}
+             
+        {% endfor %}
+    {% endif %}
+</div>
+</div>
+
+
+
+
 </div>
 
 

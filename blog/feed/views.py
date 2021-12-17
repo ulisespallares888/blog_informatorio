@@ -22,12 +22,11 @@ import datetime
 
 
 def feed(request):
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
     posteos = post.objects.all().order_by('creado_en').reverse() 
     categorias = categoria.objects.all()
     top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
-    contexto={'posteos':posteos,'categorias':categorias,'notif_user':notif_user,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
+    contexto={'posteos':posteos,'categorias':categorias,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
 def nosotros(request):
@@ -47,13 +46,13 @@ def leer_posteo(request,id):
     return render(request,"leer_post.html",contexto)
 
 @login_required
-def abrir_notificacion(request,id):
+def abrir_notificacion(request,idn,idp):
     
-    notif = notificaciones.objects.filter(post_id=id).first()
+    notif = notificaciones.objects.filter(id=idn,post_id=idp).first()
     print(notif)
     notif.leido = True
     notif.save()
-    return redirect('leer_posteo',id)
+    return redirect('leer_posteo',idp)
 
 @login_required
 def agregar_post(request):
@@ -170,9 +169,8 @@ def buscar_por_catetoria(request,id):
     posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
-    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
     
 def busqueda_por_fecha(request):
@@ -180,9 +178,8 @@ def busqueda_por_fecha(request):
     posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
     top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
-    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
 def busqueda_por_comentario(request):
@@ -190,9 +187,8 @@ def busqueda_por_comentario(request):
     categorias = categoria.objects.all()
     posteos = post.objects.filter(comentario__contenido__contains=comentario_bus).distinct().order_by('creado_en').reverse()
     top_posts = post.objects.all().order_by('me_gusta').reverse()[:10]
-    notif_user = notificaciones.objects.filter(post__posteador_id=request.user.id ).exclude(usuario_id = request.user.id).order_by('creado_en').reverse()[:10]
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
-    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_user':notif_user, 'notif_no_leidas':notif_no_leidas}
+    contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
 def busqueda_por_titulo(request):
@@ -311,25 +307,46 @@ def editar_perfil(request,id):
 @login_required
 def editar_perfil_guardar(request,id):
     usuario_bus = usuario.objects.get(usuario_fk_id=id)
-    nombre = request.POST['txtnombre']
-    email = request.POST['txtemail']
+    user_editar = User.objects.get(id=id)
+    nombre = request.POST.get('txtnombre',request.user.username)
+    email = request.POST.get('txtemail',request.user.email)
     foto = request.FILES.get('txtfoto',usuario_bus.foto)
-    rol = request.POST.get('txttrol')
+    rol = request.POST.get('txttrol',usuario_bus.tipo_usuario_id)
 
-    if nombre != "" and email != "":
-        usuario_editar = usuario.objects.get(id=id)
-        user_editar = User.objects.get(id=id)
-        user_editar.nombre = nombre
-        user_editar.email = email
-        usuario_editar.foto = foto
-        usuario_editar.tipo_usuario_id = rol
-        usuario_editar.save()
-        user_editar.save()
+    if nombre != "" and email != ""  and rol != "":
+        if User.objects.filter(username=nombre).exists() and nombre != user_editar.username:
+           messages.warning(request, 'El nombre de usuario ya existe')
+           return redirect('editar_perfil',id)
+        else:
+            user_editar.username = nombre
+            user_editar.email = email
+            user_editar.save()
+            usuario_bus.foto = foto
+            usuario_bus.tipo_usuario_id = rol
+            usuario_bus.save()
         messages.success(request, 'Perfil editado correctamente')
     else:
         messages.warning(request, 'Hay campos vacios')
+        return redirect('editar_perfil',id)
+
     return redirect('perfil_usuario')
 
-
-
+@login_required
+def editar_contraseña(request,id):
+    user_editar = User.objects.get(id=id)
+    pass_actual = request.POST.get('txtpassword_actual',user_editar.password)
+    pass_nueva = request.POST.get('txtpassword_nueva')    
+    pass_nueva_confirm = request.POST.get('txtpassword_nueva_confirm')
+    if pass_actual != '' and   pass_nueva != '' and pass_nueva_confirm != '':
+        if pass_nueva == pass_nueva_confirm:
+            user_editar.set_password(pass_nueva)
+            user_editar.save()
+            messages.success(request, 'Contraseña editada correctamente')
+        else:
+            messages.warning(request, 'Las contraseñas no coinciden')
+            return redirect('editar_perfil',id)
+        return redirect('perfil_usuario')
+    else:
+        messages.warning(request, 'Hay campos vacios')
+        return redirect('editar_perfil',id)
     

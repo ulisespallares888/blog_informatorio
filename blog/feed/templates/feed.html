@@ -57,9 +57,9 @@
         <section class="main-section2 ">
         {% for categoria in categorias %}
        
-        <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  style="margin-left: 1rem;" >
+        <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  style="margin-left: 2rem;" >
           <br>
-          <img src="{{categoria.imagen.url}} " alt="categorias" style="height: 5rem; width: 5rem; "> 
+          <img src="{{categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; "> 
           
         </a>
       </selection>
@@ -76,14 +76,18 @@
       
      
       <br>
-        <a  class="btn btn-success " href="{% url 'perfil_usuario' %}"  style="width: 16rem; margin-left: 1rem;">Crear Posteo</a>
+      
+      <a  class="btn btn-success " href="{% url 'perfil_usuario' %}"  style="width: 16rem; margin-left: 1rem;">
+          Crear Posteo
+        </a>
+        
         <br>
       
 
       Buscar post por comentarios
       <br>
 
-      <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_comentario' %}" method="GET"> {% csrf_token %}
+      <form  class=" d-flex justify-content-center " action="{% url 'busqueda_por_comentario' %}" method="GET" "> {% csrf_token %}
         <div class="btn-group " method="GET">
             <input class="form-control col-xl-8 " id="comentario_buscado" name="comentario_buscado" style="width: auto;" type="text" placeholder="Buscar" aria-label="Search">
             <button class="btn btn-outline-success" >Buscar</button>
