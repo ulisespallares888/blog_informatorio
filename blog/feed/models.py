@@ -53,6 +53,10 @@ class post(models.Model):
             os.remove(self.imagen.path)
         super(post,self).delete(*args, **kwargs)
     
+    def actualizar_imagen(self, *args, **kwargs):
+        if self.imagen != "post_default.jpg":
+            os.remove(self.imagen.path)
+    
 
 class comentario(models.Model):
     post = models.ForeignKey(post, on_delete=models.CASCADE)

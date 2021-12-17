@@ -232,7 +232,9 @@ def editar_post_guardar(request,id):
         post_editar.contenido = contenido
         post_editar.pre_contenido = contenido[:200]
         post_editar.catetoria_id = categoria
-        post_editar.imagen = imagen
+        if post_editar.imagen != imagen:
+            post_editar.actualizar_imagen()
+            post_editar.imagen = imagen
         post_editar.pre_contenido = pre_contenido
         post_editar.save()
         messages.success(request, 'Los cambios han sido guardados correctamente')
