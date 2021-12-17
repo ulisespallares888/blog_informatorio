@@ -208,7 +208,7 @@ def eliminar_post(request,id):
     post_eliminado.delete()
     messages.success(request, 'El post {} ha sido eliminado correctamente'.format(post_eliminado.titulo))
     return redirect('perfil_usuario')
-#Profile.objects.get(id=1).photo.delete(save=True)
+
 
 @login_required
 def editar_post(request,id):
