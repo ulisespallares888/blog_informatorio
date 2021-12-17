@@ -1,6 +1,8 @@
 from django.db import models
+import os
 from  django.contrib.auth.models import User
 from PIL.Image  import Image
+from django.urls import reverse
 
 
 class tipo_usuario(models.Model):
@@ -19,8 +21,15 @@ class usuario(models.Model):
     usuario_fk = models.OneToOneField(User, on_delete=models.CASCADE)
     tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, null=False)
     foto= models.FileField(upload_to='fotos_perfil', default='foto_default.jpg')
+
     def __str__(self):
         return self.usuario_fk.username
+
+    def delete(self, *args, **kwargs):
+        if self.foto != "foto_default.jpg":
+            print(self.foto)
+            os.remove(self.foto.path)
+        super(usuario,self).delete(*args, **kwargs)
 
 class post(models.Model):
     posteador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -37,6 +46,14 @@ class post(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+
+    def delete(self, *args, **kwargs):
+        if self.imagen != "post_default.jpg":
+            print(self.imagen)
+            os.remove(self.imagen.path)
+        super(post,self).delete(*args, **kwargs)
+    
 
 class comentario(models.Model):
     post = models.ForeignKey(post, on_delete=models.CASCADE)
