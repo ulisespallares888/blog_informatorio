@@ -31,6 +31,7 @@ class usuario(models.Model):
             os.remove(self.foto.path)
         super(usuario,self).delete(*args, **kwargs)
 
+
 class post(models.Model):
     posteador = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     titulo = models.CharField(max_length=100)
