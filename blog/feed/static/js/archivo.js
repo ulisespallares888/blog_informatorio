@@ -5,7 +5,7 @@
 
     btnEliminacion.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const confirmacion = confirm('¿Seguro de eliminar el contacto?');
+            const confirmacion = confirm('¿Seguro de eliminar el posteo?');
             if (!confirmacion) {
                 e.preventDefault();
             }

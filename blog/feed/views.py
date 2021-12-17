@@ -47,9 +47,7 @@ def leer_posteo(request,id):
 
 @login_required
 def abrir_notificacion(request,idn,idp):
-    
     notif = notificaciones.objects.filter(id=idn,post_id=idp).first()
-    print(notif)
     notif.leido = True
     notif.save()
     return redirect('leer_posteo',idp)
@@ -210,6 +208,7 @@ def eliminar_post(request,id):
     post_eliminado.delete()
     messages.success(request, 'El post {} ha sido eliminado correctamente'.format(post_eliminado.titulo))
     return redirect('perfil_usuario')
+#Profile.objects.get(id=1).photo.delete(save=True)
 
 @login_required
 def editar_post(request,id):
