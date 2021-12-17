@@ -18,9 +18,6 @@ import datetime
 #---------------------------------------------------------------------------------------------------
 
 
-  
-
-
 def feed(request):
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
     posteos = post.objects.all().order_by('creado_en').reverse() 
@@ -29,11 +26,14 @@ def feed(request):
     contexto={'posteos':posteos,'categorias':categorias,'top_posts':top_posts,'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
+
 def nosotros(request):
     return render(request,"nosotros.html")
 
+
 def los_17_ods(request):
     return render(request,"que_son_los_17_ods.html")
+
 
 def leer_posteo(request,id):
     un_posteo=post.objects.get(id=id)
@@ -45,12 +45,14 @@ def leer_posteo(request,id):
     contexto = {'un_posteo':un_posteo,'comentarios_del_posteo':comentarios_del_posteo,'usuarios':usuarios}
     return render(request,"leer_post.html",contexto)
 
+
 @login_required
 def abrir_notificacion(request,idn,idp):
     notif = notificaciones.objects.filter(id=idn,post_id=idp).first()
     notif.leido = True
     notif.save()
     return redirect('leer_posteo',idp)
+
 
 @login_required
 def agregar_post(request):
@@ -73,7 +75,6 @@ def agregar_post(request):
         messages.warning(request, 'No tienes permisos para crear un posteos, registrate como usuario Postador')
         return redirect('perfil_usuario')
     
-
 
 def registrarse(request):
     tipo_usuario_match = tipo_usuario.objects.all()
@@ -111,7 +112,6 @@ def crear_usuario(request):
 
 def acceder(request):
     return render(request,"registration/login.html")
-
 
 
 def iniciar_sesion(request):
@@ -166,6 +166,7 @@ def perfil_usuario(request):
     contexto = { 'rol':rol ,'mis_posteos':mis_posteos, 'mis_comentarios':mis_comentarios, 'categorias':categorias, 'notif_user':notif_user, 'mis_categorias':mis_categorias, 'usuario_actual':usuario_actual, 'posteos':posteos}
     return render(request,"mi_contenido.html",contexto)
 
+
 def buscar_por_catetoria(request,id):
     posteos = post.objects.filter(categoria_id=id).order_by('creado_en').reverse()
     categorias = categoria.objects.all()
@@ -174,6 +175,7 @@ def buscar_por_catetoria(request,id):
     contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
     
+
 def busqueda_por_fecha(request):
     fecha_bus = request.GET.get('fecha_buscada')
     posteos = post.objects.filter(creado_en__contains=fecha_bus).order_by('creado_en').reverse()
@@ -183,6 +185,7 @@ def busqueda_por_fecha(request):
     contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
 
+
 def busqueda_por_comentario(request):
     comentario_bus = request.GET.get('comentario_buscado')
     categorias = categoria.objects.all()
@@ -191,6 +194,7 @@ def busqueda_por_comentario(request):
     notif_no_leidas = notificaciones.objects.filter(post__posteador_id=request.user.id, leido=False).exclude(usuario_id = request.user.id).exists()
     contexto = {'posteos':posteos, 'categorias':categorias, 'top_posts':top_posts, 'notif_no_leidas':notif_no_leidas}
     return render(request,"feed.html",contexto)
+
 
 def busqueda_por_titulo(request):
     titulo_bus = request.GET.get('titulo_buscado')
@@ -300,6 +304,7 @@ def reaccionar(request,id,reac):
     post_reaccionar.save()
     return redirect('leer_posteo',id)
 
+
 @login_required
 def editar_perfil(request,id):
     tipo_usuario_actual = tipo_usuario.objects.all()
@@ -307,6 +312,7 @@ def editar_perfil(request,id):
     usuario_editar = usuario.objects.get(usuario_fk_id=id)
     contexto = {'user_editar':user_editar,'usuario_editar':usuario_editar,'tipo_usuario_actual':tipo_usuario_actual}
     return render(request,"editar_perfil.html",contexto)
+
 
 @login_required
 def editar_perfil_guardar(request,id):
@@ -337,6 +343,7 @@ def editar_perfil_guardar(request,id):
 
     return redirect('perfil_usuario')
 
+
 @login_required
 def editar_contraseña(request,id):
     user_editar = User.objects.get(id=id)
@@ -355,4 +362,3 @@ def editar_contraseña(request,id):
     else:
         messages.warning(request, 'Hay campos vacios')
         return redirect('editar_perfil',id)
-    
