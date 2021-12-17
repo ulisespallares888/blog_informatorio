@@ -322,7 +322,9 @@ def editar_perfil_guardar(request,id):
             user_editar.username = nombre
             user_editar.email = email
             user_editar.save()
-            usuario_bus.foto = foto
+            if usuario_bus.foto != foto:
+                usuario_bus.actualizar_foto()
+                usuario_bus.foto = foto
             usuario_bus.tipo_usuario_id = rol
             usuario_bus.save()
         messages.success(request, 'Perfil editado correctamente')

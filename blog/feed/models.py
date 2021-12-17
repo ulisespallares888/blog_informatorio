@@ -29,6 +29,10 @@ class usuario(models.Model):
         if self.foto != "foto_default.jpg":
             os.remove(self.foto.path)
         super(usuario,self).delete(*args, **kwargs)
+    
+    def actualizar_foto(self, *args, **kwargs):
+        if self.foto != "foto_default.jpg":
+            os.remove(self.foto.path)
 
 
 class post(models.Model):
