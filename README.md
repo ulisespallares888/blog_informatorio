@@ -4,10 +4,8 @@ Este repositorio está destinado a alojar el proyecto final del informatorio, el
 La tematica del blog comprende asuntos medioambientales, en este caso, los 17 ODS (Objetivos de Desarrollo Sostenibles).
 # Equipo 12
 # Integrantes:
-- Blanco Carolina
 - Bracamonte Alberto Sebastian
-- Lautaro Sanchez
-- Romero Dario Ricardo
-- Pallarés Ulises
 - Kapitanich Jorge Pablo
+- Pallarés Ulises
+
 
