@@ -54,7 +54,7 @@
                 {% for mi_categoria in mis_categorias %}
                 <a href= ""  style="margin-left: 1rem;" >
                     <br>
-                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 10rem; width: 10rem; "> 
+                    <img src="{{mi_categoria.imagen.url}} " alt="categorias" style="height: 5rem; width: 5rem; "> 
                     <br>
                   </a>
                         
@@ -173,16 +173,33 @@
     <div class="dropdown-divider"></div>
     <div id="global_mis_catetorias" >
         <div id="mansajes">
-
-    
     {%if mis_comentarios %}
         {% for post in posteos %}
-           <strong>{{post.titulo}} </strong> 
+           <a href="{% url 'leer_posteo' id=post.id %}">
+               <strong>{{post.titulo}} </strong> 
+           </a> 
              {% for comentario in mis_comentarios %}
                 {% if comentario.post_id == post.id %}
-                    <li> {{ comentario.contenido }}  
+                   {% if comentario.aprobado and not comentario.desaprobado %}
+                    <a href="{% url 'leer_posteo' id=post.id %}">
+                        <li style="color: green;"> 
+                            {{ comentario.contenido }}  
                         
-                    </li> 
+                        </li> 
+                    </a>
+                    {% elif comentario.desaprobado and not comentario.aprobado %}
+                        <a href="{% url 'leer_posteo' id=post.id %}">
+                            <li style="color: red;"> {{ comentario.contenido }}  
+                            </li> 
+                        </a>
+                    {% elif comentario.aprobado and comentario.desaprobado or not comentario.aprobado and not comentario.desaprobado %}
+                        <a href="{% url 'leer_posteo' id=post.id %}">
+                            <li style="color: gray;"> {{ comentario.contenido }}  
+                            </li> 
+                        </a>
+                   
+                    
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             <br>

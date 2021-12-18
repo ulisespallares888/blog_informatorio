@@ -70,6 +70,7 @@ class comentario(models.Model):
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
     aprobado = models.BooleanField(default=False)
+    desaprobado = models.BooleanField(default=False)
     def __str__(self):
         salida = '{} {} {} {} {}'.format(self.id, self.post, self.comentador, self.contenido, self.creado_en)
         return salida
