@@ -8,7 +8,7 @@
 
 <div class="wrapper" >
   
-    <div class="posts " id="global">
+    <div class="posts " id="global" style="margin-left: 5px;">
     <section class="main-section row" id="mensajes">
     
     {% if posteos %}
@@ -44,7 +44,7 @@
     </section>
 
     </div>
-    <div class="lista" id=global style="margin-right: -10px; margin-left: -2rem;">
+    <div class="lista" style="margin-right: -10px; margin-left: -2rem;">
       <div id="mensajes">
       <br>
       <ol style="margin-left: auto; text-align: center;">
@@ -53,8 +53,12 @@
        
         <a class=" btn btn-success" href="{% url 'feed' %}" style="background:seagreen; width: 12rem; " >Todos </a>
         <br>
-        
-        <section class="main-section2 ">
+        <br>
+        <div id="global_categorias_feed">
+
+        <div id="mensajes">
+          <br>
+        <section class="main-section2 ">          
         {% for categoria in categorias %}
        
         <a href= "{% url 'buscar_por_catetoria' id=categoria.id %}"  style="margin-left: 2rem;" >

@@ -256,3 +256,10 @@ transition: all .4s ease-in-out;
 .buttons a:hover {
   transform: scale(1.2);
 }
+
+
+#global_categorias_feed{
+  height: 60rem;
+	width: auto;	
+	overflow-y: scroll;
+}
