@@ -41,6 +41,7 @@
     <div class="form-group">
         <br>
         <select class="form-gourp form-select" name="txtcategoria" id="txtcategoria" value="{{post_editar.categoria}}" required>
+            <option value="{{post_editar.categoria_id}}" selected >{{post_editar.categoria}}</option>
             {% for categoria in categorias %}
                 <option value="{{categoria.id}}" >{{categoria.name}}</option>
                 

@@ -228,9 +228,11 @@ def editar_post(request,id):
 @login_required
 def editar_post_guardar(request,id):
     post_bus= post.objects.get(id=id)
+    print(post_bus.categoria_id)
     titulo = request.POST.get('txttitulo',"titulo_nada")
-    contenido = request.POST.get('txtcontenido',"contenido_nada")
-    categoria = request.POST.get('txtcategoria',"categoria_nada")
+    contenido = request.POST.get('txtcontenido',post_bus.contenido)
+    categoria = request.POST.get('txtcategoria',post_bus.categoria_id)
+    print(categoria)
     imagen = request.FILES.get('txtimagen',post_bus.imagen)
     pre_contenido = str(contenido)[0:100] + "[...]"
     if titulo != "" and contenido != "":
@@ -238,7 +240,8 @@ def editar_post_guardar(request,id):
         post_editar.titulo = titulo
         post_editar.contenido = contenido
         post_editar.pre_contenido = contenido[:200]
-        post_editar.catetoria_id = categoria
+        post_editar.categoria_id = categoria
+        print(post_editar.categoria_id)
         if post_editar.imagen != imagen:
             post_editar.actualizar_imagen()
             post_editar.imagen = imagen
