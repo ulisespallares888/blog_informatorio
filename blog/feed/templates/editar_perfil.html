@@ -39,7 +39,7 @@
                           <br>
                         <div class="form-gourp">
                             <select class="form-gourp form-select" name="txttrol" id="txttrol" required>
-                                <option value="">--------------</option>
+                                <option value="{{usuario_editar.tipo_usuario_id}}" >{{usuario_editar.tipo_usuario}}</option>
                                 {% for tipo_usuario in tipo_usuario_actual %}
                                     <option value="{{tipo_usuario.id}}" >{{tipo_usuario.nombre}}</option>
                                 {% endfor %}
