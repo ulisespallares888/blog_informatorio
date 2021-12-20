@@ -83,7 +83,8 @@
     {% endif %}
 
     {% if  user.is_authenticated and not usuario_actual.tipo_usuario_id == 1 %}
-    <h4>Crear posteo</h4>
+    <h4>Nuevo posteo</h4>
+    
     
     <div class="card" style="height: 33rem; width: 45rem;"> 
     
@@ -128,7 +129,7 @@
 <br>
     <div id="global_comentarios"  style="width: 45rem;">
     <section class="main-section row" id="mensajes" style="margin-left: auto;">
-    <h4>Mis Posts</h4>
+    <h4>Mis Posteos</h4>
     <div class="dropdown-divider" style="margin-block-end:-3rem"></div>
      {% for post in mis_posteos %}
      
