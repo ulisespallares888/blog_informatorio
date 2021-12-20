@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-o4ir*xlcqqh9k+wt4g#u7)%eq^g)z*6c)dwla93tvxz!kty091
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -143,9 +143,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 
 LOGIN_REDIRECT_URL = 'feed'
