@@ -120,7 +120,9 @@
     </form>
     </div>
 </div>
-{% endif %}
+
+
+
 
 <!-- Mis posteos -->
 <br>
@@ -161,6 +163,7 @@
     {% endfor %}
     </section> 
     </div>
+    {% endif %}
 </div>
 
 
@@ -209,6 +212,8 @@
 </div>
 </div>
 <!--%%%%%%%%%%%%%%%%%-->
+{% if usuario_actual.tipo_usuario_id == 2 %}
+
 <br><br>
 <h4>Notificaciones</h4>
     <div class="dropdown-divider"></div>
@@ -256,6 +261,7 @@
     {% endif %}
 </div>
 </div>
+{% endif %}
 
 
 
