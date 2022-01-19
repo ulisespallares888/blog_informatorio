@@ -1,19 +1,24 @@
 # production.py
-import pathlib
-import django_heroku
+from .settings import *
 import dj_database_url
+import django_heroku
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = pathlib(__file__).resolve().parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', '.heroku.com']
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 DATABASES = {
     'default': dj_database_url.config()
 }
 
-STATIC_URL = 'https://blog.com/static/'
-MEDIA_URL = 'https://blog.com/media/'
-
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STATIC_URL = 'https://eco-info.herokuapp.com/static/'
+MEDIA_URL = 'https://eco-info.herokuapp.com/media/'
