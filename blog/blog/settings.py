@@ -145,6 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'feed'
 LOGOUT_REDIRECT_URL = 'feed'   
 
-#DISABLE_COLLECTSTATIC = 1
+DISABLE_COLLECTSTATIC = 1
 
 django_heroku.settings(locals())
