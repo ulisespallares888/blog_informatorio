@@ -1,10 +1,11 @@
 # production.py
+from re import T
 from .settings import *
 import dj_database_url
 import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-DEBUG = False
+DEBUG = True
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
