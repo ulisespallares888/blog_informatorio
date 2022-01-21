@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from feed import views
-from . import settings
+from .settings import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

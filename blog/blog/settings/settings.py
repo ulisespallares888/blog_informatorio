@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
-import dj_database_url
+
 
 
 
@@ -28,9 +27,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o4ir*xlcqqh9k+wt4g#u7)%eq^g)z*6c)dwla93tvxz!kty091'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+DEBUG = False
+
+
+
+
+
+
 
 
 # Application definition
@@ -144,5 +150,3 @@ LOGIN_REDIRECT_URL = 'feed'
 LOGOUT_REDIRECT_URL = 'feed'   
 
 DISABLE_COLLECTSTATIC = 1
-
-django_heroku.settings(locals())
