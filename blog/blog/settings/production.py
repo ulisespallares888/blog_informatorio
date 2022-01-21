@@ -5,7 +5,7 @@ import dj_database_url
 import django_heroku
 
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
