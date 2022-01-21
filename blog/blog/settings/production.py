@@ -25,7 +25,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATIC_URL = 'https://django-pbpostgres.herokuapp.com/static/'
-MEDIA_URL = 'https://django-pbpostgres.herokuapp.com/staticfiles/img/'
+MEDIA_URL = 'https://django-pbpostgres.herokuapp.com/media/'
 
 DISABLE_COLLECTSTATIC = 1
 
