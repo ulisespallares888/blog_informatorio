@@ -17,7 +17,6 @@ DATABASES = {
 
 
 
-
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -26,7 +25,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATIC_URL = 'https://django-pbpostgres.herokuapp.com/static/'
-MEDIA_URL = 'https://django-pbpostgres.herokuapp.com/blog/blog/media/'
+MEDIA_URL = 'https://django-pbpostgres.herokuapp.com/'
 
 DISABLE_COLLECTSTATIC = 1
 
