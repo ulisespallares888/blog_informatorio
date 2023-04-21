@@ -1,4 +1,5 @@
 # production.py
+from distutils.log import debug
 from re import T
 from .settings import *
 import dj_database_url
@@ -8,7 +9,8 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
-DEBUG_PROPAGATE_EXCEPTIONS = True
+
+#DEBUG_PROPAGATE_EXCEPTIONS = True
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 DATABASES = {
